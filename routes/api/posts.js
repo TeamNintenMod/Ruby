@@ -23,9 +23,17 @@ router.post('/post', function(req, res) {
 })
 
 router.get('/posts', function(req, res) {
-    con.query(`SELECT * FROM post`, function (err, result, fields) {
-        res.send(result)
-    })
+    const limit = req.query['limit']
+
+    if (limit) {
+        con.query(`SELECT * FROM post LIMIT ${limit}`, function (err, result, fields) {
+            res.send(result)
+        })
+    } else {
+        con.query(`SELECT * FROM post`, function (err, result, fields) {
+            res.send(result)
+        })
+    }
 })
 
 module.exports = router

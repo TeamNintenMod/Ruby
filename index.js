@@ -3,6 +3,7 @@ const colors = require('colors');
 const config = require("./config.json");
 const mysql = require('mysql')
 const { port, dbPassword } = config;
+const path = require('path')
 
 const cookieparser = require('cookie-parser')
 
@@ -16,6 +17,8 @@ app.use(cookieparser())
 app.use('/api/account', accountRoute)
 app.use('/api/post', postsRoute)
 app.use('/pages', pagesRoute)
+
+app.use(express.static('static'))
 
 app.set('view engine', 'ejs');
 

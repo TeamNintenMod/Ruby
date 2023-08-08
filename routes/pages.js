@@ -8,7 +8,7 @@ router.get('/home', function(req, res) {
     fetch(`http://localhost:80/api/account/account?nnid=${nnid}`).then(response => response.text()).then((accountFetch) => {
         const account = JSON.parse(accountFetch)
 
-        fetch('http://localhost:80/api/post/posts').then(response => response.text()).then((postsFetch) => {
+        fetch('http://localhost:80/api/post/posts?limit=10').then(response => response.text()).then((postsFetch) => {
 
         const posts = JSON.parse(postsFetch)
         
