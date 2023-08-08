@@ -11,14 +11,15 @@ const accountRoute = require("./routes/api/account")
 const postRoute = require('./routes/api/posts')
 const pagesRoute = require('./routes/pages')
 const communityRoute = require('./routes/api/communties')
+const endpointRoute = require('./routes/api/endpoint')
 
 var app = express();
 
 app.use(cookieparser())
 
-app.use('/api/account', accountRoute)
-app.use('/api/post', postRoute)
-app.use('/api/community', communityRoute)
+app.use('/v1/people', accountRoute)
+app.use('/v1/communities', communityRoute)
+app.use('v1/endpoint', endpointRoute)
 
 app.use('/pages', pagesRoute)
 

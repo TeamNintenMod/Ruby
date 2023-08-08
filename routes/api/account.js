@@ -19,7 +19,7 @@ router.post('/accounts', function(req, res) {
     con.query(`INSERT INTO account (nnid, name, password, token) VALUES ("${nnid}", "${nnid}", "${password}", "${token}")`, function (err, result, fields) {
         if (err) throw {err}
         console.log(`[MYSQL] Created new account ${nnid}, ${password}`.blue)
-        res.sendStatus(201)
+        res.sendStatus(200)
     })
 })
 
