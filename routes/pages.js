@@ -5,10 +5,10 @@ router.get('/home', function(req, res) {
 
     const { nnid, password, token } = req.cookies
 
-    fetch(`http://localhost:80/api/account/account?nnid=${nnid}`).then(response => response.text()).then((accountFetch) => {
+    fetch(`http://localhost:80/v1/people/account?nnid=${nnid}`).then(response => response.text()).then((accountFetch) => {
         const account = JSON.parse(accountFetch)
 
-        fetch('http://localhost:80/api/post/posts?limit=10').then(response => response.text()).then((postsFetch) => {
+        fetch('http://localhost:80/v1/communities/0/posts?limit=10').then(response => response.text()).then((postsFetch) => {
 
         const posts = JSON.parse(postsFetch)
         

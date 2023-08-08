@@ -3,14 +3,14 @@ const router = express.Router()
 
 const con = require('../../mysqlConnection')
 
-router.get('/accounts', function(req, res) {
-    con.query("SELECT id, create_time, nnid, name FROM account", function (err, result, fields) {
+router.get('/', function(req, res) {
+    con.query("SELECT id, create_time, nnid, name, bio, admin FROM account", function (err, result, fields) {
         console.log(`[MYSQL] Requested All Accounts`)
         res.send(result)
     })
 })
 
-router.post('/accounts', function(req, res) {
+router.post('/', function(req, res) {
 
     const nnid = req.get('nnid')
     const password = req.get('password')

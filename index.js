@@ -19,7 +19,7 @@ app.use(cookieparser())
 
 app.use('/v1/people', accountRoute)
 app.use('/v1/communities', communityRoute)
-app.use('v1/endpoint', endpointRoute)
+app.use('/v1/endpoint', endpointRoute)
 
 app.use('/pages', pagesRoute)
 
