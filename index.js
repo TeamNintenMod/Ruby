@@ -8,14 +8,18 @@ const path = require('path')
 const cookieparser = require('cookie-parser')
 
 const accountRoute = require("./routes/api/account")
-const postsRoute = require('./routes/api/posts')
+const postRoute = require('./routes/api/posts')
 const pagesRoute = require('./routes/pages')
+const communityRoute = require('./routes/api/communties')
 
 var app = express();
 
 app.use(cookieparser())
+
 app.use('/api/account', accountRoute)
-app.use('/api/post', postsRoute)
+app.use('/api/post', postRoute)
+app.use('/api/community', communityRoute)
+
 app.use('/pages', pagesRoute)
 
 app.use(express.static('static'))

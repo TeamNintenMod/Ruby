@@ -6,6 +6,7 @@ const con = require('../../mysqlConnection')
 router.post('/post', function(req, res) {
     const token = req.cookies['token']
     const content = req.get('content')
+    const communityId = req.get('community-id')
 
     console.log(token, content)
 
