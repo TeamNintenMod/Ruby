@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta property="og:title" content="PenisVerse"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:description" content="PenisVerse description"/>
+
+    <meta property="description" content="PenisVerse">
+
+    <meta name="theme-color" content="#8443b5"/>
+
+    <title>PenisVerse Post</title>
+</head>
+
+<script>
+
+    function getCookie(cname) {
+        let name = cname + "=";
+        let decodedCookie = decodeURIComponent(document.cookie);
+        let ca = decodedCookie.split(';');
+        for(let i = 0; i <ca.length; i++) {
+            let c = ca[i];
+            while (c.charAt(0) == ' ') {
+                c = c.substring(1);
+            }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+        return "";
+    }
+
+    function Post() {
+        const postContent = document.getElementById('postInput').value;
+
+        const nnid = getCookie('nnid')
+        const password = getCookie('password')
+        const token = getCookie('token')
+
+        console.log(document.cookie)
+
+        fetch('http://192.168.1.49:80/api/post/post', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'nnid': nnid,
+                'content': postContent
+            }
+        }).then((response) => {
+            switch(response.status) {
+
+                case 200:
+                    window.location.href = "http://192.168.1.49:80/pages/home"
+                default:
+                    console.log("LMAO IT BROKE")
+
+            }
+        })
+    }
+</script>
+
+<body>
+    <input id="postInput" placeholder="Post Content..">
+    <button onclick="Post()">Post</button>
+</body>

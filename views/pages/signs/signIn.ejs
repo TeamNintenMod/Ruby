@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta property="og:title" content="PenisVerse"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:description" content="PenisVerse description"/>
+
+    <meta property="description" content="PenisVerse">
+
+    <meta name="theme-color" content="#8443b5"/>
+
+    <title>PenisVerse</title>
+</head>
+
+<script>
+    function signIn() {
+
+        console.log("Sending Fetch Request..")
+        const nnid = document.getElementById('nnidField').value
+        const password = document.getElementById('passwordField').value
+
+        const token = fetch('http://192.168.1.49:80/api/account/accountsignin', {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                "nnid": nnid,
+                "password": password
+            }
+        }).then(response => response.json()).then((token) => {
+            console.log("WARNING!!! DO NOT SHARE YOUR TOKENS!!!!!")
+            console.log(token)
+
+            document.cookie = `token=${token}`
+            document.cookie = `nnid=${nnid}`
+            document.cookie = `password=${password}`
+            
+            window.location.href = "http://192.168.1.49:80/pages/home"
+        })
+    } 
+</script>
+
+<body>
+    <input id="nnidField" placeholder="NNID..">
+    <input type="password" id="passwordField" placeholder="Password..">
+
+    <button onclick="(signIn())">Sign In!</button>
+</body>
