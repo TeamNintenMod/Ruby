@@ -3,6 +3,8 @@ const router = express.Router()
 
 const con = require('../../mysqlConnection')
 
+const moment = require('moment')
+
 const { placeholderBio } = require('../../config.json')
 
 router.get('/', function(req, res) {
@@ -24,7 +26,9 @@ router.post('/', function(req, res) {
             const hash = response.images.hash
             const name = response.name
 
-            con.query(`INSERT INTO account (nnid, name, bio, miiHash, password, token) VALUES ("${nnid}", "${name}", "${placeholderBio}", "${hash}", "${password}", "${token}")`, function (err, result, fields) {
+            const date = moment().format("YYYY-MM-DD HH:mm:ss")
+
+            con.query(`INSERT INTO account (create_time, nnid, name, bio, miiHash, password, token) VALUES ("${date}", "${nnid}", "${name}", "${placeholderBio}", "${hash}", "${password}", "${token}")`, function (err, result, fields) {
                 if (err) throw {err}
                 console.log(`[MYSQL] Created new account with ${nnid} and ${password}`.blue)
                 res.sendStatus(200)

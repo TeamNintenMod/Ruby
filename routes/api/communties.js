@@ -3,6 +3,8 @@ const router = express.Router()
 
 const con = require('../../mysqlConnection')
 
+const moment = require('moment')
+
 router.get('/', function(req, res) {
     const limit = req.query['limit']
 
@@ -47,7 +49,9 @@ router.post('/0/posts', function(req, res) {
         try {
             const miiUrl = `http://mii-images.account.nintendo.net/${result[0].miiHash}_normal_face.png`
 
-            con.query(`INSERT INTO post (content, userId, nnid, miiUrl) VALUES ("${content}", "${result[0].id}", "${result[0].nnid}", "${miiUrl}")`, function(err, result, fields) {
+            const date = moment().format("YYYY-MM-DD HH:mm:ss")
+
+            con.query(`INSERT INTO post (create_time, content, userId, nnid, miiUrl) VALUES ("${date}", "${content}", "${result[0].id}", "${result[0].nnid}", "${miiUrl}")`, function(err, result, fields) {
                 if (err) throw {err}
         
                 console.log("[MYSQL] Created new post!".blue)
