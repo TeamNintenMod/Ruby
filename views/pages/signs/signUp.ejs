@@ -20,18 +20,33 @@
     function CreateAccount() {
 
         console.log("Sending Fetch Request..")
+
         const nnid = document.getElementById('nnidField').value
         const password = document.getElementById('passwordField').value
+        const token = password.toString(2)
 
-        fetch('http://192.168.1.49:80/api/account/accounts', {
+        fetch('http://192.168.1.49:80/v1/people/', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
                 "nnid": nnid,
                 "password": password,
-                "token": password.toString(2)
-        }})
+                "token": token
+        }}).then(response => response.status).then((status) => {
+            switch(status) {
+                case 200:
+                    console.log("Account Successfully created!")
+
+                    document.cookie = `token=${token}`
+                    document.cookie = `nnid=${nnid}`
+                    document.cookie = `password=${password}`
+
+                    window.location.href = "/pages/home"
+                default:
+                    console.log("Error!!!")
+            }
+        })
     }
 </script>
 

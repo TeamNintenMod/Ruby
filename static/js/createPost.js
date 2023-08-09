@@ -23,13 +23,15 @@ function Post() {
 
     console.log(document.cookie)
 
-    fetch('http://192.168.1.49:80/v1/', {
+    fetch('http://192.168.1.49:80/v1/communities/0/posts', {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
             'nnid': nnid,
-            'content': postContent
+            'content': postContent,
+            'token' : token,
+            'password' : password
         }
     }).then((response) => {
         switch(response.status) {
