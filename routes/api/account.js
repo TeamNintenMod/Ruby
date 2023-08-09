@@ -32,7 +32,7 @@ router.post('/', function(req, res) {
         })
 })
 
-router.get('/account', function(req, res) {
+router.get('/person', function(req, res) {
     const nnid = req.query["nnid"]
 
     con.query(`SELECT id, create_time, nnid, name, bio, admin, miiHash FROM account WHERE nnid="${nnid}"`, function (err, result, fields) {
@@ -41,7 +41,7 @@ router.get('/account', function(req, res) {
     })
 })
 
-router.get('/accountsignin', function(req, res) {
+router.get('/signin', function(req, res) {
     const nnid = req.header('nnid')
     const password = req.header('password')
 

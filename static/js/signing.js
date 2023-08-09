@@ -21,7 +21,7 @@ function signIn() {
     const nnid = document.getElementById('nnidField').value
     const password = document.getElementById('passwordField').value
 
-    const token = fetch('http://192.168.1.49:80/api/account/accountsignin', {
+    const token = fetch('http://192.168.1.49:80/v1/people/signin', {
         method: 'GET',
         headers: {
             'Accept': 'application/json',

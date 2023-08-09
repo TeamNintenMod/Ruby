@@ -1,5 +1,3 @@
 # miiverseThing
 
-this is my teeny tiny attempt to make a free, and open source miiverse, fully coded in node and ejs
-
-fishcord
+This is an attempt to create a semi miiverse social media platform. (Hopefully, it can run on a wii u!)

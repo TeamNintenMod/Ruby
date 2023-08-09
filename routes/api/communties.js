@@ -45,7 +45,9 @@ router.post('/0/posts', function(req, res) {
         console.log(result)
 
         try {
-            con.query(`INSERT INTO post (content, userId, nnid) VALUES ("${content}", "${result[0].id}", "${result[0].nnid}")`, function(err, result, fields) {
+            const miiUrl = `http://mii-images.account.nintendo.net/${result[0].miiHash}_normal_face.png`
+
+            con.query(`INSERT INTO post (content, userId, nnid, miiUrl) VALUES ("${content}", "${result[0].id}", "${result[0].nnid}", "${miiUrl}")`, function(err, result, fields) {
                 if (err) throw {err}
         
                 console.log("[MYSQL] Created new post!".blue)
@@ -53,6 +55,7 @@ router.post('/0/posts', function(req, res) {
             })
         } catch (error) {
             console.log(error)
+            res.sendStatus(403)
         }
     })
 })
