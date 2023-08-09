@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 
-    <link rel="stylesheet" href="./css/miiverse.css">
+    <link rel="stylesheet" href="../css/portal-grp.css">
 </head>
 
 <style>
@@ -33,13 +33,12 @@
 </style>
 
 <body>
-
-    <div>
         <h1>Hello Valued Customer : <%= account[0].nnid %></h1>
         <a href="http://192.168.1.49:80/pages/post">Post?</a>
     
         <table>
             <tr>
+                <th>ID</th>
                 <th>User</th>
                 <th>Content</th>
             </tr>
@@ -47,6 +46,7 @@
             <% posts.forEach(element => {%>
                 
                 <tr>
+                    <td><%=element.id%></td>
                     <td><%=element.nnid%></td>
                     <td><%=element.content%></td>
                 </tr>
@@ -54,7 +54,6 @@
             <%});%>
             
         </table>
-    </div>
     
 </body>
 </html>

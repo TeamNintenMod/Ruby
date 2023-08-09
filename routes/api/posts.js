@@ -27,7 +27,8 @@ router.get('/posts', function(req, res) {
     const limit = req.query['limit']
 
     if (limit) {
-        con.query(`SELECT * FROM post LIMIT ${limit}`, function (err, result, fields) {
+        con.query('SELECT * FROM post LIMIT ' + limit + ' ORDER BY `id` desc', function (err, result, fields) {
+            if (err) { throw err }
             res.send(result)
         })
     } else {

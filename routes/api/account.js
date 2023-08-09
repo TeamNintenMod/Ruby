@@ -3,8 +3,10 @@ const router = express.Router()
 
 const con = require('../../mysqlConnection')
 
+const { placeholderBio } = require('../../config.json')
+
 router.get('/', function(req, res) {
-    con.query("SELECT id, create_time, nnid, name, bio, admin FROM account", function (err, result, fields) {
+    con.query("SELECT id, create_time, nnid, name, bio, admin, miiHash FROM account", function (err, result, fields) {
         console.log(`[MYSQL] Requested All Accounts`)
         res.send(result)
     })
@@ -16,17 +18,24 @@ router.post('/', function(req, res) {
     const password = req.get('password')
     const token = req.get('token')
 
-    con.query(`INSERT INTO account (nnid, name, password, token) VALUES ("${nnid}", "${nnid}", "${password}", "${token}")`, function (err, result, fields) {
-        if (err) throw {err}
-        console.log(`[MYSQL] Created new account ${nnid}, ${password}`.blue)
-        res.sendStatus(200)
-    })
+    fetch(`https://nnidlt.murilo.eu.org/api.php?env=production&user_id=${nnid}`)
+        .then(response => response.json()).then((response) => {
+
+            const hash = response.images.hash
+            const name = response.name
+
+            con.query(`INSERT INTO account (nnid, name, bio, miiHash, password, token) VALUES ("${nnid}", "${name}", "${placeholderBio}", "${hash}", "${password}", "${token}")`, function (err, result, fields) {
+                if (err) throw {err}
+                console.log(`[MYSQL] Created new account with ${nnid} and ${password}`.blue)
+                res.sendStatus(200)
+            })
+        })
 })
 
 router.get('/account', function(req, res) {
     const nnid = req.query["nnid"]
 
-    con.query(`SELECT id, create_time, nnid, name FROM account WHERE nnid="${nnid}"`, function (err, result, fields) {
+    con.query(`SELECT id, create_time, nnid, name, bio, admin, miiHash FROM account WHERE nnid="${nnid}"`, function (err, result, fields) {
         console.log(`[MYSQL] Requested "${nnid}"`.blue)
         res.send(result)
     })
