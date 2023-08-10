@@ -8,7 +8,6 @@ const path = require('path')
 const cookieparser = require('cookie-parser')
 
 const accountRoute = require("./routes/api/account")
-const postRoute = require('./routes/api/posts')
 const pagesRoute = require('./routes/pages')
 const communityRoute = require('./routes/api/communties')
 const endpointRoute = require('./routes/api/endpoint')
