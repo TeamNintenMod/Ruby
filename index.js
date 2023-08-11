@@ -9,7 +9,7 @@ const cookieparser = require('cookie-parser')
 
 const accountRoute = require("./routes/api/account")
 const pagesRoute = require('./routes/pages')
-const communityRoute = require('./routes/api/communties')
+const communityRoute = require('./routes/api/communties2')
 const endpointRoute = require('./routes/api/endpoint')
 
 var app = express();

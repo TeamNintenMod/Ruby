@@ -20,8 +20,12 @@ router.post('/', function(req, res) {
     const password = req.get('password')
     const token = req.get('token')
 
+    console.log("POST")
+
     fetch(`https://nnidlt.murilo.eu.org/api.php?env=production&user_id=${nnid}`)
         .then(response => response.json()).then((response) => {
+
+            console.log(response)
 
             const hash = response.images.hash
             const name = response.name

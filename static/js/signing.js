@@ -21,7 +21,7 @@ function signIn() {
     const nnid = document.getElementById('nnidField').value
     const password = document.getElementById('passwordField').value
 
-    const token = fetch('http://192.168.1.49:80/v1/people/signin', {
+    const token = fetch('http://192.168.1.48:80/v1/people/signin', {
         method: 'GET',
         headers: {
             'Accept': 'application/json',
@@ -37,13 +37,13 @@ function signIn() {
         document.cookie = `nnid=${nnid}`
         document.cookie = `password=${password}`
         
-        window.location.href = "http://192.168.1.49:80/pages/home"
+        window.location.href = "http://192.168.1.48:80/pages/home"
     })
 } 
 
 function accountCheck() {
     if (!getCookie('token').toString() == "") {
-        window.location.replace("http://192.168.1.49:80/pages/home")
+        window.location.replace("http://192.168.1.48:80/pages/home")
         console.log("DIE!!!")
     }
     

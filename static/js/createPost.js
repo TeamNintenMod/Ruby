@@ -23,7 +23,7 @@ function Post() {
 
     console.log(document.cookie)
 
-    fetch('http://192.168.1.49:80/v1/communities/0/posts', {
+    fetch('http://192.168.1.48:80/v1/communities/0/posts', {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
@@ -37,7 +37,7 @@ function Post() {
         switch(response.status) {
 
             case 200:
-                window.location.href = "http://192.168.1.49:80/pages/home"
+                window.location.href = "http://192.168.1.48:80/pages/home"
             default:
                 console.log("Sorry, your token has changed. Please resign in.")
 

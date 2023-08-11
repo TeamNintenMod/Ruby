@@ -5,7 +5,7 @@
   <endpoint>
     <host>api-us.olv.nintendo.net</host> <!-- Current Server Host URL -->
     <api_host>api-us.olv.nintendo.net</api_host> <!-- Miiverse API URL -->
-    <portal_host>portal-us.olv.nintendo.net</portal_host> <!-- Wii U Interface URL -->
+    <portal_host>olv.portal.nonamegiven.xyz</portal_host> <!-- Wii U Interface URL -->
     <n3ds_host>3ds-us.olv.nintendo.net</n3ds_host> <!-- 3DS Interface URL -->
   </endpoint>
 </result>
