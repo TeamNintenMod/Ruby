@@ -45,6 +45,4 @@ router.get('/:community_id/posts', (req, res) => {
     })
 })
 
-router.get()
-
 module.exports = router
