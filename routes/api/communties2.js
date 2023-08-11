@@ -27,15 +27,23 @@ router.get('/', (req, res) => {
 })
 
 router.get('/:community_id/posts', (req, res) => {
-
+    const limit = req.query['limit']
     const community_id = req.params.community_id
 
-    const sql = `SELECT * FROM post WHERE 'community_id'=${community_id}`
+    let sql
+
+    if (limit) {
+        sql = `SELECT * FROM post WHERE 'community_id'=${community_id} LIMIT ${limit}`
+    } else {
+        sql = `SELECT * FROM post WHERE 'community_id'=${community_id}`
+    }
+
+
 
     con.query(sql, (err, result, fields) => {
         if (err) { throw err }
 
-        const xmlResult = json2xml.json2xml(result, {compact : true, fullTagEmptyElement : true}).replace(/[0-9]>/g, "post>")
+        const xmlResult = json2xml.json2xml(result, {compact : true, fullTagEmptyElement : false}).replace(/[0-9]>/g, "post>")
 
         console.log(`[GET] ${req.originalUrl}`.green)
 
