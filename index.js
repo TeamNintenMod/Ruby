@@ -5,11 +5,13 @@ const mysql = require('mysql')
 const { port, dbPassword } = config;
 const path = require('path')
 
+const logger = require('./other/logger')
+
 const cookieparser = require('cookie-parser')
 
 const accountRoute = require("./routes/api/account")
 const pagesRoute = require('./routes/pages')
-const communityRoute = require('./routes/api/communties2')
+const communityRoute = require('./routes/api/communties')
 const endpointRoute = require('./routes/api/endpoint')
 
 var app = express();
@@ -36,6 +38,6 @@ app.get('/signin', function(req, res) {
 })
 
 app.listen(port, () => {
-    console.log(`[INFO] Server started on port ${port}.`.green)
+    console.log(logger.Info('Server started on port 80.'))
 })
 

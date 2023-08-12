@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 
-const con = require('../../mysqlConnection')
+const con = require('../../other/mysqlConnection')
 
 const moment = require('moment')
 

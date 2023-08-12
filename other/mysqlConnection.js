@@ -1,6 +1,10 @@
 const colors = require('colors');
-const config = require("./config.json");
-const mysql = require('mysql')
+
+const config = require("../config.json");
+const logger = require('./logger');
+
+const mysql = require('mysql');
+
 const { port, mysqlhost, mysqluser, mysqlpassword, mysqldatabase } = config;
 
 var con = mysql.createConnection({
@@ -12,7 +16,7 @@ var con = mysql.createConnection({
 
 con.connect((err) => {
     if (err) { throw err }
-    console.log("[MYSQL] Connected to database.".blue)
+    console.log(logger.MySQL('Connected to Database!'))
 })
 
 module.exports = con
