@@ -42,9 +42,9 @@ router.get('/:community_id/posts', (req, res) => {
     let sql
 
     if (limit) {
-        sql = `SELECT * FROM post WHERE 'community_id'=${community_id} LIMIT ${limit}`
+        sql = `SELECT * FROM post WHERE 'community_id'=${community_id} ORDER BY id DESC LIMIT ${limit}`
     } else {
-        sql = `SELECT * FROM post WHERE 'community_id'=${community_id}`
+        sql = `SELECT * FROM post WHERE 'community_id'=${community_id} ORDER BY id DESC`
     }
 
     con.query(sql, (err, result, fields) => {
