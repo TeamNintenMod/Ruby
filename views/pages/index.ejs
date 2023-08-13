@@ -8,6 +8,7 @@
 <br>
 <br>
 <br>
+<br>
 
 <table>
     <tr>
@@ -16,6 +17,7 @@
         <th>Name</th>
         <th>Description</th>
         <th>Icon</th>
+        <th>Posts</th>
     </tr>
     <% data.community.forEach(community => {%>
         <tr>
@@ -24,6 +26,7 @@
             <td><%= community.name %></td>
             <td><%= community.description %></td>
             <td><img src="<%= community.icon %>" width="64" height="64"></td>
+            <td><a href="./pages/posts/<%= community.community_id %>">Posts</a></td>
         </tr>
     <%}); %>
 

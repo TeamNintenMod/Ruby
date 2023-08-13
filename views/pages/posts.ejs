@@ -1,0 +1,28 @@
+<%- include('../partials/header.ejs') %>
+
+<%- include('../partials/sidebar.ejs') %>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>PID</th>
+        <th>Body</th>
+    </tr>
+
+    <% data.post.forEach(post => {%>
+        <tr>
+            <td><%= post.id %></td>
+            <td><%= post.pid %></td>
+            <td><%= post.body %></td>
+        </tr>
+    <%}); %>
+</table>
