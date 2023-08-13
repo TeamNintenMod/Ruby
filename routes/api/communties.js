@@ -39,6 +39,8 @@ router.get('/:community_id/posts', (req, res) => {
     const limit = req.query['limit']
     const community_id = req.params.community_id
 
+    console.log(logger.Get(req.originalUrl))
+
     let sql
 
     if (limit) {

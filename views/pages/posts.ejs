@@ -17,16 +17,17 @@
     <% if (postsFound) {%>
         <table>
             <tr>
+                <th>Created At</th>
                 <th>ID</th>
                 <th>PID</th>
                 <th>Is Spoiler?</th>
                 <th>Screen Name</th>
                 <th>Body</th>
-        
             </tr>
         
             <% data.post.forEach(post => {%>
                 <tr>
+                    <td><%= post.created_at.toString()%></td>
                     <td><%= post.id %></td>
                     <td><%= post.pid %></td>
                     <td><%= post.is_spoiler %></th>
