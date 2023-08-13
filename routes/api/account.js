@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 
 const con = require('../../other/mysqlConnection')
+const logger = require('../../other/logger')
 
 const moment = require('moment')
 
@@ -9,7 +10,7 @@ const { placeholderBio } = require('../../config.json')
 
 router.get('/', function(req, res) {
     con.query("SELECT id, create_time, nnid, name, bio, admin, miiHash FROM account", function (err, result, fields) {
-        console.log(`[MYSQL] Requested All Accounts`)
+        console.log(logger.Get(req.originalUrl))
         res.send(result)
     })
 })
