@@ -33,6 +33,7 @@ CREATE TABLE `account` (
   `admin` tinyint(1) DEFAULT NULL,
   `miiUrl` json DEFAULT NULL,
   `miiHash` varchar(255) DEFAULT NULL,
+  `pid` int DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -49,13 +50,13 @@ CREATE TABLE `community` (
   `community_id` int DEFAULT NULL,
   `name` varchar(255) DEFAULT NULL,
   `description` varchar(500) DEFAULT NULL,
-  `icon` varchar(10000) DEFAULT NULL,
+  `icon` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
   `icon_3ds` varchar(1000) DEFAULT NULL,
   `pid` varchar(255) DEFAULT NULL,
-  `app_data` varchar(1000) DEFAULT NULL,
+  `app_data` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
   `is_user_community` int DEFAULT NULL,
   PRIMARY KEY (`olive_community_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -89,7 +90,7 @@ CREATE TABLE `post` (
   `screen_name` varchar(255) DEFAULT NULL,
   `title_id` int DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -105,4 +106,4 @@ CREATE TABLE `post` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-08-10 19:37:25
+-- Dump completed on 2023-08-13  9:00:59
