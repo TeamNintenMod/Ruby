@@ -9,7 +9,7 @@ router.get('/post', function(req, res) {
     res.render('pages/post.ejs')
 })
 
-router.get('/posts/:community_id', (req, res) => {
+router.get('/communities/:community_id', (req, res) => {
     const community_id = req.params.community_id
     const parser = new xmlparser.XMLParser();
 
@@ -17,7 +17,7 @@ router.get('/posts/:community_id', (req, res) => {
         const xmlFinal = parser.parse(xmlResult)
         let postsFound;
 
-        if (xmlFinal.result.posts.length <= 1) {
+        if (xmlFinal.result.posts.length < 1) {
             postsFound = false
         } else {
             postsFound = true

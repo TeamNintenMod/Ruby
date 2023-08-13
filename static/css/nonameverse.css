@@ -1,17 +1,67 @@
-#sidebar {
+@font-face {
+    font-family: MiiverseSymbols;
+    src: url('./MiiverseSymbols-Regular.woff');
+}
+
+:root {
+    --navbar: #58a7db
+}
+
+html, body {
+    margin: 0px;
+}
+
+main {
+    width: 854px;
+    height: 480px;
+    border:rgba(0, 0, 0, 0.7) solid;
+    border-width: 3px;
+
     position: absolute;
-    left: 0px;
+    margin: 0px;
 
     display: flex;
+    flex-direction: row;
+}
+
+#sidebar {
+    display: flex;
     flex-direction: column;
+
+    background-color: var(--navbar);
+
+    position: sticky;
+
+    left: 0px;
+
+    height:100%;
+
+    margin: 0px;
+
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0), 0 6px 20px 0 rgba(0, 0, 0, 0.7);
 }
 
 #sidebar a {
-    background-color: gray;
-    padding: 5px;
+
+    font-family: MiiverseSymbols;
+    color: white;
+    font-size: 300%;
+
+    padding: 15px;
+
+    text-decoration: none;
 
     margin-bottom: 5px;
     text-align: center;
+}
+
+#mii img {
+    border-radius: 100%;
+    background-color: white;
+}
+
+#backexit {
+    float: none;
 }
 
 table, td, th {
