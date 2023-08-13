@@ -1,33 +1,24 @@
 const colors = require('colors')
+const moment = require('moment')
 
 function Get(input) {
-    const time = new Date()
-
-    return `(${time.getHours()}:${time.getMinutes()}:${time.getSeconds()}) [GET] ${input}`.green
+    return `(${moment().format("HH:mm:ss")}) [GET] ${input}`.green
 }
 
 function Post(input) {
-    const time = new Date()
-
-    return `(${time.getHours()}:${time.getMinutes()}:${time.getSeconds()}) [POST] ${input}`.purple
+    return `(${moment().format("HH:mm:ss")}) [POST] ${input}`.purple
 }
 
 function Info(input) {
-    const time = new Date()
-
-    return `(${time.getHours()}:${time.getMinutes()}:${time.getSeconds()}) [INFO] ${input}`.green
+    return `(${moment().format("HH:mm:ss")}) [INFO] ${input}`.green
 }
 
 function MySQL(input) {
-    const time = new Date()
-
-    return `(${time.getHours()}:${time.getMinutes()}:${time.getSeconds()}) [MYSQL] ${input}`.blue
+    return `(${moment().format("HH:mm:ss")}) [MYSQL] ${input}`.blue
 }
 
 function Error(input) {
-    const time = new Date()
-
-    return `(${time.getHours()}:${time.getMinutes()}:${time.getSeconds()}) [MYSQL] ${input}`.red
+    return `(${moment().format("HH:mm:ss")}) [ERROR] ${input}`.red
 }
 
 module.exports = {
