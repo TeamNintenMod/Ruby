@@ -46,7 +46,7 @@ app.get('/', (req, res) => {
 
     const parser = new xmlparser.XMLParser();
 
-    fetch('http://192.168.0.210:80/v1/communities').then(response => response.text()).then((xmlResult) => {
+    fetch('http://localhost:80/v1/communities').then(response => response.text()).then((xmlResult) => {
         const xmlFinal = parser.parse(xmlResult)
 
         res.render('./pages/index.ejs', {
