@@ -15,9 +15,17 @@ router.get('/posts/:community_id', (req, res) => {
 
     fetch(`http://localhost:80/v1/communities/${community_id}/posts`).then(response => response.text()).then(xmlResult => {
         const xmlFinal = parser.parse(xmlResult)
+        let postsFound;
+
+        if (xmlFinal.result.posts.length <= 1) {
+            postsFound = false
+        } else {
+            postsFound = true
+        }
 
         res.render('pages/posts.ejs', {
-            data : xmlFinal.result.posts
+            data : xmlFinal.result.posts,
+            postsFound : postsFound
         })
     })
 })

@@ -42,17 +42,15 @@ router.get('/:community_id/posts', (req, res) => {
     let sql
 
     if (limit) {
-        sql = `SELECT * FROM post WHERE 'community_id'=${community_id} ORDER BY id DESC LIMIT ${limit}`
+        sql = 'SELECT * FROM post WHERE `community_id`=' + community_id + ' ORDER BY id DESC LIMIT ' + limit
     } else {
-        sql = `SELECT * FROM post WHERE 'community_id'=${community_id} ORDER BY id DESC`
+        sql = 'SELECT * FROM post WHERE `community_id`=' + community_id + ' ORDER BY id DESC'
     }
 
     con.query(sql, (err, result, fields) => {
         if (err) { throw err }
 
-        const xmlResult = json2xml.json2xml(result, {compact : true, fullTagEmptyElement : false}).replace(/[0-9]>/g, "post>")
-
-        console.log(logger.Get(req.originalUrl))
+        const xmlResult = json2xml.json2xml(result, {compact : true, fullTagEmptyElement : false}).replace(/[0-9]+>/g, "post>")
 
         res.set('Content-Type', 'text/xml')
 
