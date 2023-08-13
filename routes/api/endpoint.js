@@ -8,7 +8,7 @@ const logger = require('../../other/logger')
 
 router.get('/', function(req, res) {
     res.set('Content-Type', 'text/xml')
-    res.sendFile(path.join(__dirname, '/discovery.xml'))
+    res.sendFile(path.join(__dirname, 'files/discovery.xml'))
 
     console.log(logger.Get(req.originalUrl))
 })
