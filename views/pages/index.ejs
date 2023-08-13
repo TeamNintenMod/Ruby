@@ -1,0 +1,31 @@
+<%- include('../partials/header.ejs') %>
+
+<%- include('../partials/sidebar.ejs') %>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<table>
+    <tr>
+        <th>OLV_ID</th>
+        <th>Community_Id</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Icon</th>
+    </tr>
+    <% data.community.forEach(community => {%>
+        <tr>
+            <td><%= community.olive_community_id %></td>
+            <td><%= community.community_id %></td>
+            <td><%= community.name %></td>
+            <td><%= community.description %></td>
+            <td><img src="<%= community.icon %>" width="64" height="64"></td>
+        </tr>
+    <%}); %>
+
+</table>
+

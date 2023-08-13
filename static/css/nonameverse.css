@@ -1,0 +1,19 @@
+#sidebar {
+    position: absolute;
+    left: 0px;
+
+    display: flex;
+    flex-direction: column;
+}
+
+#sidebar a {
+    background-color: gray;
+    padding: 5px;
+
+    margin-bottom: 5px;
+    text-align: center;
+}
+
+table, th, tr, td {
+    border: 2px black solid;
+}
