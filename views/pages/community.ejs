@@ -18,20 +18,16 @@
             </communityHeaderWrapper>
 
             <communityPostsWrapper>
-                <% if (postsFound) {%>
-                        <% posts.post.forEach(post => {%>
-                            <post>
-                                <img src="<%= post.mii_face_url %>" width="75px" height="75px">
+                <% posts.post.forEach(post => {%>
+                    <post>
+                        <img src="<%= post.mii_face_url %>" width="75px" height="75px">
             
-                                <postContent>
+                        <postContent>
                                     <h2><%= post.screen_name %></h2>
                                     <span id="postBody"><%= post.body %></span>
-                                </postContent>
-                            </post>
-                        <%}); %>
-                <% } else {%>
-                <h1>No posts found..</h1>
-                <%} %>
+                        </postContent>
+                    </post>
+                <%});%>
                 
             </communityPostsWrapper>
 
