@@ -35,6 +35,26 @@ router.get('/', (req, res) => {
     })
 })
 
+router.get('/:community_id', (req, res) => {
+    const limit = req.query['limit']
+    const community_id = req.params.community_id
+
+    let sql = "SELECT * FROM community WHERE `community_id`=" + community_id
+        
+    con.query(sql, (err, result, fields) => {
+        if (err) { throw err }
+
+        const xmlResult = `<?xml version="1.0" encoding="UTF-8"?><result><has_error>0</has_error><version>1</version><request_name>communities</request_name><communities>` + json2xml.json2xml(result, {compact : true, fullTagEmptyElement : true}).replace(/[0-9]+>/g, "community>") + '</communities></result>'//.replace(/[0-9]>+/g, "community>")
+
+        console.log(logger.Get(req.originalUrl))
+
+        res.set('Content-Type', 'text/xml')
+
+        res.send(xmlResult)
+
+    })
+})
+
 router.get('/:community_id/posts', (req, res) => {
     const limit = req.query['limit']
     const community_id = req.params.community_id

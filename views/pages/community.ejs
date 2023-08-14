@@ -1,0 +1,43 @@
+<%- include('../partials/header.ejs') %>
+
+<body>
+
+    <main>
+        <%- include('../partials/sidebar.ejs', {
+            homePage : false
+        }) %>
+        <content>
+
+            <communityHeaderWrapper>
+                <img src="<%= community.icon %>" width="100px" height="100px"> 
+
+                <communityMetaData>
+                    <h1><%= community.name %></h1>
+                    <h2><%= community.description %></h2>
+                </communityMetaData>
+            </communityHeaderWrapper>
+
+            <communityPostsWrapper>
+                <% if (postsFound) {%>
+                        <% posts.post.forEach(post => {%>
+                            <post>
+                                <img src="<%= post.mii_face_url %>" width="75px" height="75px">
+            
+                                <postContent>
+                                    <h2><%= post.screen_name %></h2>
+                                    <span id="postBody"><%= post.body %></span>
+                                </postContent>
+                            </post>
+                        <%}); %>
+                <% } else {%>
+                <h1>No posts found..</h1>
+                <%} %>
+                
+            </communityPostsWrapper>
+
+            
+        </content>
+    </main>
+
+   
+</body>

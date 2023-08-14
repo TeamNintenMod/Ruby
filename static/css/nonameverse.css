@@ -3,12 +3,29 @@
     src: url('./MiiverseSymbols-Regular.woff');
 }
 
+@font-face {
+    font-family: miiverse;
+    src: url('./nintendo_NTLG-DB_002.woff');
+}
+
 :root {
-    --navbar: #58a7db
+    --navbar: #58a7db;
+    --header2: gray;
+
+    --background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPAAAADwBAMAAADMe/ShAAAAHlBMVEX29vb09PTy8vL19fXz8/Px8fHw8PDv7+/u7u739/dHdNvrAAACSElEQVR4AezYNX7DMBiGcafcKTRlC0hdy7T1Z7iAcS5YOkEl38DeQlNOW24YX63fsxr+Ztm2RmvjMiu2bWbOXPmjtW2A7S8YKlfMCK4lKPzeMoJvYhROHYIJno9gggkmmGCCCSaYYIIJJphgggkmGP/PZQZf4XDHCK5JFFYtE7hXkwWYap0awEMPh8NHA7jPNQprv2EAH5zh8MsTDo9vY/xGxuCeLXFYsVMY7nNZwCm/AcM3scZhnTooPBwfafBYP4JwiZvBfgWDh7Xxkc71DmXjY916hOAbLrMxK7ZuTOfKdxC4ZMf6z1Ui2iEh/2Sdssru8L4dy+zXFVGbuVtntyPxK+cqZRc7wr1Ll0v95/qser1DVZv/yVr5bv10Bczq+ML4Rl/als/ww4WfJptbwuACMbgwhaUVfkvgt6LU1icpdkAAAADAEEz/1EKshHOBgMAnwZ7gNgG9DEwybTKpyZiLRCT6ItqUCJuIYqKoosaJlEsMJBki+ZOElwRfkpqSuElcS9Qnd4LcGN3enRUACMRQDFSDJRzg3wIKuNnNzygYA83rGbx9g1cwGAwGg8FgMBgMBoPBYDAYDAaDwWAwGAwGg8FgMBgMBoPB/bFgfx7ZH4TWJ7DB0W9w5hwcdgen7MHxfp8r9IFGkKQEEU6WHWWhVZaWZTFdlg9mwWSdiAZRbJABB+FzkHoHcXuQ82cDBtlkQzVSkc1yZEMk2fRKNjZTzetkg0LlhJK1KjAYDAaDwWAwGAwGg8FgcAD3L/H6J4DLS/j67eEOl9GYoKbAV2YAAAAASUVORK5CYII=');
+
 }
 
 html, body {
     margin: 0px;
+
+    font-family: miiverse;
+
+    background-image: var(--background)
+}
+
+content {
+    width: 100%;
 }
 
 main {
@@ -31,6 +48,9 @@ main {
     background-color: var(--navbar);
 
     position: sticky;
+
+    border-top-right-radius: 35px;
+    border-bottom-right-radius: 35px;
 
     left: 0px;
 
@@ -66,4 +86,82 @@ main {
 
 table, td, th {
     border: 2px black solid;
+}
+
+communityHeaderWrapper {
+    display: flex;
+    flex-direction: row;
+
+    margin: 15px;
+
+    padding-bottom: 10px;
+
+    border-bottom: solid black 1.5px;
+
+    width: auto;
+}
+
+communityHeaderWrapper img {
+    border-radius: 5px;
+}
+
+h1, h2 {
+    margin: 0px;
+    margin-left: 10px;
+}
+
+h1 {
+    font-size:xx-large;
+}
+
+h2 {
+    color: var(--header2);
+    font-size: medium;
+}
+
+communityPostsWrapper {
+    display: flex;
+    flex-direction: column;
+
+    margin: 15px;
+
+    padding-bottom: 10px;
+}
+
+communityPostsWrapper img, postContent {
+    border-radius: 5px;
+    background-color: white;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+
+    margin-left: 15px;
+}
+
+postContent {
+    padding-left: 5px;
+    padding-right: 5px;
+    text-align: left;
+}
+
+postContent h1, postContent h2 {
+    color: black;
+    margin: 0px;
+
+    font-size: larger;
+}
+
+
+#postBody {
+    color: black;
+    font-size: large;
+}
+
+communityPostsWrapper h1 {
+    font-size: x-large;
+}
+
+post {
+    display: flex;
+    flex-direction: row;
+
+    margin-bottom: 15px;
 }

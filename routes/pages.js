@@ -9,24 +9,32 @@ router.get('/post', function(req, res) {
     res.render('pages/post.ejs')
 })
 
-router.get('/communities/:community_id', (req, res) => {
+router.get('/community/:community_id', (req, res) => {
     const community_id = req.params.community_id
     const parser = new xmlparser.XMLParser();
 
     fetch(`http://localhost:80/v1/communities/${community_id}/posts`).then(response => response.text()).then(xmlResult => {
-        const xmlFinal = parser.parse(xmlResult)
+        const postsXML = parser.parse(xmlResult)
         let postsFound;
 
-        if (xmlFinal.result.posts.length < 1) {
+        if (postsXML.result.posts.length < 1) {
             postsFound = false
         } else {
             postsFound = true
         }
 
-        res.render('pages/posts.ejs', {
-            data : xmlFinal.result.posts,
-            postsFound : postsFound
+        fetch(`http://localhost:80/v1/communities/${community_id}`).then(response => response.text()).then(xmlResult => {
+
+            const communityXML = parser.parse(xmlResult)
+
+            res.render('pages/community.ejs', {
+                posts : postsXML.result.posts,
+                postsFound : postsFound,
+                community : communityXML.result.communities.community
+            })
         })
+
+        
     })
 })
 
