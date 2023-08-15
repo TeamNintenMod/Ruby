@@ -16,10 +16,8 @@
                     <th>Icon</th>
                     <th>Posts</th>
                 </tr>
-                <% 
-                
-                if (data.community.length > 1) {
-                    data.community.forEach(community => {%>
+                <% if (data.community.length > 1) {
+                    data.community.forEach(community => { %>
                     <tr>
                         <td><%= community.olive_community_id %></td>
                         <td><%= community.community_id %></td>
@@ -38,7 +36,7 @@
                         <td><img src="<%= data.community.icon %>" width="80" height="80"></td>
                         <td><a href="./pages/community/<%= data.community.community_id %>">Posts</a></td>
                     </tr>
-                <% } %>
+                <%}%>
             </table>    
         </content>
     </main>
