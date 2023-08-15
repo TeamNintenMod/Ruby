@@ -5,6 +5,8 @@ const mysql = require('mysql')
 const { port, dbPassword } = config;
 const path = require('path')
 
+const fs = require('fs')
+
 const xmlparser = require('fast-xml-parser')
 
 const logger = require('./other/logger')
@@ -18,13 +20,21 @@ const endpointRoute = require('./routes/api/endpoint');
 const xmljs= require('xml-js');
 const xml = require('xml')
 
+const subdomain = require('express-subdomain')
+
+const key = fs.readFileSync('./certs/key.pem');
+
+const cert = fs.readFileSync('./certs/cert.pem');
+
+const https = require('https')
+
 var app = express();
 
 app.use(cookieparser())
 
 app.use('/v1/people', accountRoute)
 app.use('/v1/communities', communityRoute)
-app.use('/v1/endpoint', endpointRoute)
+app.use(subdomain('olv', endpointRoute))
 
 app.use('/pages', pagesRoute)
 
@@ -46,7 +56,7 @@ app.get('/', (req, res) => {
 
     const parser = new xmlparser.XMLParser();
 
-    fetch('http://localhost:80/v1/communities').then(response => response.text()).then((xmlResult) => {
+    fetch('http://192.168.1.48/v1/communities').then(response => response.text()).then((xmlResult) => {
         const xmlFinal = parser.parse(xmlResult)
 
         res.render('./pages/index.ejs', {
@@ -60,4 +70,3 @@ app.get('/', (req, res) => {
 app.listen(port, () => {
     console.log(logger.Info('Server started on port 80.'))
 })
-

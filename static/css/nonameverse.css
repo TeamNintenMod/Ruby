@@ -52,6 +52,8 @@ main {
     border-top-right-radius: 35px;
     border-bottom-right-radius: 35px;
 
+    z-index: 0;
+
     left: 0px;
 
     height:100%;
@@ -78,6 +80,7 @@ main {
 #mii img {
     border-radius: 100%;
     background-color: white;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 
 #backexit {
@@ -103,6 +106,7 @@ communityHeaderWrapper {
 
 communityHeaderWrapper img {
     border-radius: 5px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 
 h1, h2 {
