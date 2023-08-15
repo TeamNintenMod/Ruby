@@ -34,7 +34,7 @@ app.use(cookieparser())
 
 app.use('/v1/people', accountRoute)
 app.use('/v1/communities', communityRoute)
-app.use(subdomain('olv', endpointRoute))
+app.use('/v1/endpoint', endpointRoute)
 
 app.use('/pages', pagesRoute)
 
@@ -42,21 +42,12 @@ app.use(express.static('static'))
 
 app.set('view engine', 'ejs');
 
-app.get('/signUp', function(req, res) {
-    res.render('./pages/signs/signUp.ejs')
-})
-
-app.get('/signin', function(req, res) {
-    console.log(req.ip)
-    res.render('./pages/signs/signIn.ejs')
-})
-
 app.get('/', (req, res) => {
     console.log(logger.Get(req.originalUrl))
 
     const parser = new xmlparser.XMLParser();
 
-    fetch('http://192.168.1.48/v1/communities').then(response => response.text()).then((xmlResult) => {
+    fetch('http://localhost:80/v1/communities').then(response => response.text()).then((xmlResult) => {
         const xmlFinal = parser.parse(xmlResult)
 
         res.render('./pages/index.ejs', {

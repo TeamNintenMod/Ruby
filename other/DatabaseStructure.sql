@@ -56,7 +56,7 @@ CREATE TABLE `community` (
   `app_data` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
   `is_user_community` int DEFAULT NULL,
   PRIMARY KEY (`olive_community_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -67,7 +67,8 @@ DROP TABLE IF EXISTS `post`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `post` (
-  `body` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `app_data` mediumtext,
+  `body` varchar(255) DEFAULT NULL,
   `community_id` int DEFAULT NULL,
   `country_id` int DEFAULT NULL,
   `created_at` datetime DEFAULT NULL COMMENT 'Create Time',
@@ -90,7 +91,7 @@ CREATE TABLE `post` (
   `screen_name` varchar(255) DEFAULT NULL,
   `title_id` int DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -106,4 +107,4 @@ CREATE TABLE `post` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-08-13  9:00:59
+-- Dump completed on 2023-08-15 13:13:14

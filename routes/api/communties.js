@@ -6,6 +6,8 @@ const json2xml = require('xml-js')
 const con = require('../../other/mysqlConnection')
 const logger = require('../../other/logger')
 
+const { community_posts } = require('../../config.json')
+
 const moment = require('moment')
 const xml = require('xml')
 
@@ -64,15 +66,15 @@ router.get('/:community_id/posts', (req, res) => {
     let sql
 
     if (limit) {
-        sql = 'SELECT * FROM post WHERE `community_id`=' + community_id + ' ORDER BY id DESC LIMIT ' + limit
+        sql = 'SELECT ' + community_posts + ' FROM  WHERE `community_id`=' + community_id + ' ORDER BY id DESC LIMIT ' + limit
     } else {
-        sql = 'SELECT * FROM post WHERE `community_id`=' + community_id + ' ORDER BY id DESC'
+        sql = 'SELECT ' + community_posts + ' FROM post WHERE `community_id`=' + community_id + ' ORDER BY id DESC'
     }
 
     con.query(sql, (err, result, fields) => {
         if (err) { throw err }
 
-        const xmlResult = json2xml.json2xml(result, {compact : true, fullTagEmptyElement : false}).replace(/[0-9]+>/g, "post>")
+        let xmlResult = json2xml.json2xml(result, {fullTagEmptyElement : true, compact : true}).replace(/[0-9]+>/g, "post>")
 
         res.set('Content-Type', 'text/xml')
 

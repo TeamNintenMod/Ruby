@@ -47,7 +47,9 @@ main {
 
     background-color: var(--navbar);
 
-    position: sticky;
+    justify-content:space-between;
+
+    position: relative;
 
     border-top-right-radius: 35px;
     border-bottom-right-radius: 35px;
@@ -61,15 +63,19 @@ main {
     margin: 0px;
 
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0), 0 6px 20px 0 rgba(0, 0, 0, 0.7);
+
+    font-size: 40px;
 }
 
 #sidebar a {
 
     font-family: MiiverseSymbols;
     color: white;
-    font-size: 300%;
 
-    padding: 15px;
+    padding: 5px;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 10px;
 
     text-decoration: none;
 
@@ -105,7 +111,7 @@ communityHeaderWrapper {
 }
 
 communityHeaderWrapper img {
-    border-radius: 5px;
+    border-radius: 6px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 
@@ -133,17 +139,21 @@ communityPostsWrapper {
 }
 
 communityPostsWrapper img, postContent {
-    border-radius: 5px;
-    background-color: white;
+    border-radius: 10px;
+    background: rgb(255,255,255);
+    background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 0%, rgb(241, 241, 241) 100%);  
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 
     margin-left: 15px;
 }
 
 postContent {
-    padding-left: 5px;
-    padding-right: 5px;
+    padding: 5px;
     text-align: left;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
 }
 
 postContent h1, postContent h2 {
@@ -156,7 +166,8 @@ postContent h1, postContent h2 {
 
 #postBody {
     color: black;
-    font-size: large;
+    font-size: mediums;
+    padding: 2px;
 }
 
 communityPostsWrapper h1 {
@@ -168,4 +179,8 @@ post {
     flex-direction: row;
 
     margin-bottom: 15px;
+}
+
+#postIcon {
+    margin: 10px
 }

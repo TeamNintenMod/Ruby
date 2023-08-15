@@ -13,7 +13,7 @@ router.get('/community/:community_id', (req, res) => {
     const community_id = req.params.community_id
     const parser = new xmlparser.XMLParser();
 
-    fetch(`http://localhost:80/v1/communities/${community_id}/posts`).then(response => response.text()).then(xmlResult => {
+    fetch(`http://localhost/v1/communities/${community_id}/posts`).then(response => response.text()).then(xmlResult => {
         const postsXML = parser.parse(xmlResult)
         let postsFound;
 
@@ -23,12 +23,12 @@ router.get('/community/:community_id', (req, res) => {
             postsFound = true
         }
 
-        fetch(`http://localhost:80/v1/communities/${community_id}`).then(response => response.text()).then(xmlResult => {
+        fetch(`http://localhost/v1/communities/${community_id}`).then(response => response.text()).then(xmlResult => {
 
             const communityXML = parser.parse(xmlResult)
 
             res.render('pages/community.ejs', {
-                posts : postsXML.result,
+                posts : postsXML.result.posts,
                 postsFound : postsFound,
                 community : communityXML.result.communities.community
             })
@@ -36,6 +36,10 @@ router.get('/community/:community_id', (req, res) => {
 
         
     })
+})
+
+router.get('/activityfeed', (req, res) => {
+    console.log('add later')
 })
 
 module.exports = router

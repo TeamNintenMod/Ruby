@@ -23,12 +23,11 @@
                         <img src="<%= post.mii_face_url %>" width="75px" height="75px">
             
                         <postContent>
-                                    <h2><%= post.screen_name %></h2>
-                                    <span id="postBody"><%= post.body %></span>
+                                <img id="postIcon" width="45" height="45" src="<%= community.icon %>">
+                                <span id="postBody"><%= post.body %></span>
                         </postContent>
                     </post>
                 <%});%>
-                
             </communityPostsWrapper>
 
             

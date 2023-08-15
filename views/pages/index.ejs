@@ -18,7 +18,7 @@
                 </tr>
                 <% 
                 
-                if (data.community.length < 1) {
+                if (data.community.length > 1) {
                     data.community.forEach(community => {%>
                     <tr>
                         <td><%= community.olive_community_id %></td>
