@@ -3,6 +3,71 @@
     src: url('./MiiverseSymbols-Regular.ttf');
 }
 
+/* navbar */
+
+#sidebar {
+    background-color: #58a7db;
+
+    position: fixed;
+
+    border-top-right-radius: 35px;
+    border-bottom-right-radius: 35px;
+
+    z-index: 0;
+
+    left: 0px;
+
+    height:100%;
+    width: 9%;
+
+    margin: 0px;
+
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0), 0 6px 20px 0 rgba(0, 0, 0, 0.7);
+
+    font-size: 60px;
+}
+
+#sidebar ul {
+    margin: 0px;
+    list-style: none;
+
+    padding: 0px;
+
+    text-align: center;
+    height: 100%;;
+    width: 100%;
+}
+
+li {
+    padding-top: 10px;
+}
+
+#sidebar a {
+
+    font-family: MiiverseSymbols;
+    color: white;
+
+    text-align: center;
+    width: 100%;
+
+    text-decoration: none;
+
+    margin-bottom: 5px;
+    text-align: center;
+}
+
+#backexit {
+    float: none;
+}
+
+#mii img {
+    border-radius: 100%;
+    background-color: white;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+/* basic stuff */
+
 :root {
     --navbar: #58a7db;
     --header2: gray;
