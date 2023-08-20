@@ -5,12 +5,12 @@ This is an attempt to create a semi-miiversey social media platform, written in 
 # So Far..
 
 So far into development, this is what I have working..
-[x] Proper endpoint
-[x] Portal working
-[] Topics
-[] People
-[x] In-Game Posting
-[] Post's in-game
+- [x] Proper endpoint
+- [x] Portal working
+- [] Topics
+- [] People
+- [x] In-Game Posting
+- [] Post's in-game
 
 # Setting up
 
