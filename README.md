@@ -7,10 +7,10 @@ This is an attempt to create a semi-miiversey social media platform, written in 
 So far into development, this is what I have working..
 - [x] Proper endpoint
 - [x] Portal working
-- [o] Topics
-- [o] People
+- [ ] Topics
+- [ ] People
 - [x] In-Game Posting
-- [o] Post's in-game
+- [ ] Post's in-game
 
 # Setting up
 
