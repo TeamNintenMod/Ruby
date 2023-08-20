@@ -18,7 +18,7 @@
     left: 0px;
 
     height:100%;
-    width: 12%;
+    width: 15%;
 
     margin: 0px;
 
@@ -45,7 +45,7 @@ li {
 #sidebar a {
 
     font-family: MiiverseSymbols;
-    color: white;
+    color: rgb(255, 255, 255);
 
     text-align: center;
     width: 100%;
@@ -83,9 +83,9 @@ html, body {
     background-image: var(--background)
 }
 
-content {
-    width: 88%;
-    margin-left: 12%;
+content, table {
+    width: 85%;
+    margin-left: 15%;
 }
 
 content table, tr, td, th {
