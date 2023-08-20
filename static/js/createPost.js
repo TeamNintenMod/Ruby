@@ -1,3 +1,5 @@
+const { post } = require("../../routes/pages");
+
 function getCookie(cname) {
     let name = cname + "=";
     let decodedCookie = decodeURIComponent(document.cookie);
@@ -16,28 +18,23 @@ function getCookie(cname) {
 
 function Post() {
     const postContent = document.getElementById('postInput').value;
+    const communityid = document.getElementById('community_input').value.toString()
 
-    const nnid = getCookie('nnid')
-    const password = getCookie('password')
-    const token = getCookie('token')
+    console.log(communityid)
 
-    console.log(document.cookie)
-
-    fetch('http://192.168.1.48:80/v1/communities/0/posts', {
+    fetch('http://olv.nonamegiven.xyz/v1/communities/post', {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
-            'nnid': nnid,
-            'content': postContent,
-            'token' : token,
-            'password' : password
+            'body': postContent,
+            'communityid' : communityid
         }
     }).then((response) => {
         switch(response.status) {
 
             case 200:
-                window.location.href = "http://192.168.1.48:80/pages/home"
+                window.location.href = "http://olv.nonamegiven.xyz"
             default:
                 console.log("Sorry, your token has changed. Please resign in.")
 

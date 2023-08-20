@@ -1,5 +1,6 @@
 const express = require('express')
 const router = express.Router()
+const fetch = require('node-fetch')
 
 const xmltojson = require('xml-js')
 
@@ -13,7 +14,7 @@ router.get('/community/:community_id', (req, res) => {
     const community_id = req.params.community_id
     const parser = new xmlparser.XMLParser();
 
-    fetch(`http://localhost/v1/communities/${community_id}/posts`).then(response => response.text()).then(xmlResult => {
+    fetch(`https://olvapi.nonamegiven.xyz/v1/communities/${community_id}/posts`).then(response => response.text()).then(xmlResult => {
         const postsXML = parser.parse(xmlResult)
         let postsFound;
 
@@ -23,7 +24,7 @@ router.get('/community/:community_id', (req, res) => {
             postsFound = true
         }
 
-        fetch(`http://localhost/v1/communities/${community_id}`).then(response => response.text()).then(xmlResult => {
+        fetch(`https://olvapi.nonamegiven.xyz/v1/communities/${community_id}`).then(response => response.text()).then(xmlResult => {
 
             const communityXML = parser.parse(xmlResult)
 
@@ -38,8 +39,8 @@ router.get('/community/:community_id', (req, res) => {
     })
 })
 
-router.get('/activityfeed', (req, res) => {
-    console.log('add later')
+router.get('/post', (req, res) => {
+    res.render('pages/post.ejs')
 })
 
 module.exports = router

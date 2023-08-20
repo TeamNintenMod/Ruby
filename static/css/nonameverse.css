@@ -1,11 +1,6 @@
 @font-face {
     font-family: MiiverseSymbols;
-    src: url('./MiiverseSymbols-Regular.woff');
-}
-
-@font-face {
-    font-family: miiverse;
-    src: url('./nintendo_NTLG-DB_002.woff');
+    src: url('./MiiverseSymbols-Regular.ttf');
 }
 
 :root {
@@ -19,82 +14,25 @@
 html, body {
     margin: 0px;
 
-    font-family: miiverse;
-
     background-image: var(--background)
 }
 
 content {
-    width: 100%;
+    width: 91%;
+    margin-left: 9%;
+}
+
+content table, tr, td, th {
+    margin-left: 9%;
+    border: 2px black solid;
 }
 
 main {
-    width: 854px;
-    height: 480px;
-    border:rgba(0, 0, 0, 0.7) solid;
-    border-width: 3px;
+    width: 100%;
+    height: 100%;
 
     position: absolute;
     margin: 0px;
-
-    display: flex;
-    flex-direction: row;
-}
-
-#sidebar {
-    display: flex;
-    flex-direction: column;
-
-    background-color: var(--navbar);
-
-    justify-content:space-between;
-
-    position: relative;
-
-    border-top-right-radius: 35px;
-    border-bottom-right-radius: 35px;
-
-    z-index: 0;
-
-    left: 0px;
-
-    height:100%;
-
-    margin: 0px;
-
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0), 0 6px 20px 0 rgba(0, 0, 0, 0.7);
-
-    font-size: 40px;
-}
-
-#sidebar a {
-
-    font-family: MiiverseSymbols;
-    color: white;
-
-    padding: 5px;
-    padding-left: 15px;
-    padding-right: 15px;
-    padding-top: 10px;
-
-    text-decoration: none;
-
-    margin-bottom: 5px;
-    text-align: center;
-}
-
-#mii img {
-    border-radius: 100%;
-    background-color: white;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-}
-
-#backexit {
-    float: none;
-}
-
-table, td, th {
-    border: 2px black solid;
 }
 
 communityHeaderWrapper {
@@ -168,6 +106,8 @@ postContent h1, postContent h2 {
     color: black;
     font-size: mediums;
     padding: 2px;
+    word-wrap:normal;
+    flex-wrap: nowrap;
 }
 
 communityPostsWrapper h1 {

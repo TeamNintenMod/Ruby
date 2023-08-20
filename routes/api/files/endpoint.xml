@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<result>
+  <has_error>0</has_error>
+  <version>1</version>
+  <endpoint>
+    <host>olv-api.nonamegiven.xyz</host>
+    <api_host>olv-api.nonamegiven.xyz</api_host>
+    <portal_host>olv-portal.nonamegiven.xyz</portal_host>
+    <n3ds_host>olv-3ds.nonamegiven.xyz</n3ds_host>
+  </endpoint>
+</result>

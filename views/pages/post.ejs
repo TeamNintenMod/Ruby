@@ -1,27 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<%- include('../partials/header.ejs') %>
 
-    <meta property="og:title" content="PenisVerse"/>
-    <meta property="og:type" content="website"/>
-    <meta property="og:description" content="PenisVerse description"/>
-
-    <meta property="description" content="PenisVerse">
-
-    <meta name="theme-color" content="#8443b5"/>
-
-    <title>PenisVerse Post</title>
-
-    <link rel="stylesheet" href="../css/portal-grp.css">
-</head>
-
-<script src="../js/createPost.js">
-</script>
 
 <body>
-    <input id="postInput" placeholder="Post Content..">
-    <button onclick="Post()">Post</button>
+    <main>
+        <%- include('../partials/sidebar.ejs', {
+            homePage : false
+        }) %>        
+        <content>
+            <textarea placeholder="Post Content" id="postInput" maxlength="1000"></textarea>
+            <input placeholder="Community ID.." id="community_input" maxlength="3">
+            <button onclick="Post()">Post!</button>
+        </content>
+    </main>
 </body>
+

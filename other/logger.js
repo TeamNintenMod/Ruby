@@ -6,7 +6,7 @@ function Get(input) {
 }
 
 function Post(input) {
-    return `(${moment().format("HH:mm:ss")}) [POST] ${input}`.purple
+    return `(${moment().format("HH:mm:ss")}) [POST] ${input}`.yellow
 }
 
 function Info(input) {

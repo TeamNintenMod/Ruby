@@ -1,14 +1,15 @@
 <div id="sidebar">
-    <a id="mii"><img src="../../../../img/prodtest1.png" width="64" height="64"></a>
+    <ul>
+        <li><a id="mii"><img src="../../../../img/prodtest1.png" width="64" height="64"></a></li>
+        <li><a>a</a></li>
+        <li><a href="../../../../../../../titles/show">c</a></li>
+        <li><a>n</a></li>
+        <li><a>m</a></li>
 
-    <a>a</a>
-
-    <a href="../../../../../../../../">c</a>
-    <a>n</a>
-    <a>m</a>
-    <% if (!homePage) {%>
-        <a id="backexit" onclick="history.back()" style="cursor: pointer;">b</a>
-    <%} else {%>
-        <a id="backexit" href="https://google.com" style="cursor: pointer;">x</a>
-    <% } %>
+        <% if (!homePage) {%>
+            <li><a id="backexit" onclick="history.back()" style="cursor: pointer;">b</a></li>
+        <%} else {%>
+            <li><a id="backexit" onclick="wiiuBrowser.closeApplication(); wiiuSound.playSoundByName('SE_WAVE_EXIT', 1);" style="cursor: pointer;">x</a></li>
+        <% } %>
+    </ul>
 </div>

@@ -1,12 +1,13 @@
 <%- include('../partials/header.ejs') %>
 
-<body>
+<body onload="endLoading();">
 
     <main>
         <%- include('../partials/sidebar.ejs', {
             homePage : true
         }) %>
         <content>
+            <a href="https://olv.nonamegiven.xyz/pages/post">Post</a>
             <table>
                 <tr>
                     <th>OLV_ID</th>
@@ -24,7 +25,7 @@
                         <td><%= community.name %></td>
                         <td><%= community.description %></td>
                         <td><img src="<%= community.icon %>" width="80" height="80"></td>
-                        <td><a href="./pages/community/<%= community.community_id %>">Posts</a></td>
+                        <td><a href="../../pages/community/<%= community.community_id %>">Posts</a></td>
                     </tr>
                 <%});
                 }else {%>
@@ -34,7 +35,9 @@
                         <td><%= data.community.name %></td>
                         <td><%= data.community.description %></td>
                         <td><img src="<%= data.community.icon %>" width="80" height="80"></td>
-                        <td><a href="./pages/community/<%= data.community.community_id %>">Posts</a></td>
+
+
+                        <td><a href="../../pages/community/<%= data.community.community_id %>">Posts</a></td>
                     </tr>
                 <%}%>
             </table>    
