@@ -1,40 +1,41 @@
 <%- include('../partials/header.ejs') %>
 
 <body>
+    <%- include('../partials/sidebar.ejs', {
+        homePage : false
+    }) %>
+    <content>
 
-    <main>
-        <%- include('../partials/sidebar.ejs', {
-            homePage : false
-        }) %>
-        <content>
+        <div class="titleHeader">
+            <div class="titleName"><%= community.name %></div>
+        </div>
+        <img class="titleBanner" src='../../../../img/banners/<%= community.community_id %>.jpg' width="87.1%">
+        <div class="titleData">
+            <img class="titleIcon" src="../../../../img/icons/<%= community.community_id %>.jpg" width="100px">
+            <div class="titleMetaWrapper">
+                <span class="titleMetaName"><%= community.name %> Community</span> <br>
+                <span class="titleMetaDescription"><%= community.description %></span>
+            </div>
+        </div>
 
-            <communityHeaderWrapper>
-                <img src="<%= community.icon %>" width="100px" height="100px"> 
+        <div class="postsWrapper">
+            <ul>
+                <% posts.forEach(element => {%>
+                    <li>
+                        <img src="<%= element.mii_face_url %>">
+                        <div class="post">
+                            <img src="../../../../img/icons/<%= community.community_id %>.jpg" width="100px">
+                            <span><%= element.body %></span>
+                        </div>
+                    </li>
+                <%}); %>
+                
+            </ul>
 
-                <communityMetaData>
-                    <h1><%= community.name %></h1>
-                    <h2><%= community.description %></h2>
-                </communityMetaData>
-            </communityHeaderWrapper>
-
-            <communityPostsWrapper>
-                <% posts.post.forEach(post => {%>
-                    <post>
-                        <img src="<%= post.mii_face_url %>" width="75px" height="75px">
             
-                        <postContent>
-                                <img id="postIcon" width="45" height="45" src="<%= community.icon %>">
-                                <span id="postBody"><%= post.body %></span>
-                        </postContent>
-                    </post>
-                <%});%>
-            </communityPostsWrapper>
-
             
-        </content>
-    </main>
-
-   
+        </div>
+    </content>
 </body>
 
 <script>wiiuBrowser.endStartUp();</script>

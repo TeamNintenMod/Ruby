@@ -29,7 +29,7 @@ router.get('/community/:community_id', (req, res) => {
             const communityXML = parser.parse(xmlResult)
 
             res.render('pages/community.ejs', {
-                posts : postsXML.result.posts,
+                posts : postsXML.result.posts.post,
                 postsFound : postsFound,
                 community : communityXML.result.communities.community
             })

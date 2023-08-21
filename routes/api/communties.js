@@ -10,6 +10,7 @@ const { community_posts } = require('../../config.json')
 
 const moment = require('moment')
 const xmlbuilder = require('xmlbuilder')
+const headerDecoder = require('../../other/headerDecoder')
 
 router.get('/', (req, res) => {
 
@@ -58,17 +59,37 @@ router.get('/:community_id', (req, res) => {
 })
 
 router.get('/:community_id/posts', (req, res) => {
+
+    let paremPack = req.get('x-nintendo-parampack')
     const limit = req.query['limit']
-    const community_id = req.params.community_id
+    const search_key = req.query['search_key']
+    let community_id = req.params.community_id
+
+    if (req.get('x-nintendo-parampack')) {
+        console.log(logger.Info('Found ParemPack!'))
+        paremPack = headerDecoder.decodeParamPack(paremPack)
+        community_id = paremPack.title_id
+    } else {
+        console.log(logger.Info('Did not find ParemPack..'))
+        community_id = req.params.community_id
+    }
 
     console.log(logger.Get(req.originalUrl))
 
     let sql
 
-    if (limit) {
-        sql = 'SELECT ' + community_posts + ' FROM post WHERE `community_id`=' + community_id + ' LIMIT ' + limit 
+    if (req.get('x-nintendo-parampack')) {
+        if (limit) {
+            sql = 'SELECT * FROM post WHERE `community_id`=' + community_id + ' AND `search_key` LIKE "%' + search_key + '%" LIMIT ' + limit 
+        } else {
+            sql = 'SELECT * FROM post WHERE `community_id`=' + community_id + ' AND `search_key` LIKE "%' + search_key + '%"'
+        }
     } else {
-        sql = 'SELECT ' + community_posts + ' FROM post WHERE `community_id`=' + community_id
+        if (limit) {
+            sql = 'SELECT ' + community_posts + ' FROM post WHERE `community_id`=' + community_id + ' LIMIT ' + limit 
+        } else {
+            sql = 'SELECT ' + community_posts + ' FROM post WHERE `community_id`=' + community_id
+        }
     }
 
     con.query(sql, (err, result, fields) => {
@@ -79,8 +100,8 @@ router.get('/:community_id/posts', (req, res) => {
         result.forEach(element => {
 
             xml.ele('post')
-                .ele('body', element.body).up()
-                    .ele('community_id', element.community_id).up()
+            .ele('body', element.body).up()
+            .ele('community_id', element.community_id).up()
                     .ele('country_id', element.country_id).up()
                     .ele('created_at', element.created_at).up()
                     .ele('feeling_id', element.feeling_id).up()
@@ -94,12 +115,14 @@ router.get('/:community_id/posts', (req, res) => {
                     .ele('mii', element.mii).up()
                     .ele('mii_face_url', element.mii_face_url).up()
                     .ele('number', element.number).up()
+                    .ele('painting').up()
                     .ele('pid', element.pid).up()
                     .ele('platform_id', element.platform_id).up()
                     .ele('region_id', element.region_id).up()
                     .ele('reply_count', element.reply_count).up()
                     .ele('screen_name', element.screen_name).up()
                     .ele('title_id', element.title_id).up()
+                    .ele('app_data', String(element.app_data)).end()
                     
         });        
 

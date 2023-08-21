@@ -1,4 +1,3 @@
-
 function endLoading() {
     wiiuBrowser.endStartUp();
     wiiuSound.playSoundByName('BGM_OLV_MAIN', 3);
