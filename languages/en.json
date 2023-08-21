@@ -1,0 +1,42 @@
+{
+    "settings" : {
+        
+    },
+
+    "ui" : {
+        "newCommunties" : "New Communities",
+        "popularCommunities" : "Popular Communities"
+    },
+
+    "newUser" : {
+        "welcomeHeader" : "Welcome to NoNameVerse!",
+        "welcome" : "Welcome to NoNameVerse. An online social networking platform, designed to help Wii U owners around the world connect with eachother. It seems like it's your fist time here, let's get you set up!",
+
+        "rulesHeader" : "Rules to follow.",
+        "preRules" : "Before you sign up, you must agree to the rules that we have in place.",
+
+        "nnidSetupHeader" : "NNID Setup.",
+        "nnidSetup" : "Please input the NNID of the current acocunt you are on.",
+        "nnidWarning" : "Warning, you will not be allowed to change this in the future. Are you ready to proceed?",
+        "nnidComplete" : "Great! Your account is now fully set up! Have fun out there."
+    },
+
+    "rules" : [
+        {
+            "name" : "No NSFW",
+            "description" : "Please do not upload any sort of NSFW or gross things that users may feel are uncomfortable. This includes drawings. Everyone deserves a happy and safe miiverse."
+        },
+        {
+            "name" : "Don't post spoilers!",
+            "description" : "Many people come into NoNameVerse, looking for new tips or tricks to their favorite games, not for the whole game to be spoiled. If you're posting something containing a spoiler for a game, make sure to tick the spoiler box!"
+        }, 
+        {
+            "name" : "No Sensitive Information",
+            "description" : "Please do not upload any sort of sensitive information to NoNameVerse. This includes things such as, Addresses, Full Names, IP Addresses, Cities, States, anything like that. This ensures that nobody can do anything with that information, since it wasnt there at all!"
+        },
+        {
+            "name" : "Let's follow these rules and keep NoNameVerse safe!",
+            "description" : "Following these rules ensures a safe and fun zone for all walks of life, to explore, meet new friends, and have fun!"
+        }
+    ]
+}

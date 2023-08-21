@@ -1,0 +1,42 @@
+{
+    "settings" : {
+        
+    },
+
+    "ui" : {
+        "newCommunties" : "",
+        "popularCommunities" : ""
+    },
+
+    "newUser" : {
+        "welcomeHeader" : "",
+        "welcome" : "",
+
+        "rulesHeader" : "",
+        "preRules" : "",
+
+        "nnidSetupHeader" : "",
+        "nnidSetup" : "",
+        "nnidWarning" : "",
+        "nnidComplete" : ""
+    },
+
+    "rules" : [
+        {
+            "name" : "",
+            "description" : ""
+        },
+        {
+            "name" : "",
+            "description" : ""
+        }, 
+        {
+            "name" : "",
+            "description" : ""
+        },
+        {
+            "name" : "",
+            "description" : ""
+        }
+    ]
+}

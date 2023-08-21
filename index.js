@@ -15,7 +15,7 @@ const logger = require('./other/logger')
 const cookieparser = require('cookie-parser')
 
 const accountRoute = require("./routes/api/account")
-const pagesRoute = require('./routes/pages')
+const titlesRoute = require('./routes/titles')
 const communityRoute = require('./routes/api/communties')
 const endpointRoute = require('./routes/api/endpoint')
 const postsRoute = require('./routes/api/posts')
@@ -38,7 +38,7 @@ app.use('/v1/endpoint', endpointRoute)
 app.use('/v1/posts', postsRoute)
 app.use('/miiverse/xml', endpointRoute)
 
-app.use('/pages', pagesRoute)
+app.use('/titles', titlesRoute)
 
 app.use(express.static('static'))
 
