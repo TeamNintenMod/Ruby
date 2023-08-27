@@ -11,6 +11,10 @@ So far into development, this is what I have working..
 - [ ] People
 - [x] In-Game Posting
 - [x] Post's in-game
+- [ ] Empathies
+- [x] Topic Tag's/Search Keys
+- [ ] User Made Communities
+- [ ] Sub Communities
 
 # Setting up
 
