@@ -10,7 +10,7 @@ So far into development, this is what I have working..
 - [ ] Topics
 - [ ] People
 - [x] In-Game Posting
-- [ ] Post's in-game
+- [x] Post's in-game
 
 # Setting up
 
