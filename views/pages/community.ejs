@@ -2,13 +2,14 @@
 
 <body>
     <%- include('../partials/sidebar.ejs', {
-        homePage : false
+        homePage : false,
+        miiURL : `http://mii-images.account.nintendo.net/${account[0].hash}_normal_face.png`
     }) %>
-    <content>
 
-        <div class="titleHeader">
-            <div class="titleName"><%= community.name %></div>
-        </div>
+<a href="/titles/post/<%= community.community_id %>" class="community_post_button"><img href="/titles/post<%= community.community_id %>" class="community_post_button" src="../../../../../img/post.png" width="225px"></a>
+
+    <content>
+        <%- include('../partials/titleHeader.ejs', { title : community.name }) %>
         <img class="titleBanner" src='../../../../img/banners/<%= community.community_id %>.jpg' width="87.1%">
         <div class="titleData">
             <img class="titleIcon" src="../../../../img/icons/<%= community.community_id %>.jpg" width="100px">
@@ -20,20 +21,12 @@
 
         <div class="postsWrapper">
             <ul>
-                <% posts.forEach(element => {%>
+                <%for (let i in posts) {%>
                     <li>
-                        <img src="<%= element.mii_face_url %>">
-                        <div class="post">
-                            <img src="../../../../img/icons/<%= community.community_id %>.jpg" width="100px">
-                            <span><%= element.body %></span>
-                        </div>
+                        <%- include('../partials/post.ejs', { post : posts[i], community : community}) %>
                     </li>
-                <%}); %>
-                
+                <%}; %>        
             </ul>
-
-            
-            
         </div>
     </content>
 </body>

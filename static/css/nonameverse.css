@@ -79,14 +79,73 @@ html, body {
 
     color: black;
 }
+/* New User */
+
+.nuNext {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+
+    border-top-left-radius: 40px;
+    border: 2px rgb(177, 177, 177) solid;
+    padding: 30px;
+
+    text-decoration: none;
+    color: black;
+
+    font-size: xx-large;
+
+    text-align: center;
+
+    background: -webkit-linear-gradient(-90deg, rgba(255,255,255,1) 0%, rgb(221, 221, 221) 100%);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0), 0 6px 20px 0 rgba(0, 0, 0, 0.4);
+    border-bottom: 2px rgb(177, 177, 177) solid;
+}
+
+.nuBox {
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+
+    transform:  translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+
+    text-align: center;
+
+    width: 70%;
+    margin: auto;
+    padding: 20px;
+
+    font-size: xx-large;
+
+    border-radius: 30px;
+
+    background: -webkit-linear-gradient(-90deg, rgba(255,255,255,1) 0%, rgb(221, 221, 221) 100%);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0), 0 6px 20px 0 rgba(0, 0, 0, 0.4);
+    border-bottom: 2px rgb(177, 177, 177) solid;
+}
+
+.nuBox h1 {
+    font-weight: 100;
+}
+
+.nunnidInput {
+    width: 20%;
+}
 
 table, th, td, tr {
     border: 2px black solid;
 }
 
+table {
+    position: absolute;
+    top: 60px;
+}
+
 content {
     width: 100%;
-    display: block;
+    position: absolute;
 }
 
 content > * > *, content > *, content > * > * > *  {
@@ -114,11 +173,7 @@ content > * > *, content > *, content > * > * > *  {
 
     border-bottom: 2px rgb(177, 177, 177) solid;
 
-    background: rgb(255,255,255);
-    background: -moz-linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 0%, rgba(224,224,224,1) 100%);
-    background: -webkit-linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 0%, rgba(224,224,224,1) 100%);
-    background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 0%, rgba(224,224,224,1) 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ffffff",endColorstr="#e0e0e0",GradientType=1);
+    background: -webkit-linear-gradient(-90deg, rgba(255,255,255,1) 0%, rgb(221, 221, 221) 100%);
 
     z-index: 1;
 }
@@ -141,7 +196,7 @@ content > * > *, content > *, content > * > * > *  {
     bottom: 4px;
     background: rgb(255,255,255);
     background: -moz-linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 0%, rgba(224,224,224,1) 100%);
-    background: -webkit-linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 0%, rgba(224,224,224,1) 100%);
+    background: -webkit-linear-gradient(-90deg, rgba(255,255,255,1) 0%, rgb(221, 221, 221) 100%);
     background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 0%, rgba(224,224,224,1) 100%);
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ffffff",endColorstr="#e0e0e0",GradientType=1);
 
@@ -211,7 +266,7 @@ content > * > *, content > *, content > * > * > *  {
 .postsWrapper ul li img {
     background: rgb(255,255,255);
     background: -moz-linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 0%, rgba(224,224,224,1) 100%);
-    background: -webkit-linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 0%, rgba(224,224,224,1) 100%);
+    background: -webkit-linear-gradient(-90deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 0%, rgba(224,224,224,1) 100%);
     background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 0%, rgba(224,224,224,1) 100%);
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ffffff",endColorstr="#e0e0e0",GradientType=1);
 
@@ -229,7 +284,7 @@ content > * > *, content > *, content > * > * > *  {
 .post {
     background: rgb(255,255,255);
     background: -moz-linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 0%, rgba(224,224,224,1) 100%);
-    background: -webkit-linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 0%, rgba(224,224,224,1) 100%);
+    background: -webkit-linear-gradient(-90deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 0%, rgba(224,224,224,1) 100%);
     background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 0%, rgba(224,224,224,1) 100%);
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ffffff",endColorstr="#e0e0e0",GradientType=1);
 
@@ -243,6 +298,8 @@ content > * > *, content > *, content > * > * > *  {
     font-size: x-large;
 
     width: 65%;
+
+    display: block;
 }
 
 .post span {
@@ -255,4 +312,58 @@ content > * > *, content > *, content > * > * > *  {
     border-bottom: 2px rgb(150, 150, 150) solid;
 
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
+}
+
+.topic_tag {
+    color: #578eb3;
+    position: relative;
+    top: 0;
+    font-size: 20px;
+
+    text-overflow: ellipsis;
+}
+
+.topic_tag_symbol {
+    font-family: MiiverseSymbols;
+}
+
+.community_post_button {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+
+    width: 225px;
+    height: 106px;
+
+    z-index: 4;
+}
+
+.screen_name {
+    background-color: gray;
+    color: white;
+
+    width: min-content;
+    height: min-content;
+    text-align: center;
+
+    vertical-align: middle;
+
+    border-radius: 20px;
+    padding: 5px;
+
+    position: relative;
+    bottom: 8px;
+    right: 15px;
+}
+
+.post_author {
+    height: 0px;
+}
+
+.content_input {
+    border-radius: 10px;
+}
+
+.post_box {
+
 }

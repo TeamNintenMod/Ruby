@@ -3,69 +3,62 @@ const router = express.Router()
 
 const con = require('../../other/mysqlConnection')
 const logger = require('../../other/logger')
+const config = require('../../config.json')
 
 const moment = require('moment')
 
 const { placeholderBio } = require('../../config.json')
 
-router.get('/', function(req, res) {
-    con.query("SELECT id, create_time, nnid, name, bio, admin, miiHash FROM account", function (err, result, fields) {
-        console.log(logger.Get(req.originalUrl))
-        res.send(result)
-    })
-})
-
-router.post('/', function(req, res) {
-
-    const nnid = req.get('nnid')
-    const password = req.get('password')
-    const token = req.get('token')
-
-    console.log("POST")
-
-    fetch(`https://nnidlt.murilo.eu.org/api.php?env=production&user_id=${nnid}`)
-        .then(response => response.json()).then((response) => {
-
-            console.log(response)
-
-            const hash = response.images.hash
-            const name = response.name
-
-            const date = moment().format("YYYY-MM-DD HH:mm:ss")
-
-            con.query(`INSERT INTO account (create_time, nnid, name, bio, miiHash, password, token) VALUES ("${date}", "${nnid}", "${name}", "${placeholderBio}", "${hash}", "${password}", "${token}")`, function (err, result, fields) {
-                if (err) throw {err}
-                console.log(`[MYSQL] Created new account with ${nnid} and ${password}`.blue)
-                res.sendStatus(200)
-            })
-        })
-})
+const fetch = require('node-fetch')
 
 router.get('/person', function(req, res) {
-    const nnid = req.query["nnid"]
+    const regExp = new RegExp(' ', 'g')
+    const token = req.query["token"].replace(regExp, "+")
 
-    con.query(`SELECT id, create_time, nnid, name, bio, admin, miiHash FROM account WHERE nnid="${nnid}"`, function (err, result, fields) {
-        console.log(`[MYSQL] Requested "${nnid}"`.blue)
-        res.send(result)
+    con.query(`SELECT * FROM account WHERE serviceToken="${token}"`, function (err, result, fields) {
+        if (err) { throw err }
+
+        console.log(logger.Get(req.originalUrl))
+
+        if (JSON.stringify(result).replace('[]', '')) {
+            console.log(logger.Info('Found account!'))
+            res.send(result)
+        } else {
+            console.log(logger.Error('Could not find account matching that token..'))
+            res.send('')
+        }
+        
     })
 })
 
-router.get('/signin', function(req, res) {
-    const nnid = req.header('nnid')
-    const password = req.header('password')
+router.post('/', (req, res) => {
+    console.log(logger.Info(req.originalUrl))
 
-    console.log(`[GET] Sign In Request. [ ${nnid}, ${password} ]`)
+    const serviceToken = req.get('x-nintendo-servicetoken').slice(0, 42)
+    const nnid = req.get('NNID')
 
-    con.query(`SELECT * FROM account WHERE nnid="${nnid}"`, function (err, result, field) {
-        if (err) { throw err}
-        console.log(`[MYSQL] Check 1 [${result[0].nnid}, ${result[0].password}]`.blue)
+    console.log(logger.MySQL(`Creating New Account For ${nnid}`))
 
-        if (password == result[0].password) {
-            console.log(`[LOGIN] Correct login attempt!`.cyan)
-            res.send(result[0].token)
+    con.query(`SELECT * FROM account WHERE nnid="${nnid}"`, function (err, result, fields) {
+        if (err) { throw err }
+
+        console.log(result)
+
+        if (JSON.stringify(result).replace('[]', '')) {
+            console.log(logger.Error(`There has already been an account created for ${nnid}`))
+            res.send('{ success : 0 }')
         } else {
-            console.log(`[LOGIN] Incorrect login attempt by ${req.ip}`.red)
-            res.sendStatus(404)
+            fetch(`https://nnidlt.murilo.eu.org/api.php?env=production&user_id=${nnid}`).then(response => response.text()).then(response => {
+                const responseObject = JSON.parse(response)
+
+                con.query(`INSERT INTO account (nnid, serviceToken, name, bio, admin, pid, mii, hash) VALUES("${responseObject.user_id}", "${serviceToken}", "${responseObject.name}", "${config.placeholderBio}", 0, ${responseObject.pid}, "${responseObject.data}", "${responseObject.images.hash}");`, function (err, result, fields) {
+                    if (err) {throw err} else {
+                        console.log(logger.MySQL('Account Created!'))
+                        res.send('{ success : 1 }')
+                    }   
+                })
+
+            })
         }
     })
 })

@@ -10,7 +10,7 @@
 
     "newUser" : {
         "welcomeHeader" : "Welcome to NoNameVerse!",
-        "welcome" : "Welcome to NoNameVerse. An online social networking platform, designed to help Wii U owners around the world connect with eachother. It seems like it's your fist time here, let's get you set up!",
+        "welcome" : "Welcome to NoNameVerse. An online social networking platform, designed to help Wii U owners around the world connect with eachother. It seems like it's your first time here, let's get you set up!",
 
         "rulesHeader" : "Rules to follow.",
         "preRules" : "Before you sign up, you must agree to the rules that we have in place.",

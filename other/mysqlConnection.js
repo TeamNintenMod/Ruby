@@ -19,6 +19,4 @@ con.connect((err) => {
     console.log(logger.MySQL('Connected to Database!'))
 })
 
-process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
-
 module.exports = con

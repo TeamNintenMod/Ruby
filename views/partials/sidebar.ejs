@@ -1,15 +1,15 @@
 <div id="sidebar">
     <ul>
-        <li><a id="mii"><img src="../../../../img/prodtest1.png" width="95" height="95"></a></li>
+        <li><a id="mii"><img src="<%=miiURL%>" width="95" height="95"></a></li>
         <li><a>a</a></li>
         <li><a href="../../../../../../../titles/show">c</a></li>
         <li><a>n</a></li>
         <li><a>m</a></li>
 
         <% if (!homePage) {%>
-            <li><a id="backexit" href="" onclick="history.back()" style="cursor: pointer;">b</a></li>
+            <li><a id="backexit" href="javascript:void(0)" onclick="history.back()" style="cursor: pointer;">b</a></li>
         <%} else {%>
-            <li><a id="backexit" href="" onclick="wiiuBrowser.closeApplication(); wiiuSound.playSoundByName('SE_WAVE_EXIT', 1);" style="cursor: pointer;">x</a></li>
+            <li><a id="backexit" href="javascript:void(0)" onclick="wiiuBrowser.closeApplication(); wiiuSound.playSoundByName('SE_WAVE_EXIT', 1);" style="cursor: pointer;">x</a></li>
         <% } %>
     </ul>
 </div>

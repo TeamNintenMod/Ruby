@@ -1,16 +1,11 @@
 <%- include('../partials/header.ejs') %>
 
-
 <body>
-    <main>
-        <%- include('../partials/sidebar.ejs', {
-            homePage : false
-        }) %>        
-        <content>
-            <textarea placeholder="Post Content" id="postInput" maxlength="1000"></textarea>
-            <input placeholder="Community ID.." id="community_input" maxlength="3">
-            <button onclick="Post()">Post!</button>
-        </content>
-    </main>
+    <div class="post_box">
+        <textarea placeholder="Content.." id="bodyInput" class="content_input"></textarea>
+        <button onclick="submitPost(<%= title_id %>)">Send</button>
+    </div>
+    
 </body>
 
+<script>wiiuBrowser.endStartUp();</script>

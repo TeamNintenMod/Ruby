@@ -44,39 +44,6 @@ app.use(express.static('static'))
 
 app.set('view engine', 'ejs');
 
-const testHtml = fs.readFileSync('./testHTML.html')
-
-app.get('/titles/show', (req, res) => {
-    console.log(logger.Get(req.originalUrl))
-
-    const parser = new xmlparser.XMLParser();
-
-    fetch('https://olvapi.nonamegiven.xyz/v1/communities').then(response => response.text()).then((xmlResult) => {
-        const xmlFinal = parser.parse(xmlResult)
-
-        res.render('./pages/index.ejs', {
-            data : xmlFinal.result.communities
-        })
-    });
-})
-
-app.get('/titles/first', (req, res) => {
-    console.log(logger.Get(req.originalUrl))
-})
-
-app.get('/titles/newUser', (req, res) => {
-    console.log(logger.Get(req.originalUrl))
-})
-
-app.get('/titles', (req, res) => {
-    console.log(logger.Get(req.originalUrl))
-})
-
-app.get('/', (req, res) => {
-    console.log(logger.Get(req.originalUrl))
-    res.sendStatus(200)
-})
-
 app.listen(port, () => {
     console.log(logger.Info('Server started on port 80.'))
 })

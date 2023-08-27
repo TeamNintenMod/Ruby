@@ -1,0 +1,11 @@
+
+<div class="post_author"><img src="<%= post.mii_face_url %>"><span class="screen_name"><%= post.screen_name %></span></div>
+
+<div class="post">
+    <img src="../../../../img/icons/<%= community.community_id %>.jpg" width="70px">
+    <% if (post.topic_tag) {%>
+        <span class="topic_tag"><span class="topic_tag_symbol">t</span> <%= post.topic_tag %></span>
+        <br>
+    <%}%>
+    <span><%= post.body %></span>
+</div>

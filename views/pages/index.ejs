@@ -2,9 +2,12 @@
 
 <body onload="endLoading();">
         <%- include('../partials/sidebar.ejs', {
-            homePage : true
+            homePage : true,
+            miiURL : `http://mii-images.account.nintendo.net/${account[0].hash}_normal_face.png`,
         }) %>
         <content>
+            <%- include('../partials/titleHeader.ejs', { title : "Communities", account : account[0]}) %>
+
             <table>
                 <tr>
                     <th>OLV_ID</th>
@@ -14,29 +17,16 @@
                     <th>Icon</th>
                     <th>Posts</th>
                 </tr>
-                <% if (data.community.length > 1) {
-                    data.community.forEach(community => { %>
+                    <% communities.forEach(community => { %>
                     <tr>
                         <td><%= community.olive_community_id %></td>
                         <td><%= community.community_id %></td>
                         <td><%= community.name %></td>
                         <td><%= community.description %></td>
-                        <td><img src="<%= community.icon %>" width="80" height="80"></td>
-                        <td><a href="../../pages/community/<%= community.community_id %>">Posts</a></td>
+                        <td><img src="../../../../../../img/icons/<%= community.community_id %>.jpg" width="80" height="80"></td>
+                        <td><a href="../../titles/community/<%= community.community_id %>">Posts</a></td>
                     </tr>
-                <%});
-                }else {%>
-                    <tr>
-                        <td><%= data.community.olive_community_id %></td>
-                        <td><%= data.community.community_id %></td>
-                        <td><%= data.community.name %></td>
-                        <td><%= data.community.description %></td>
-                        <td><img src="<%= data.community.icon %>" width="80" height="80"></td>
-
-
-                        <td><a href="../../pages/community/<%= data.community.community_id %>">Posts</a></td>
-                    </tr>
-                <%}%>
+                <%}); %>
             </table>    
         </content>
 </body>
