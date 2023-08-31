@@ -77,7 +77,7 @@ router.get('/post', function(req, res) {
     res.render('pages/post.ejs')
 })
 
-router.get('/community/:community_id', async function(req, res) {
+router.get('/:community_id', async function(req, res) {
     const community_id = req.params.community_id
     const parser = new xmlparser.XMLParser();
 

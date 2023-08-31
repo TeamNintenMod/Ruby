@@ -14,7 +14,7 @@ const logger = require('./other/logger')
 
 const cookieparser = require('cookie-parser')
 
-const accountRoute = require("./routes/api/account")
+const accountRoute = require("./routes/api/people")
 const titlesRoute = require('./routes/titles')
 const communityRoute = require('./routes/api/communties')
 const endpointRoute = require('./routes/api/endpoint')

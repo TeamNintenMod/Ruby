@@ -11,6 +11,15 @@ function newUser() {
     wiiuSound.playSoundByName("BGM_OLV_INIT", 3);
 }
 
+function init_post(postId) {
+
+    postId = postId + "_bottom_row"
+    document.getElementById(postId).style.bottom = "0px"
+    document.getElementById(postId).style.position = "absolute"
+    document.getElementById(postId).style.width = "750px"
+    document.getElementById(postId).style.marginBottom = "15px"
+}
+
 
 
 function submitUser() {
@@ -47,6 +56,45 @@ function submitPost(title_id) {
         if (xhr.readyState === 4) {
             console.log("Rec")
             window.location.replace("/titles/show") 
+        }
+    }
+}
+
+function Yeah(postId) {
+
+    var xhr = new XMLHttpRequest();
+
+    xhr.open("POST", "https://olvportal.nonamegiven.xyz/v1/posts/"+postId+"/empathies")
+
+    xhr.send()
+
+    xhr.onload = function() {
+        if (xhr.status == 200) {
+            document.getElementById(postId + "_text").innerText = "Unyeah!"
+            document.getElementById(postId).style.color = "#58a7db"
+            document.getElementById(postId + "_symbol").innerText = "E"
+            document.getElementById(postId).setAttribute( "onClick", "UnYeah("+postId+")")
+            document.getElementById(postId + "_empathy_count").innerText = Number(document.getElementById(postId + "_empathy_count").innerText) + 1
+
+            wiiuSound.playSoundByName('SE_WAVE_MII_ADD', 1);
+        }
+    }
+}
+
+function UnYeah(postId) {
+    var xhr = new XMLHttpRequest();
+
+    xhr.open("DELETE", "https://olvportal.nonamegiven.xyz/v1/posts/"+postId+"/empathies")
+
+    xhr.send()
+
+    xhr.onload = function() {
+        if (xhr.status == 200) {
+            document.getElementById(postId + "_text").innerText = "Yeah!"
+            document.getElementById(postId).style.color = "grey"
+            document.getElementById(postId + "_symbol").innerText = "E"
+            document.getElementById(postId).setAttribute( "onClick", "Yeah("+postId+")")
+            document.getElementById(postId + "_empathy_count").innerText = Number(document.getElementById(postId + "_empathy_count").innerText) - 1
         }
     }
 }

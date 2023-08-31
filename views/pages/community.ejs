@@ -6,9 +6,14 @@
         miiURL : `http://mii-images.account.nintendo.net/${account[0].hash}_normal_face.png`
     }) %>
 
+    <% console.log(community) %>
+
 <a href="/titles/post/<%= community.community_id %>" class="community_post_button"><img href="/titles/post<%= community.community_id %>" class="community_post_button" src="../../../../../img/post.png" width="225px"></a>
 
     <content>
+
+        <% %>
+
         <%- include('../partials/titleHeader.ejs', { title : community.name }) %>
         <img class="titleBanner" src='../../../../img/banners/<%= community.community_id %>.jpg' width="87.1%">
         <div class="titleData">
@@ -23,7 +28,7 @@
             <ul>
                 <%for (let i in posts) {%>
                     <li>
-                        <%- include('../partials/post.ejs', { post : posts[i], community : community}) %>
+                        <%- include('../partials/post.ejs', { post : posts[i], community : community, yeahed : account[0].yeahed_posts }) %>
                     </li>
                 <%}; %>        
             </ul>

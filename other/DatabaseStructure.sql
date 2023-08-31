@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.1.0, for macos13 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.34, for Linux (x86_64)
 --
--- Host: 127.0.0.1    Database: accounts
+-- Host: 127.0.0.1    Database: db
 -- ------------------------------------------------------
--- Server version	8.1.0
+-- Server version	8.0.34-0ubuntu0.22.04.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -24,18 +24,19 @@ DROP TABLE IF EXISTS `account`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `account` (
   `id` int NOT NULL AUTO_INCREMENT COMMENT 'Primary Key',
-  `create_time` datetime DEFAULT NULL COMMENT 'Create Time',
   `nnid` varchar(32) DEFAULT NULL,
   `password` varchar(25) DEFAULT NULL,
+  `serviceToken` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `create_time` varchar(255) DEFAULT NULL COMMENT 'Create Time',
   `name` varchar(255) DEFAULT NULL,
   `bio` varchar(500) DEFAULT NULL,
-  `token` varchar(255) DEFAULT NULL,
   `admin` tinyint(1) DEFAULT NULL,
-  `miiUrl` json DEFAULT NULL,
-  `miiHash` varchar(255) DEFAULT NULL,
   `pid` int DEFAULT NULL,
+  `mii` varchar(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `hash` varchar(255) DEFAULT NULL,
+  `yeahed_posts` json DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=59 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -46,17 +47,20 @@ DROP TABLE IF EXISTS `community`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `community` (
-  `olive_community_id` int NOT NULL AUTO_INCREMENT COMMENT 'Primary Key',
-  `community_id` int DEFAULT NULL,
+  `olive_community_id` bigint DEFAULT NULL,
+  `community_id` varchar(255) DEFAULT NULL,
   `name` varchar(255) DEFAULT NULL,
   `description` varchar(500) DEFAULT NULL,
-  `icon` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
   `icon_3ds` varchar(1000) DEFAULT NULL,
   `pid` varchar(255) DEFAULT NULL,
   `app_data` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
   `is_user_community` int DEFAULT NULL,
-  PRIMARY KEY (`olive_community_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `hidden` int DEFAULT NULL,
+  `icon` text,
+  `title_ids` varchar(500) DEFAULT NULL,
+  `wii_vc` int DEFAULT NULL,
+  KEY `community_id` (`community_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -68,10 +72,10 @@ DROP TABLE IF EXISTS `post`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `post` (
   `app_data` mediumtext,
-  `body` varchar(255) DEFAULT NULL,
-  `community_id` int DEFAULT NULL,
+  `body` varchar(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `community_id` bigint DEFAULT NULL,
   `country_id` int DEFAULT NULL,
-  `created_at` datetime DEFAULT NULL COMMENT 'Create Time',
+  `created_at` text COMMENT 'Create Time',
   `feeling_id` int DEFAULT NULL,
   `id` int NOT NULL AUTO_INCREMENT COMMENT 'Primary Key',
   `is_autopost` int DEFAULT NULL,
@@ -80,22 +84,25 @@ CREATE TABLE `post` (
   `is_app_jumpable` int DEFAULT NULL,
   `empathy_count` int DEFAULT NULL,
   `language_id` int DEFAULT NULL,
-  `mii` varchar(255) DEFAULT NULL,
+  `mii` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
   `mii_face_url` varchar(400) DEFAULT NULL,
   `number` int DEFAULT NULL,
-  `painting` json DEFAULT NULL,
+  `painting` text,
   `pid` int DEFAULT NULL,
   `platform_id` int DEFAULT NULL,
   `region_id` int DEFAULT NULL,
   `reply_count` int DEFAULT NULL,
+  `title_id` bigint DEFAULT NULL,
   `screen_name` varchar(255) DEFAULT NULL,
-  `title_id` int DEFAULT NULL,
+  `topic_tag` varchar(255) DEFAULT NULL,
+  `search_key` varchar(255) DEFAULT NULL,
+  `painting_png` text,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping routines for database 'accounts'
+-- Dumping routines for database 'db'
 --
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -107,4 +114,4 @@ CREATE TABLE `post` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-08-15 13:13:14
+-- Dump completed on 2023-08-31  8:16:07

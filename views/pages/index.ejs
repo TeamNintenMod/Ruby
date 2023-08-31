@@ -1,4 +1,4 @@
-<%- include('../partials/header.ejs') %>
+<%- include('../partials/header.ejs')%>
 
 <body onload="endLoading();">
         <%- include('../partials/sidebar.ejs', {
@@ -23,8 +23,9 @@
                         <td><%= community.community_id %></td>
                         <td><%= community.name %></td>
                         <td><%= community.description %></td>
-                        <td><img src="../../../../../../img/icons/<%= community.community_id %>.jpg" width="80" height="80"></td>
-                        <td><a href="../../titles/community/<%= community.community_id %>">Posts</a></td>
+                        <% var id; if (community.related_community) {id = community.related_community} else {id = community.community_id} %>
+                        <td><img src="../../../../../../img/icons/<%= id %>.jpg" width="80" height="80"></td>
+                        <td><a href="../../titles/<%= community.community_id %>">Posts</a></td>
                     </tr>
                 <%}); %>
             </table>    

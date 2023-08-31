@@ -2,10 +2,38 @@
 <div class="post_author"><img src="<%= post.mii_face_url %>"><span class="screen_name"><%= post.screen_name %></span></div>
 
 <div class="post">
-    <img src="../../../../img/icons/<%= community.community_id %>.jpg" width="70px">
+    <img src="../../../../img/icons/<%= community.community_id %>.jpg" width="70px" onload="init_post(<%= post.id %>)">
     <% if (post.topic_tag) {%>
         <span class="topic_tag"><span class="topic_tag_symbol">t</span> <%= post.topic_tag %></span>
         <br>
     <%}%>
-    <span><%= post.body %></span>
+    <div class="body_wrapper">
+        <% if (post.body) {%>
+            <span class="body"><%= post.body %></span>  
+        <%} else { %>
+            <img class="painting" src="data:image/png;base64,<%=post.painting_png%>" width="600px">
+        <%} %>
+        
+    </div>
+
+    <div class="bottom_row" id="<%= post.id %>_bottom_row">
+        <span class="empathy_count">
+            <span class="empathy_symbol">e</span>
+            <span id="<%= post.id %>_empathy_count"> <%= post.empathy_count %></span>
+        </span>
+
+        <% if (JSON.parse(yeahed).includes(post.id)) {%>
+            <a class="yeah" id="<%= post.id %>" style="color: #58a7db;" href="javascript:void(0)" onclick="UnYeah( <%= post.id %> )">
+                <span id="<%= post.id %>_symbol" class="yeah_symbol">E</span>
+                <span id="<%= post.id %>_text">Unyeah</span>
+            </a>
+        <%} else { %>
+            <a class="yeah" id="<%= post.id %>" href="javascript:void(0)" onclick="Yeah(<%= post.id %>)">
+                <span id="<%= post.id %>_symbol" class="yeah_symbol">E</span>
+                <span id="<%= post.id %>_text">Yeah</span>
+            </a>
+        <% } %>
+
+        
+    </div>
 </div>
