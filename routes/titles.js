@@ -5,18 +5,21 @@ const fetch = require('node-fetch')
 const xmltojson = require('xml-js')
 
 const xmlparser = require('fast-xml-parser')
-const headerDecoder = require('../other/headerDecoder')
+const headerDecoder = require('../other/decoder')
 
 const en = require('../languages/en.json')
 const logger = require('../other/logger')
+const xml = require('xml')
 
-router.get('/show', (req, res) => {
+const moment = require('moment')
 
-    let serviceToken;
-    let paramPack;
-    const regExp = new RegExp("/+/", 'g')
+const auth = require('../other/auth')
 
-    if(req.get('x-nintendo-parampack') && req.get('x-nintendo-servicetoken')) {
+router.get('/show', async (req, res) => {
+
+    let serviceToken, paramPack;
+
+    if (req.get('x-nintendo-parampack') && req.get('x-nintendo-servicetoken')) {
         serviceToken = req.get('x-nintendo-servicetoken').slice(0, 42)
         paramPack = headerDecoder.decodeParamPack(req.get('x-nintendo-parampack'))
 
@@ -28,29 +31,26 @@ router.get('/show', (req, res) => {
         console.log(logger.Error('Did not find any Service Token or ParamPack. Setting both values to "0" as default.'))
     }
 
-    fetch(`https://olvapi.nonamegiven.xyz/v1/people/person?token=${serviceToken}`).then(response => response.text()).then(result => {
-        if (result) {
-            const account = JSON.parse(result)
+    const account = JSON.parse(await auth.authenticateUser(serviceToken).catch(() => {
+        res.redirect('https://olvportal.nonamegiven.xyz/titles/newUser')
+    }))
 
-            console.log(logger.Get(req.originalUrl))
+    if (account) {
+        console.log(logger.Get(req.originalUrl))
 
-            const parser = new xmlparser.XMLParser();
+        const parser = new xmlparser.XMLParser();
 
-            fetch('https://olvapi.nonamegiven.xyz/v1/communities?json=1').then(response => response.text()).then((xmlResult) => {
+        fetch('https://olvapi.nonamegiven.xyz/v1/communities?json=1').then(response => response.text()).then((xmlResult) => {
+            var communities = JSON.parse(xmlResult)
 
-                var communities = JSON.parse(xmlResult)
-
-                res.render('./pages/index.ejs', {
-                    account : account,
-                    communities : communities
+            res.render('./pages/index.ejs', {
+                account: account,
+                communities: communities
             })
-    });
-        } else {
-            res.redirect('https://olvportal.nonamegiven.xyz/titles/newUser')
-        }
-    })
-
-    
+        });
+    } else {
+        res.redirect('https://olvportal.nonamegiven.xyz/titles/newUser')
+    }
 })
 
 router.get('/first', (req, res) => {
@@ -59,7 +59,7 @@ router.get('/first', (req, res) => {
 
 router.get('/newUser', (req, res) => {
     res.render('./pages/newuser/startup.ejs', {
-        language : en
+        language: en
     })
 })
 
@@ -69,15 +69,15 @@ router.get('/', (req, res) => {
 
 router.get('/newUser/1', (req, res) => {
     res.render('./pages/newuser/nnidcreation.ejs', {
-        language : en
+        language: en
     })
 })
 
-router.get('/post', function(req, res) {
+router.get('/post', function (req, res) {
     res.render('pages/post.ejs')
 })
 
-router.get('/:community_id', async function(req, res) {
+router.get('/:community_id', async (req, res) => {
     const community_id = req.params.community_id
     const parser = new xmlparser.XMLParser();
 
@@ -87,26 +87,26 @@ router.get('/:community_id', async function(req, res) {
         console.log(logger.Error('Found no service token, replacing with default values.'))
     }
 
-    fetch(`https://olvapi.nonamegiven.xyz/v1/communities/${community_id}/posts?json=1`).then(response => response.text()).then(result => {
+    fetch(`https://olvapi.nonamegiven.xyz/v1/communities/${community_id}/posts?json=1`).then(response => response.text()).then(async (result) => {
         const postsJson = JSON.parse(result)
 
-        fetch(`https://olvapi.nonamegiven.xyz/v1/communities/${community_id}?json=1`).then(response => response.text()).then(function(result){
+        fetch(`https://olvapi.nonamegiven.xyz/v1/communities/${community_id}?json=1`).then(response => response.text()).then( async (result) => {
 
             const communityJson = JSON.parse(result)
 
-            fetch(`https://olvapi.nonamegiven.xyz/v1/people/person?token=${serviceToken.slice(0, 42)}`).then(response => response.text()).then(result => {
+            
                 let account; var posts;
 
-                account = JSON.parse(result)            
-                
+                account = JSON.parse(await auth.authenticateUser(serviceToken))
+
                 res.render('pages/community.ejs', {
-                    posts : postsJson,
-                    community : communityJson[0],
-                    account : account
+                    posts: postsJson,
+                    community: communityJson[0],
+                    account: account,
+                    moment : moment
                 })
-            }); 
-            
-        })          
+
+        })
     })
 })
 
@@ -114,7 +114,13 @@ router.get('/post/:title_id', (req, res) => {
     const title_id = req.params.title_id
 
     res.render('pages/post.ejs', {
-        title_id : title_id
+        title_id: title_id
+    })
+})
+
+router.get('/users/:userId', (req, res) => {
+    res.render('pages/user.ejs', {
+        
     })
 })
 

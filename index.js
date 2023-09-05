@@ -14,13 +14,15 @@ const logger = require('./other/logger')
 
 const cookieparser = require('cookie-parser')
 
-const accountRoute = require("./routes/api/people")
+const accountRoute = require("./routes/api/v1/people")
 const titlesRoute = require('./routes/titles')
-const communityRoute = require('./routes/api/communties')
-const endpointRoute = require('./routes/api/endpoint')
-const postsRoute = require('./routes/api/posts')
+const communityRoute = require('./routes/api/v1/communties')
+const endpointRoute = require('./routes/api/v1/endpoint')
+const postsRoute = require('./routes/api/v1/posts')
 const xmljs= require('xml-js');
 const xml = require('xml')
+
+const paintingProccess = require('./other/decoder')
 
 const subdomain = require('express-subdomain')
 

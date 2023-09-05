@@ -1,35 +1,15 @@
 const express = require('express')
 const router = express.Router()
 
-const con = require('../../other/mysqlConnection')
-const logger = require('../../other/logger')
-const config = require('../../config.json')
+const con = require('../../../other/mysqlConnection')
+const logger = require('../../../other/logger')
+const config = require('../../../config.json')
 
 const moment = require('moment')
 
-const { placeholderBio } = require('../../config.json')
+const { placeholderBio } = config
 
 const fetch = require('node-fetch')
-
-router.get('/person', function(req, res) {
-    const regExp = new RegExp(' ', 'g')
-    const token = req.query["token"].replace(regExp, "+")
-
-    con.query(`SELECT * FROM account WHERE serviceToken="${token}"`, function (err, result, fields) {
-        if (err) { throw err }
-
-        console.log(logger.Get(req.originalUrl))
-
-        if (JSON.stringify(result).replace('[]', '')) {
-            console.log(logger.Info('Found account!'))
-            res.send(result)
-        } else {
-            console.log(logger.Error('Could not find account matching that token..'))
-            res.send('')
-        }
-        
-    })
-})
 
 router.post('/', (req, res) => {
     console.log(logger.Info(req.originalUrl))
@@ -61,6 +41,10 @@ router.post('/', (req, res) => {
             })
         }
     })
+})
+
+router.get('/', (req, res) => {
+    
 })
 
 

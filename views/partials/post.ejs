@@ -1,5 +1,11 @@
 
-<div class="post_author"><img src="<%= post.mii_face_url %>"><span class="screen_name"><%= post.screen_name %></span></div>
+<div class="post_author">
+    <img src="<%= post.mii_face_url %>" width="96px" height="96px">
+    <span class="screen_name"><%= post.screen_name %></span>
+    
+</div>
+
+<span class="from_now"><%= moment(post.created_at).fromNow() %></span>
 
 <div class="post">
     <img src="../../../../img/icons/<%= community.community_id %>.jpg" width="70px" onload="init_post(<%= post.id %>)">

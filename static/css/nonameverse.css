@@ -18,7 +18,7 @@
 
     left: 0px;
 
-    height:100%;
+    height: 100%;
     width: 13%;
 
     margin: 0px;
@@ -36,7 +36,8 @@
     padding: 0px;
 
     text-align: center;
-    height: 100%;;
+    height: 100%;
+    ;
     width: 100%;
 }
 
@@ -68,17 +69,22 @@
     background-color: white;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
+
 /* basic stuff */
 
-html, body {
+html,
+body {
     margin: 0px;
 
-    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPAAAADwBAMAAADMe/ShAAAAHlBMVEX29vb09PTy8vL19fXz8/Px8fHw8PDv7+/u7u739/dHdNvrAAACSElEQVR4AezYNX7DMBiGcafcKTRlC0hdy7T1Z7iAcS5YOkEl38DeQlNOW24YX63fsxr+Ztm2RmvjMiu2bWbOXPmjtW2A7S8YKlfMCK4lKPzeMoJvYhROHYIJno9gggkmmGCCCSaYYIIJJphgggkmGP/PZQZf4XDHCK5JFFYtE7hXkwWYap0awEMPh8NHA7jPNQprv2EAH5zh8MsTDo9vY/xGxuCeLXFYsVMY7nNZwCm/AcM3scZhnTooPBwfafBYP4JwiZvBfgWDh7Xxkc71DmXjY916hOAbLrMxK7ZuTOfKdxC4ZMf6z1Ui2iEh/2Sdssru8L4dy+zXFVGbuVtntyPxK+cqZRc7wr1Ll0v95/qser1DVZv/yVr5bv10Bczq+ML4Rl/als/ww4WfJptbwuACMbgwhaUVfkvgt6LU1icpdkAAAADAEEz/1EKshHOBgMAnwZ7gNgG9DEwybTKpyZiLRCT6ItqUCJuIYqKoosaJlEsMJBki+ZOElwRfkpqSuElcS9Qnd4LcGN3enRUACMRQDFSDJRzg3wIKuNnNzygYA83rGbx9g1cwGAwGg8FgMBgMBoPBYDAYDAaDwWAwGAwGg8FgMBgMBoPB/bFgfx7ZH4TWJ7DB0W9w5hwcdgen7MHxfp8r9IFGkKQEEU6WHWWhVZaWZTFdlg9mwWSdiAZRbJABB+FzkHoHcXuQ82cDBtlkQzVSkc1yZEMk2fRKNjZTzetkg0LlhJK1KjAYDAaDwWAwGAwGg8FgcAD3L/H6J4DLS/j67eEOl9GYoKbAV2YAAAAASUVORK5CYII=');
-    justify-content:left;
-    flex-direction:row;
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPAAAADwBAMAAADMe/ShAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAHlBMVEXu/Nvl+sfk+cXh+b7g+b3f+Lro+s3p+9Hr+9P///8RNr/jAAAAAWJLR0QJ8dml7AAAAAd0SU1FB+cJBQQHGkhx1LgAAAABb3JOVAHPoneaAAACaklEQVR42u3dvVLCQBSG4VRCS5yJtgHHXpIrkPUOQm8sGEtTaakNetmiAg7OuEvOMfMVvtsq85D9SXaXPSdZFi15fbM8thz8Z7MoM09pe8DLQ7hwwd2FFb4+c8HrmRWe3wMDAwMDAwMDAwMDAwMDAwMDA/+E7ftcPvjFDp+74M6+pejb2etqm7tc+uDxnR2+fHbAozxY4VA+OOCTUzt8deuAzcPYO5DN++TOnfJRbu5bm97laOT1zNzEm0a21/XYUdOfdf1sr2kXbK3rcbev6Sb0KLsvG+Zntkte7y74g62OLnt6c8mmVh612wtuwqKa9ihVvZXDvDBU9ridfV1wE6rppFgdXdrJtPqSm8W8f/96XeV12Lpl8fjWozy2+VYOi3L19JtQPDk+bP7Sr21WFn9fXelmavOsGqKDpDtmlW3+MsCQSA3FOmTD3ATSN59soNte8nabgq03+uQDJg47Hm2pR2ocdjzMU5OIKOyaviTqOg57JmyJiWIUdk1RE1PjOOyZlCcWA1HYtQxJLH/isGvh1Zlh51IzvsSNwr7FdXxRH4dd2wlrO+zbQIkPZGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBg4G9YdlhQdjxSdSBUdgRWd+hXdsxZdrBbdpRddnhfFq6gC9CQhaQMGYQjCzuSBVrJQstkwXSy8EH7h50Bk/bqGiZEVBcUqwsD1gU+y0K9dcHtsnB+XQIDWcoGXZIKWVoOWSISWeoVWbIZXXodWUIhWQqlf5itChgYGBgYGBgYGBgYGBgYGBh4OFj2SjzZSwDNv8MkX3v4DiiOs0uytmunAAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDIzLTA5LTA1VDA0OjA3OjI2KzAwOjAwkm7I0QAAACV0RVh0ZGF0ZTptb2RpZnkAMjAyMy0wOS0wNVQwNDowNzoyNiswMDowMOMzcG0AAAAASUVORK5CYII=');
+    justify-content: left;
+    flex-direction: row;
 
     color: black;
+
+    overflow-x: hidden;
 }
+
 /* New User */
 
 .nuNext {
@@ -97,7 +103,7 @@ html, body {
 
     text-align: center;
 
-    background: -webkit-linear-gradient(-90deg, rgba(255,255,255,1) 0%, rgb(221, 221, 221) 100%);
+    background: -webkit-linear-gradient(-90deg, rgba(255, 255, 255, 1) 0%, rgb(221, 221, 221) 100%);
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0), 0 6px 20px 0 rgba(0, 0, 0, 0.4);
     border-bottom: 2px rgb(177, 177, 177) solid;
 }
@@ -108,7 +114,7 @@ html, body {
     top: 50%;
     left: 50%;
 
-    transform:  translate(-50%, -50%);
+    transform: translate(-50%, -50%);
     -webkit-transform: translate(-50%, -50%);
 
     text-align: center;
@@ -121,7 +127,7 @@ html, body {
 
     border-radius: 30px;
 
-    background: -webkit-linear-gradient(-90deg, rgba(255,255,255,1) 0%, rgb(221, 221, 221) 100%);
+    background: -webkit-linear-gradient(-90deg, rgba(255, 255, 255, 1) 0%, rgb(221, 221, 221) 100%);
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0), 0 6px 20px 0 rgba(0, 0, 0, 0.4);
     border-bottom: 2px rgb(177, 177, 177) solid;
 }
@@ -134,7 +140,10 @@ html, body {
     width: 20%;
 }
 
-table, th, td, tr {
+table,
+th,
+td,
+tr {
     border: 2px black solid;
 }
 
@@ -148,57 +157,101 @@ content {
     position: absolute;
 }
 
-content > * > *, content > *, content > * > * > *  {
+content>*>*,
+content>*,
+content>*>*>* {
     margin-left: 15%;
+    overflow-x: visible;
 }
 
 .titleHeader {
     width: 100%;
     margin: 0px;
 
-    height: 20px;
+    height: 180px;
 
     position: fixed;
     top: 0;
 
-    padding-top: 30px;
-    padding-bottom: 30px;
-
     color: black;
 
     font-size: 25px;
-    font-weight:900;
+    font-weight: 900;
 
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0), 0 6px 20px 0 rgba(0, 0, 0, 0.4);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
 
     border-bottom: 2px rgb(177, 177, 177) solid;
 
-    background: -webkit-linear-gradient(-90deg, rgba(255,255,255,1) 0%, rgb(221, 221, 221) 100%);
-
     z-index: 1;
+
+    display: inline;
 }
 
-.titleName, .titlename b {
+.titleHeaderbg {
+    opacity: 0.9;
+
+    position: absolute;
+
+    z-index: -1;
+
+    height: 100%;
     width: 100%;
-    float: left;
-    height: 20px;
+
+    margin: 0;
+
+    background: -webkit-linear-gradient(-90deg, rgba(255, 255, 255, 1) 0%, rgb(221, 221, 221) 100%);
+}
+
+.titleMeta {
+    position: relative;
+    bottom: 95px;
+    left: 115px;
+
+    font-size: 30px;
+}
+
+br {
+    margin: 0;
+}
+
+.titleDescription {
+    position: relative;
+
+    width: 600px;
+    height: 115px;
+
+    vertical-align: middle;
+
+    color: rgb(77, 77, 77);
+
+    font-size: 18px;
+
+    margin: 0;
+    font-weight: 300;
+
+    overflow: scroll;
+
+    text-overflow: ellipsis;
 }
 
 .titleBanner {
-    margin-left: 13%;
-    margin-top: 80px;
     margin-bottom: 0px;
+
+    margin-left: 0;
+
+    width: 100%;
+    border-bottom: 2px rgb(177, 177, 177) solid;
 }
 
 .titleData {
     position: relative;
     display: block;
     bottom: 4px;
-    background: rgb(255,255,255);
-    background: -moz-linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 0%, rgba(224,224,224,1) 100%);
-    background: -webkit-linear-gradient(-90deg, rgba(255,255,255,1) 0%, rgb(221, 221, 221) 100%);
-    background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 0%, rgba(224,224,224,1) 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ffffff",endColorstr="#e0e0e0",GradientType=1);
+    background: rgb(255, 255, 255);
+    background: -moz-linear-gradient(180deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 0%, rgba(224, 224, 224, 1) 100%);
+    background: -webkit-linear-gradient(-90deg, rgba(255, 255, 255, 1) 0%, rgb(221, 221, 221) 100%);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 0%, rgba(224, 224, 224, 1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ffffff", endColorstr="#e0e0e0", GradientType=1);
 
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0), 0 6px 20px 0 rgba(0, 0, 0, 0.3);
 
@@ -206,41 +259,25 @@ content > * > *, content > *, content > * > * > *  {
 
     padding-bottom: -20px;
 
-    border-top: 2px rgb(177, 177, 177) solid;;
+    border-top: 2px rgb(177, 177, 177) solid;
+
+    height: 50px;
+
     border-bottom: 2px rgb(177, 177, 177) solid;
 }
 
-.titleMetaWrapper {
-    margin: 0px;
-    width: 100%;
-    position: relative;
-
-    bottom: 110px
-}
-
-.titleMetaWrapper > * {
-    margin-left: 15%;
-    font-size: x-large;
-}
-
-.titleMetaDescription {
-    display: block;
-    color:grey;
-    font-size: large;
-}
-
 .titleIcon {
-    position: relative;
-    bottom: 70px;
-    margin-left: 3%;
-
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0), 0 6px 20px 0 rgba(0, 0, 0, 0.3);
-
-    border: white 8px solid;
     border-radius: 10px;
+
+    display: inline-block;
+    vertical-align: middle;
+
+    margin-top: 12px;
 }
 
-.postsWrapper ul, .postsWrapper li, .post {
+.postsWrapper ul,
+.postsWrapper li,
+.post {
     margin: 0px;
     padding-left: 0px;
     list-style: none;
@@ -264,11 +301,11 @@ content > * > *, content > *, content > * > * > *  {
 }
 
 .postsWrapper ul li img {
-    background: rgb(255,255,255);
-    background: -moz-linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 0%, rgba(224,224,224,1) 100%);
-    background: -webkit-linear-gradient(-90deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 0%, rgba(224,224,224,1) 100%);
-    background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 0%, rgba(224,224,224,1) 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ffffff",endColorstr="#e0e0e0",GradientType=1);
+    background: rgb(255, 255, 255);
+    background: -moz-linear-gradient(180deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 0%, rgba(224, 224, 224, 1) 100%);
+    background: -webkit-linear-gradient(-90deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 0%, rgba(224, 224, 224, 1) 100%);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 0%, rgba(224, 224, 224, 1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ffffff", endColorstr="#e0e0e0", GradientType=1);
 
     border-radius: 15px;
     border-bottom: 3px rgb(150, 150, 150) solid;
@@ -282,11 +319,11 @@ content > * > *, content > *, content > * > * > *  {
 }
 
 .post {
-    background: rgb(255,255,255);
-    background: -moz-linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 0%, rgba(224,224,224,1) 100%);
-    background: -webkit-linear-gradient(-90deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 0%, rgba(224,224,224,1) 100%);
-    background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 0%, rgba(224,224,224,1) 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ffffff",endColorstr="#e0e0e0",GradientType=1);
+    background: rgb(255, 255, 255);
+    background: -moz-linear-gradient(180deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 0%, rgba(224, 224, 224, 1) 100%);
+    background: -webkit-linear-gradient(-90deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 0%, rgba(224, 224, 224, 1) 100%);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 0%, rgba(224, 224, 224, 1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ffffff", endColorstr="#e0e0e0", GradientType=1);
 
     border-radius: 15px;
     border-bottom: 3px rgb(150, 150, 150) solid;
@@ -367,6 +404,12 @@ content > * > *, content > *, content > * > * > *  {
     right: 15px;
 }
 
+.from_now {
+    position: relative;
+    right: 110px;
+    bottom: 20px;
+}
+
 .post_author {
     height: 0px;
 }
@@ -378,11 +421,13 @@ content > * > *, content > *, content > * > * > *  {
 .empathy_symbol {
     font-family: MiiverseSymbols;
 }
+
 .empathy_count {
     color: gray;
 
     float: right;
 }
+
 .yeah {
     font-size: large;
 
@@ -393,6 +438,7 @@ content > * > *, content > *, content > * > * > *  {
 
     border-radius: 7px;
 }
+
 .yeah_symbol {
     font-family: MiiverseSymbols;
     font-size: larger;
@@ -405,4 +451,68 @@ content > * > *, content > *, content > * > * > *  {
     width: 750px;
 
     margin-bottom: 15px;
+}
+
+.post_box {
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+
+    height: 75%;
+
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+
+    width: 65%;
+    margin: auto;
+
+    font-size: xx-large;
+
+    border-radius: 20px;
+
+    background: -webkit-linear-gradient(-90deg, rgba(255, 255, 255, 1) 0%, rgb(221, 221, 221) 100%);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0), 0 6px 20px 0 rgba(0, 0, 0, 0.4);
+
+    border-bottom: 2px rgb(150, 150, 150) solid;
+}
+
+.post_input {
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+
+    position: relative;
+    margin-top: 5%;
+
+    left: 25%;
+
+    width: 70%;
+    height: 45%;
+
+    font-size: larger;
+    text-indent: 10px;
+    border: 1px solid rgb(173, 173, 173);
+    border-top: 2px solid rgb(163, 163, 163);
+
+    resize: none;
+}
+
+.post_header {
+    width: 100%;
+
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+
+    color: white;
+
+    text-align: center;
+
+    font-size: xx-large;
+
+    padding-bottom: 6px;
+    padding-top: 6px;
+
+    font-weight: 900;
+
+    background: -webkit-linear-gradient(-90deg, #58a7db 0%, #4584ad 100%);
 }

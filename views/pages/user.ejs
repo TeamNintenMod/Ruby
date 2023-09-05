@@ -1,0 +1,9 @@
+<%- include('../partials/header.ejs') %>
+
+<body>
+    <%- include('../partials/sidebar.ejs', {
+        homePage : false,
+        miiURL : `http://mii-images.account.nintendo.net/${account[0].hash}_normal_face.png`
+    }) %>
+
+</body onload="wiiuBrowser.endStartUp();">

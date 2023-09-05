@@ -3,10 +3,10 @@ const router = express.Router()
 
 const path = require('path')
 
-const con = require('../../other/mysqlConnection')
-const logger = require('../../other/logger')
+const con = require('../../../other/mysqlConnection')
+const logger = require('../../../other/logger')
 
-const config = require('../../config.json')
+const config = require('../../../config.json')
 
 const {host, api_host, portal_host, n3ds_host} = config
 

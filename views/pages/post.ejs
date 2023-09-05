@@ -2,10 +2,12 @@
 
 <body>
     <div class="post_box">
-        <textarea placeholder="Content.." id="bodyInput" class="content_input"></textarea>
-        <button onclick="submitPost(<%= title_id %>)">Send</button>
+        <div class="post_header">Post to Nintendo Land</div>
+        
+        <textarea class="post_input" placeholder="Tap here to make a post." ></textarea>
+
+        <button onclick="history.back()">Back</button>
     </div>
-    
 </body>
 
 <script>wiiuBrowser.endStartUp();</script>

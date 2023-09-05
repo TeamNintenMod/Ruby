@@ -1,4 +1,14 @@
 <div class="titleHeader">
+
+    <div class="titleHeaderbg"></div>
+    <% if (community) {%>
+        <img class="titleIcon" src="../../../../img/icons/<%= community.community_id %>.jpg" width="100px">
+    <%}%>
     
-    <div class="titleName" ><%= title %></div>
+    <div class="titleMeta" >
+        <%= title + " Community" %>
+        <br>
+        <div class="titleDescription"><%= community.description %></div>
+    </div>
+   
 </div>

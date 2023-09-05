@@ -1,12 +1,26 @@
 <%- include('../partials/header.ejs')%>
 
-<body onload="endLoading();">
+
+<script>
+
+    function getScreenshot() {
+        var ssview = document.getElementById('screenshotViewer')
+
+        ssview.src = "data:image/png;base64," + wiiuMainApplication.getScreenShot(false)
+    }
+
+</script>
+
+
+<body onload="endLoading()">
         <%- include('../partials/sidebar.ejs', {
             homePage : true,
             miiURL : `http://mii-images.account.nintendo.net/${account[0].hash}_normal_face.png`,
         }) %>
         <content>
-            <%- include('../partials/titleHeader.ejs', { title : "Communities", account : account[0]}) %>
+            
+            <img id="screenshotViewer" style="z-index: 10;">
+            <button onclick="getScreenshot()">Get Screenshot</button>
 
             <table>
                 <tr>
@@ -23,8 +37,7 @@
                         <td><%= community.community_id %></td>
                         <td><%= community.name %></td>
                         <td><%= community.description %></td>
-                        <% var id; if (community.related_community) {id = community.related_community} else {id = community.community_id} %>
-                        <td><img src="../../../../../../img/icons/<%= id %>.jpg" width="80" height="80"></td>
+                        <td><img src="../../../../../../img/icons/<%= String(community.community_id)%>.jpg" width="80" height="80"></td>
                         <td><a href="../../titles/<%= community.community_id %>">Posts</a></td>
                     </tr>
                 <%}); %>
