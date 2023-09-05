@@ -7,11 +7,11 @@ This is an attempt to create a semi-miiversey social media platform, written in 
 So far into development, this is what I have working..
 - [x] Proper endpoint
 - [x] Portal working
-- [ ] Topics
+- [ ] Topics (Wara Wara Plaza)
 - [ ] People
 - [x] In-Game Posting
 - [x] Post's in-game
-- [ ] Empathies
+- [x] Empathies
 - [x] Topic Tag's/Search Keys
 - [ ] User Made Communities
 - [ ] Sub Communities
