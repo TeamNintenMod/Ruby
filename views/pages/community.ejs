@@ -1,28 +1,53 @@
 <%- include('../partials/header.ejs') %>
 
-<body>
-    <%- include('../partials/sidebar.ejs', {
-        homePage : false,
-        miiURL : `http://mii-images.account.nintendo.net/${account[0].hash}_normal_face.png`
-    }) %>
+    <body>
+        <%- include('../partials/sidebar.ejs', { homePage : false, miiURL :
+            `http://mii-images.account.nintendo.net/${account[0].hash}_normal_face.png` }) %>
 
-<a href="/titles/post/<%= community.community_id %>" class="community_post_button"><img href="/titles/post<%= community.community_id %>" class="community_post_button" src="../../../../../img/post.png" width="225px"></a>
+            <div class="postUI" style="display: none;">
+                <div class="postUI_bg"></div>
+                <div class="postUI_container">
+                    <div>
+                        <img src="<%= `http://mii-images.account.nintendo.net/${account[0].hash}_normal_face.png` %>" class="postUI_mii" width="100px">
+                        <div class="postUI_name_wrapper">
+                            <span class="postUI_name"><%= account[0].name %></span>
+                            <div>
+                                <img src='../../../../img/icons/<%= community.community_id %>.jpg' class="postUI_community_icon" width="55px">
+                                <span class="postUI_community"><%= community.name %></span>
+                            </div>
+                        </div>
+                        <div class="postUI_actions">
+                            <textarea class="postUI_input" placeholder="Please input post text." style="font-size: 30px;" maxlength="100"></textarea>
+                            <div class="postUI_select_image">Select Image</div>
+                        </div>          
+                    </div>
+                </div>
 
-    <content>
+                <div class="postUI_button_wrapper">
+                    <button class="postUI_button">Cancel</button>
+                    <button class="postUI_button" style="left: 70%;">Post</button>
+                </div>
+                
+            </div>
 
-        <% %>
+            <a class="community_post_button"><img href="javascript:void(0)" class="community_post_button" src="../../../../../img/post.png" width="225px"></a>
 
-        <%- include('../partials/titleHeader.ejs', { title : community.name, community : community }) %>
-        <img class="titleBanner" src='../../../../img/banners/<%= community.community_id %>.jpg'>
+            <content>
 
-        <div class="postsWrapper">
-            <ul>
-                <%for (let i in posts) {%>
-                    <li>
-                        <%- include('../partials/post.ejs', { post : posts[i], community : community, yeahed : account[0].yeahed_posts, moment : moment }) %>
-                    </li>
-                <%}; %>        
-            </ul>
-        </div>
-    </content>
-</body onload="wiiuBrowser.endStartUp();">
+                <% %>
+
+                    <%- include('../partials/titleHeader.ejs', { title : community.name, community : community }) %>
+                        <img class="titleBanner" src='../../../../img/banners/<%= community.community_id %>.jpg'>
+
+                        <div class="postsWrapper">
+                            <ul>
+                                <%for (let i in posts) {%>
+                                    <li>
+                                        <%- include('../partials/post.ejs', { post : posts[i], community : community,
+                                            yeahed : account[0].yeahed_posts, moment : moment }) %>
+                                    </li>
+                                    <%}; %>
+                            </ul>
+                        </div>
+            </content>
+    </body onload="wiiuBrowser.endStartUp();">

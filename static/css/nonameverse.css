@@ -292,7 +292,7 @@ br {
 .postsWrapper ul li {
     position: relative;
     display: block;
-    margin-top: 30px;
+    margin-top: 60px;
     width: 100%;
 }
 
@@ -302,15 +302,11 @@ br {
 
 .postsWrapper ul li img {
     background: rgb(255, 255, 255);
-    background: -moz-linear-gradient(180deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 0%, rgba(224, 224, 224, 1) 100%);
-    background: -webkit-linear-gradient(-90deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 0%, rgba(224, 224, 224, 1) 100%);
-    background: linear-gradient(180deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 0%, rgba(224, 224, 224, 1) 100%);
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ffffff", endColorstr="#e0e0e0", GradientType=1);
 
     border-radius: 15px;
-    border-bottom: 3px rgb(150, 150, 150) solid;
 
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0), 0 6px 20px 0 rgba(0, 0, 0, 0.3);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
 
     display: inline;
     position: relative;
@@ -321,14 +317,13 @@ br {
 .post {
     background: rgb(255, 255, 255);
     background: -moz-linear-gradient(180deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 0%, rgba(224, 224, 224, 1) 100%);
-    background: -webkit-linear-gradient(-90deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 0%, rgba(224, 224, 224, 1) 100%);
+    background: -webkit-linear-gradient(-90deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 0%, rgb(241, 241, 241) 100%);
     background: linear-gradient(180deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 0%, rgba(224, 224, 224, 1) 100%);
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ffffff", endColorstr="#e0e0e0", GradientType=1);
 
     border-radius: 15px;
-    border-bottom: 3px rgb(150, 150, 150) solid;
 
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0), 0 6px 20px 0 rgba(0, 0, 0, 0.3);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
 
     padding: 25px;
 
@@ -348,9 +343,7 @@ br {
 .post img {
     border-radius: 10px;
 
-    border-bottom: 2px rgb(150, 150, 150) solid;
-
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0), 0 6px 20px 0 rgba(0, 0, 0, 0.05);
 }
 
 .painting {
@@ -408,6 +401,9 @@ br {
     position: relative;
     right: 110px;
     bottom: 20px;
+
+    text-align: right;
+    color: gray;
 }
 
 .post_author {
@@ -515,4 +511,168 @@ br {
     font-weight: 900;
 
     background: -webkit-linear-gradient(-90deg, #58a7db 0%, #4584ad 100%);
+}
+
+.postUI {
+    position: fixed;
+
+    width: 100%;
+    height: 100%;
+
+    z-index: 9;
+}
+
+.postUI_bg {
+    position: absolute;
+    background-color: black;
+    opacity: 0.6;
+
+    width: 100%;
+    height: 100%;
+
+    z-index: 9;
+}
+
+.postUI .postUI_container {
+
+    position: relative;
+
+    background: rgb(223,255,248);
+    background: -webkit-linear-gradient(129deg, rgba(223,255,248,1) 0%, rgb(231, 231, 231) 100%);
+
+    width: 900px;
+    height: 375px;
+    border-radius: 45px;
+
+    z-index: 10;
+
+    top: 40%;
+    left: 50%;
+    margin-right: -50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+.postUI_mii {
+    display: inline;
+    margin-left: 30px;
+    margin-top: 30px;
+    
+    background-color: white;
+    border-radius: 15px;
+
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
+}
+
+.postUI_name {
+    display: block;
+    font-size: 35px;
+}
+
+.postUI_community {
+    font-size: 20px;
+
+    display: inline;
+
+    vertical-align: middle;
+
+    margin-left: 5px;
+}
+
+.postUI_name_wrapper {
+    display: block; 
+    position: relative; 
+    bottom: 110px; 
+    left: 150px;
+}
+
+.postUI_community_icon {
+    display: inline;
+    vertical-align: middle;
+
+    border-radius: 10px;
+}
+
+.postUI_button {
+
+    background: rgb(223,255,248);
+    background: -webkit-linear-gradient(129deg, rgba(223,255,248,1) 0%, rgb(231, 231, 231) 100%);
+
+    width: 300px;
+    height: 80px;
+    border-radius: 25px;
+
+    font-size: 35px;
+
+    z-index: 10;
+
+    margin-right: 40px;
+}
+
+.postUI_button_wrapper {
+    position: absolute;
+      top: 80%;
+      left: 50%;
+      margin-right: -50%;
+      transform: translate(-50%, -50%);
+      -webkit-transform: translate(-50%, -50%);
+
+      z-index: 10;
+}
+
+.postUI_input {
+    border: none;
+    border-top: solid rgb(199, 199, 199) 2px;
+    border-right: solid rgb(199, 199, 199) 1px;
+
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+
+    margin-left: 140px;
+
+    width: 500px;
+
+    height: 170px;
+
+    font-size: 40px;
+
+    text-indent: 8px;
+
+    resize: none;
+
+    display: inline;
+    vertical-align: middle;
+}
+
+.postUI_actions {
+    height: 235px;
+
+    position: relative;
+
+    bottom: 95px;
+}
+
+.postUI_select_image {
+
+    display: inline-block;
+
+    position: relative;
+
+    vertical-align: bottom;
+
+    width: 165px;
+    height: 50px;
+
+    text-align: center;
+
+    background-color: rgb(187, 187, 187);
+
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+
+    margin-left: 30px;
+
+    border-left: 2px solid rgb(238, 241, 243);
+
+    font-size: 20px;
 }
