@@ -5,7 +5,7 @@
     
 </div>
 
-<span class="from_now"><%= moment(post.created_at).fromNow() %></span>
+<span class="from_now"><%= moment(post.created_at).fromNow() %> <%if(post.is_autopost) {%> Auto-post <%}%></span>
 
 <div class="post">
     <img src="../../../../img/icons/<%= community.community_id %>.jpg" width="70px" onload="init_post(<%= post.id %>)">
@@ -14,10 +14,15 @@
         <br>
     <%}%>
     <div class="body_wrapper">
-        <% if (post.body) {%>
+
+        <% if (post.screenshot) {%>
+            <img class="screenshot" src="data:image/png;base64,<%= post.screenshot %>" width="750px" height="421px">
+        <%} %>
+
+        <% if (post.body) { %>
             <span class="body"><%= post.body %></span>  
         <%} else { %>
-            <img class="painting" src="data:image/png;base64,<%=post.painting_png%>" width="600px">
+            <img class="painting" src="data:image/png;base64,<%=post.painting_png%>" <%if (post.screenshot) {%> style="margin-top: 15px;" <%}%> width="600px">
         <%} %>
         
     </div>
