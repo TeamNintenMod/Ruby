@@ -4,7 +4,7 @@
         <%- include('../partials/sidebar.ejs', { homePage : false, miiURL :
             `http://mii-images.account.nintendo.net/${account[0].hash}_normal_face.png` }) %>
 
-            <div class="postUI" style="display: none;">
+            <div class="postUI" style="display: none;" id="postUI">
                 <div class="postUI_bg"></div>
                 <div class="postUI_container">
                     <div>
@@ -17,20 +17,28 @@
                             </div>
                         </div>
                         <div class="postUI_actions">
-                            <textarea class="postUI_input" placeholder="Please input post text." style="font-size: 30px;" maxlength="100"></textarea>
-                            <div class="postUI_select_image">Select Image</div>
+                            <div class="postUI_textdraw">
+                                <a class="postUI_text" href="javascript:void(0)" onclick="postUI_text()">
+                                    T
+                                </a>
+                                <a class="postUI_draw" href="javascript:void(0)" onclick="postUI_img()">
+                                    J
+                                </a>
+                            </div>
+                            <textarea id="postUI_input" class="postUI_input" placeholder="Please input post text." maxlength="100"></textarea>
+                            <img id="postUI_drawing" style=" display:none; vertical-align: middle; position: relative; right: 5px;" width="374px" height="174px">
                         </div>          
                     </div>
                 </div>
 
                 <div class="postUI_button_wrapper">
-                    <button class="postUI_button">Cancel</button>
-                    <button class="postUI_button" style="left: 70%;">Post</button>
+                    <button class="postUI_button" onclick="postUIToggle()">Cancel</button>
+                    <button class="postUI_button" onclick="submitPost(<%= community.community_id %>)" style="left: 70%;">Post</button>
                 </div>
                 
             </div>
 
-            <a class="community_post_button"><img href="javascript:void(0)" class="community_post_button" src="../../../../../img/post.png" width="225px"></a>
+            <a class="community_post_button" href="javascript:void(0)" onclick="postUIToggle()"><img class="community_post_button" src="../../../../../img/post.png" width="225px"></a>
 
             <content>
 

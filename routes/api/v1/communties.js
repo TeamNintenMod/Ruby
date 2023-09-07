@@ -99,7 +99,7 @@ router.get('/', (req, res) => {
                     .ele('description', element.description + " ").up()
                     .ele('icon', " ").up()
                     .ele('icon_3ds', " ").up()
-                    .ele('pid', " ").up()
+                    .ele('pid', element.pid).up()
                     .ele("app_data", element.app_data).up()
                     .ele('is_user_community', element.is_user_community)
             });

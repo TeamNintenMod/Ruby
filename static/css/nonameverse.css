@@ -537,8 +537,8 @@ br {
 
     position: relative;
 
-    background: rgb(223,255,248);
-    background: -webkit-linear-gradient(129deg, rgba(223,255,248,1) 0%, rgb(231, 231, 231) 100%);
+    background: rgb(223, 255, 248);
+    background: -webkit-linear-gradient(129deg, rgba(223, 255, 248, 1) 0%, rgb(231, 231, 231) 100%);
 
     width: 900px;
     height: 375px;
@@ -557,16 +557,19 @@ br {
     display: inline;
     margin-left: 30px;
     margin-top: 30px;
-    
+
     background-color: white;
     border-radius: 15px;
 
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
+
+    border: solid rgb(221, 221, 221) 2px;
 }
 
 .postUI_name {
     display: block;
-    font-size: 35px;
+    font-size: 25px;
+    margin-top: 3px;
 }
 
 .postUI_community {
@@ -580,9 +583,9 @@ br {
 }
 
 .postUI_name_wrapper {
-    display: block; 
-    position: relative; 
-    bottom: 110px; 
+    display: block;
+    position: relative;
+    bottom: 110px;
     left: 150px;
 }
 
@@ -595,8 +598,8 @@ br {
 
 .postUI_button {
 
-    background: rgb(223,255,248);
-    background: -webkit-linear-gradient(129deg, rgba(223,255,248,1) 0%, rgb(231, 231, 231) 100%);
+    background: rgb(223, 255, 248);
+    background: -webkit-linear-gradient(129deg, rgba(223, 255, 248, 1) 0%, rgb(231, 231, 231) 100%);
 
     width: 300px;
     height: 80px;
@@ -611,30 +614,30 @@ br {
 
 .postUI_button_wrapper {
     position: absolute;
-      top: 80%;
-      left: 50%;
-      margin-right: -50%;
-      transform: translate(-50%, -50%);
-      -webkit-transform: translate(-50%, -50%);
+    top: 80%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
 
-      z-index: 10;
+    z-index: 10;
 }
 
 .postUI_input {
     border: none;
     border-top: solid rgb(199, 199, 199) 2px;
     border-right: solid rgb(199, 199, 199) 1px;
-
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
 
-    margin-left: 140px;
-
     width: 500px;
 
-    height: 170px;
+    height: 172px;
 
-    font-size: 40px;
+    font-size: 25px;
+
+    position: relative;
+    right: 5px;
 
     text-indent: 8px;
 
@@ -649,7 +652,7 @@ br {
 
     position: relative;
 
-    bottom: 95px;
+    bottom: 80px;
 }
 
 .postUI_select_image {
@@ -676,3 +679,60 @@ br {
 
     font-size: 20px;
 }
+
+.postUI_textdraw {
+    display: inline-block;
+    width: 79px;
+
+    vertical-align: middle;
+    height: 177px;
+
+    margin-left: 30px;
+}
+
+.postUI_draw {
+    background-color: red;
+    display: inline-block;
+    vertical-align: bottom;
+
+    font-family: MiiverseSymbols;
+    font-size: 55px;
+
+    text-align: center;
+
+    padding-top: 12px;
+    padding-bottom: 12px;
+    width: 79px;
+
+    color: gray;
+
+    text-decoration: none;
+
+    border-bottom-left-radius: 10px;
+
+    text-shadow: rgba(88, 88, 88, 0.5) -1px 0, rgba(156, 156, 156, 0.3) 0 -1px, rgba(255,255,255,0.5) 0 1px, rgba(0,0,0,0.3) -1px -2px; 
+}
+
+.postUI_text {
+    background-color: red;
+    display: inline-block;
+    vertical-align: bottom;
+
+    font-family: MiiverseSymbols;
+    font-size: 55px;
+
+    text-align: center;
+
+    padding-top: 11px;
+    padding-bottom: 11px;
+    width: 79px;
+
+    color: gray;
+
+    text-decoration: none;
+
+    border-top-left-radius: 10px;
+
+    text-shadow: rgba(148, 148, 148, 0.5) -1px 0, rgba(156, 156, 156, 0.3) 0 -1px, rgba(255,255,255,0.5) 0 1px, rgba(0,0,0,0.3) -1px -2px; 
+}
+
