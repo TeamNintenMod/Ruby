@@ -32,6 +32,7 @@ function submitUser() {
     xhr.setRequestHeader("NNID", nnid)
 
     xhr.send()
+    wiiuBrowser.lockUserOperation(true);
 
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
@@ -120,6 +121,7 @@ function submitPost(community_id) {
 
     var content = document.getElementById("postUI_input").value
     var memo = wiiuMemo.getImage(true)
+    var screenshot_img = document.getElementById('postUI_screenshot')
 
     var form = new FormData()
 
@@ -133,6 +135,10 @@ function submitPost(community_id) {
         default:
             console.log('Broken!!!!')
             break
+    }
+
+    if (!screenshot_img.src == "") {
+        form.append('screenshot', wiiuMainApplication.getScreenShot(false))
     }
 
     form.append('feeling_id', '0')
@@ -157,4 +163,10 @@ function submitPost(community_id) {
     }
 
 
+}
+
+function getScreenshot() {
+    var ssview = document.getElementById('postUI_screenshot')
+
+    ssview.src = "data:image/png;base64," + wiiuMainApplication.getScreenShot(false)
 }

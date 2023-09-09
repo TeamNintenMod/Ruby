@@ -22,7 +22,7 @@
         <% if (post.body) { %>
             <span class="body"><%= post.body %></span>  
         <%} else { %>
-            <img class="painting" src="data:image/png;base64,<%=post.painting_png%>" <%if (post.screenshot) {%> style="margin-top: 15px;" <%}%> width="600px">
+            <img class="painting" src="data:image/png;base64,<%=post.painting_png%>" <%if (post.screenshot) {%> style="margin-top: 15px;" width='750px' <%} else {%> width='600px' <%}%>>
         <%} %>
         
     </div>
@@ -44,7 +44,5 @@
                 <span id="<%= post.id %>_text">Yeah</span>
             </a>
         <% } %>
-
-        
     </div>
 </div>

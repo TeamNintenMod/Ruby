@@ -2,6 +2,8 @@
 
 This is an attempt to create a semi-miiversey social media platform, written in Node.JS.
 
+https://discord.gg/GQN6ph7X
+
 # So Far..
 
 So far into development, this is what I have working..

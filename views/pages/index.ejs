@@ -1,18 +1,6 @@
 <%- include('../partials/header.ejs')%>
 
-
-<script>
-
-    function getScreenshot() {
-        var ssview = document.getElementById('screenshotViewer')
-
-        ssview.src = "data:image/png;base64," + wiiuMainApplication.getScreenShot(false)
-    }
-
-</script>
-
-
-<body onload="endLoading()">
+<body onload="endLoading();wiiuBrowser.lockUserOperation(false);">
         <%- include('../partials/sidebar.ejs', {
             homePage : true,
             miiURL : `http://mii-images.account.nintendo.net/${account[0].hash}_normal_face.png`,
@@ -20,8 +8,6 @@
         <content>
             
             <img id="screenshotViewer" style="z-index: 10;">
-            <button onclick="getScreenshot()">Get Screenshot</button>
-
             <table>
                 <tr>
                     <th>OLV_ID</th>
