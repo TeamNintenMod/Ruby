@@ -34,12 +34,23 @@ var app = express();
 
 app.use(cookieparser())
 
+app.use(function (req, res, next) {
+    res.setHeader('Access-Control-Allow-Origin', 'https://davidsosa2022.github.io');
+
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+
+    res.setHeader('Access-Control-Allow-Headers', 'x-nintendo-servicetoken, x-nintendo-parampack, Content-Type, Accept, X-Requested-With');
+
+    res.setHeader('Access-Control-Allow-Credentials', true);
+
+    next();
+})
+
 app.use('/v1/people', accountRoute)
 app.use('/v1/communities', communityRoute)
 app.use('/v1/endpoint', endpointRoute)
 app.use('/v1/posts', postsRoute)
 app.use('/miiverse/xml', endpointRoute)
-
 app.use('/titles', titlesRoute)
 
 app.use(express.static('static'))

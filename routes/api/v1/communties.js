@@ -82,7 +82,7 @@ router.get('/', (req, res) => {
         const parampack = headerDecoder.decodeParamPack(req.get('x-nintendo-parampack'))
         sql = `SELECT * FROM community WHERE hidden=0 AND title_ids LIKE "%${parampack.title_id}%"`
     } else {
-        sql = `SELECT * FROM community`
+        sql = `SELECT * FROM community WHERE hidden=0`
     }
     
 
@@ -96,9 +96,8 @@ router.get('/', (req, res) => {
                     .ele('olive_community_id', element.olive_community_id).up()
                     .ele('community_id', element.community_id).up()
                     .ele('name', element.name).up()
-                    .ele('description', element.description + " ").up()
-                    .ele('icon', " ").up()
-                    .ele('icon_3ds', " ").up()
+                    .ele('icon', element.icon).up()
+                    .ele('icon_3ds', element.icon_3ds).up()
                     .ele('pid', element.pid).up()
                     .ele("app_data", element.app_data).up()
                     .ele('is_user_community', element.is_user_community)
@@ -106,6 +105,8 @@ router.get('/', (req, res) => {
 
             xml.end({pretty : true, allowEmpty : true})
             console.log(logger.Get(req.originalUrl))
+
+            console.log(req.headers)
 
             res.set('Content-Type', 'application/xml')
             res.send(`<?xml version="1.0" encoding="UTF-8"?><result><has_error>0</has_error><version>1</version><request_name>communities</request_name>${xml}</result>`)

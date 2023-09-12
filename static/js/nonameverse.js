@@ -138,7 +138,7 @@ function submitPost(community_id) {
     }
 
     if (!screenshot_img.src == "") {
-        form.append('screenshot', wiiuMainApplication.getScreenShot(false))
+        form.append('screenshot', wiiuMainApplication.getScreenShot(true))
     }
 
     form.append('feeling_id', '0')
@@ -168,5 +168,5 @@ function submitPost(community_id) {
 function getScreenshot() {
     var ssview = document.getElementById('postUI_screenshot')
 
-    ssview.src = "data:image/png;base64," + wiiuMainApplication.getScreenShot(false)
+    ssview.src = "data:image/png;base64," + wiiuMainApplication.getScreenShot(true)
 }
