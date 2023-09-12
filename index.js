@@ -50,7 +50,6 @@ app.use('/v1/people', accountRoute)
 app.use('/v1/communities', communityRoute)
 app.use('/v1/endpoint', endpointRoute)
 app.use('/v1/posts', postsRoute)
-app.use('/miiverse/xml', endpointRoute)
 app.use('/titles', titlesRoute)
 
 app.use(express.static('static'))
