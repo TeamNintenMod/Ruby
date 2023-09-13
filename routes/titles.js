@@ -15,6 +15,8 @@ const moment = require('moment')
 
 const auth = require('../other/auth')
 
+const config = require('../config.json')
+
 router.get('/show', async (req, res) => {
 
     let serviceToken, paramPack;
@@ -25,7 +27,7 @@ router.get('/show', async (req, res) => {
 
         console.log(logger.Info('Found Service Token And/Or ParamPack'))
     } else {
-        serviceToken = 0
+        serviceToken = config.guest_token
         paramPack = 0
 
         console.log(logger.Error('Did not find any Service Token or ParamPack. Setting both values to "0" as default.'))
@@ -83,7 +85,7 @@ router.get('/:community_id', async (req, res) => {
 
     let serviceToken = req.get('x-nintendo-servicetoken')
     if (!serviceToken) {
-        serviceToken = "0"
+        serviceToken = config.guest_token
         console.log(logger.Error('Found no service token, replacing with default values.'))
     }
 

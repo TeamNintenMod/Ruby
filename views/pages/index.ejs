@@ -8,25 +8,34 @@
         <content>
             
             <img id="screenshotViewer" style="z-index: 10;">
-            <table>
-                <tr>
-                    <th>OLV_ID</th>
-                    <th>Community_Id</th>
-                    <th>Name</th>
-                    <th>Description</th>
-                    <th>Icon</th>
-                    <th>Posts</th>
-                </tr>
-                    <% communities.forEach(community => { %>
-                    <tr>
-                        <td><%= community.olive_community_id %></td>
-                        <td><%= community.community_id %></td>
-                        <td><%= community.name %></td>
-                        <td><%= community.description %></td>
-                        <td><img src="../../../../../../img/icons/<%= String(community.community_id)%>.jpg" width="80" height="80"></td>
-                        <td><a href="../../titles/<%= community.community_id %>">Posts</a></td>
-                    </tr>
-                <%}); %>
-            </table>    
+            
+            <table style="border: none;">
+                <% for (let i = 0; i < 6; i++) {%>
+                    <td style="border: none; color: black; padding-top: 5px; padding-bottom: 5px;" >
+                        <a href="<%= communities[i].community_id %>" style="display: block; text-decoration: none; width: 700px;">
+                            <img style="display: inline-block; vertical-align: middle; border-radius: 10px;" src="../../../img/icons/<%=communities[i].community_id%>.jpg"></img>
+                            <div style="display: inline-block; position: relative; left: 10px;">
+                                <span style="display: block; vertical-align: middle; text-decoration: none; font-size: 23px; color: black; font-weight: 900;  position: relative;"><%= communities[i].name %></span>
+
+                                <% switch (communities[i].type) {
+                                    case 'wiiu':%>
+                                    <span style="display: block; color: grey;"><span style="display: inline-block; border-radius: 50px; width: 60px; padding: 5px; text-align: center; background-color: #0099C9; font-size: 15px; color: white; font-weight: 900;">Wii U</span> Wii U Games</span>
+                                        <%break;
+                                    case '3ds':%>
+                                    <span style="display: block; color: grey;"><span style="display: inline-block; border-radius: 50px; width: 60px; padding: 5px; text-align: center; background-color: #D3000F; font-size: 15px; color: white; font-weight: 900;">3DS</span> 3DS Games</span>
+                                        <%break;
+                                    default:%>
+                                    <span style="display: block; color: grey;"><span style="display: inline-block; border-radius: 50px; width: 60px; padding: 5px; text-align: center; background-color: #777777; font-size: 15px; color: white; font-weight: 900;">Topic</span> General Topic</span>
+                                    <%break;
+                                }%>
+                            </div>
+                        </a>
+                    </td>
+                    
+                    <% if (i % 2) {%>
+                        <tr>
+                    <%} %>
+                <%}%>
+            </table>
         </content>
 </body>

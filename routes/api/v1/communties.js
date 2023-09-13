@@ -73,6 +73,11 @@ router.post('/', multer().none(), async (req, res) => {
     }
 })
 
+
+router.get('/new', (req, res) => {
+    
+})
+
 router.get('/', (req, res) => {
 
     const limit = (req.query['limit']) ? ` LIMIT ${req.query['limit']}` : ''

@@ -48,7 +48,6 @@
 #sidebar a {
 
     font-family: MiiverseSymbols;
-    color: rgb(255, 255, 255);
 
     text-align: center;
     width: 100%;
@@ -58,6 +57,8 @@
 
     margin-bottom: 10px;
     text-align: center;
+
+    color: white;
 }
 
 #backexit {
@@ -81,8 +82,6 @@ body {
     flex-direction: row;
 
     color: black;
-
-    overflow-x: hidden;
 }
 
 /* New User */
@@ -161,7 +160,6 @@ content>*>*,
 content>*,
 content>*>*>* {
     margin-left: 15%;
-    overflow-x: visible;
 }
 
 .titleHeader {
