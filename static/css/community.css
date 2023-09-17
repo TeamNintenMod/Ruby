@@ -1,0 +1,19 @@
+.favorite_community {
+    font-family: MiiverseSymbols;
+    vertical-align: middle;
+
+    float: right;
+
+    color: gray;
+
+    border-radius: 5px;
+
+    margin: 25px;
+
+    font-size: 35px;
+
+    width: 90px;
+    height: 90px;
+
+    text-align: center;
+}

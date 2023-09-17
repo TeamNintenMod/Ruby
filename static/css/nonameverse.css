@@ -202,10 +202,18 @@ content>*>*>* {
 
 .titleMeta {
     position: relative;
-    bottom: 95px;
-    left: 115px;
+
+    top: 15px;
+
+    width: 700px;
 
     font-size: 30px;
+
+    vertical-align: middle;
+    display: inline-block;
+
+    margin: 0px;
+    margin-left: 10px;
 }
 
 br {

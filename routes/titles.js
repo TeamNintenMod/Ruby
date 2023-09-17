@@ -1,21 +1,19 @@
 const express = require('express')
 const router = express.Router()
-const fetch = require('node-fetch')
-
-const xmltojson = require('xml-js')
 
 const xmlparser = require('fast-xml-parser')
 const headerDecoder = require('../other/decoder')
 
 const en = require('../languages/en.json')
 const logger = require('../other/logger')
-const xml = require('xml')
 
 const moment = require('moment')
 
 const auth = require('../other/auth')
 
 const config = require('../config.json')
+
+const UIQuery = require('../other/UIQuery')
 
 router.get('/show', async (req, res) => {
 
@@ -40,24 +38,16 @@ router.get('/show', async (req, res) => {
     if (account) {
         console.log(logger.Get(req.originalUrl))
 
-        const parser = new xmlparser.XMLParser();
+        var communities = JSON.parse(await UIQuery.getCommunities('newest'))
 
-        fetch('https://olvapi.nonamegiven.xyz/v1/communities?json=1&new=1').then(response => response.text()).then((xmlResult) => {
-            var communities = JSON.parse(xmlResult)
-
-            res.render('./pages/index.ejs', {
-                account: account,
-                communities: communities,
-                current_announcement: config.current_announcement
-            })
-        });
+        res.render('./pages/index.ejs', {
+            account: account,
+            communities: communities,
+            current_announcement: config.current_announcement
+        })
     } else {
         res.redirect('https://olvportal.nonamegiven.xyz/titles/newUser')
     }
-})
-
-router.get('/first', (req, res) => {
-    console.log(logger.Get(req.originalUrl))
 })
 
 router.get('/newUser', (req, res) => {
@@ -76,10 +66,6 @@ router.get('/newUser/1', (req, res) => {
     })
 })
 
-router.get('/post', function (req, res) {
-    res.render('pages/post.ejs')
-})
-
 router.get('/:community_id', async (req, res) => {
     const community_id = req.params.community_id
     const parser = new xmlparser.XMLParser();
@@ -90,26 +76,15 @@ router.get('/:community_id', async (req, res) => {
         console.log(logger.Error('Found no service token, replacing with default values.'))
     }
 
-    fetch(`https://olvapi.nonamegiven.xyz/v1/communities/${community_id}/posts?json=1`).then(response => response.text()).then(async (result) => {
-        const postsJson = JSON.parse(result)
+    var posts = JSON.parse(await UIQuery.getPosts(community_id))
+    var community = JSON.parse(await UIQuery.getCommunityData(community_id))[0]
+    var account = JSON.parse(await auth.authenticateUser(serviceToken))
 
-        fetch(`https://olvapi.nonamegiven.xyz/v1/communities/${community_id}?json=1`).then(response => response.text()).then( async (result) => {
-
-            const communityJson = JSON.parse(result)
-
-            
-                let account; var posts;
-
-                account = JSON.parse(await auth.authenticateUser(serviceToken))
-
-                res.render('pages/community.ejs', {
-                    posts: postsJson,
-                    community: communityJson[0],
-                    account: account,
-                    moment : moment
-                })
-
-        })
+    res.render('pages/community.ejs', {
+        posts: posts,
+        community: community,
+        account: account,
+        moment: moment
     })
 })
 
@@ -123,7 +98,7 @@ router.get('/post/:title_id', (req, res) => {
 
 router.get('/users/:userId', (req, res) => {
     res.render('pages/user.ejs', {
-        
+
     })
 })
 

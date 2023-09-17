@@ -19,8 +19,6 @@ function authenticateUser(token) {
             
         })
     })
-
-    
 }
 
 module.exports = { authenticateUser }
