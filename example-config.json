@@ -1,6 +1,8 @@
 {
     "port" : 80,
 
+    "webhook_logger" : "",
+
     "placeholderBio" : "",
     
     "mysqlhost" : "",
@@ -15,5 +17,6 @@
 
     "community_posts" : "body, community_id, country_id, created_at, feeling_id, id, is_autopost, is_community_private_autopost, is_spoiler, is_app_jumpable, empathy_count, language_id, mii, mii_face_url, number, painting, pid,platform_id, region_id, reply_count, screen_name, title_id",
 
-    "guest_token" : ""
+    "guest_token" : "",
+    "current_announcement" : ""
 }

@@ -42,12 +42,13 @@ router.get('/show', async (req, res) => {
 
         const parser = new xmlparser.XMLParser();
 
-        fetch('https://olvapi.nonamegiven.xyz/v1/communities?json=1').then(response => response.text()).then((xmlResult) => {
+        fetch('https://olvapi.nonamegiven.xyz/v1/communities?json=1&new=1').then(response => response.text()).then((xmlResult) => {
             var communities = JSON.parse(xmlResult)
 
             res.render('./pages/index.ejs', {
                 account: account,
-                communities: communities
+                communities: communities,
+                current_announcement: config.current_announcement
             })
         });
     } else {

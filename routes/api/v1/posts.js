@@ -100,17 +100,20 @@ router.post('/', multer().none(), async (req, res) => {
                         if (err) { console.log(logger.Error(err)); res.sendStatus(404); } else {
                             console.log(logger.MySQL('Post Created!'))
                             res.sendStatus(200)
+
+                            logger.Post(mii_url, account[0].name, req.body.body)
                         }
                     })
                 })
             } else {
                 const sql = `INSERT INTO post (app_data, ${(painting) ? "painting" : "body"}, ${(paintingPNG) ? "painting_png," : ""} ${(screenshot) ? "screenshot," : ""} community_id, feeling_id, is_autopost, is_spoiler, language_id, is_app_jumpable, created_at, empathy_count, number, platform_id, region_id, reply_count, title_id, country_id, topic_tag, search_key, mii, mii_face_url, screen_name, pid)
-                        VALUES ("${app_data}", "${(painting) ? painting : req.body.body}", ${(paintingPNG) ? "'" + paintingPNG + "'," : ""} ${(screenshot) ? `"${screenshot}",` : ""} ${req.body.community_id}, ${req.body.feeling_id}, ${req.body.is_autopost}, ${req.body.is_spoiler}, ${req.body.language_id}, ${req.body.is_app_jumpable}, "${moment().format('YYYY-MM-DD hh:mm:ss')}", 0, 0, ${paremPack.platform_id}, ${paremPack.region_id}, 0, ${paremPack.title_id}, ${paremPack.country_id}, "${topic_tag}", "${req.body.search_key}", "${account[0].mii}", "${mii_url}", "${account[0].name}", ${account[0].pid})`
+                        VALUES ("${app_data}", "${(painting) ? painting : req.body.body}", ${(paintingPNG) ? "'" + paintingPNG + "'," : ""} ${(screenshot) ? `"${screenshot}",` : ""} ${req.body.community_id}, ${req.body.feeling_id}, ${req.body.is_autopost}, ${req.body.is_spoiler}, ${req.body.language_id}, ${req.body.is_app_jumpable}, "${moment().format('YYYY-MM-DD HH:mm:ss')}", 0, 0, ${paremPack.platform_id}, ${paremPack.region_id}, 0, ${paremPack.title_id}, ${paremPack.country_id}, "${topic_tag}", "${req.body.search_key}", "${account[0].mii}", "${mii_url}", "${account[0].name}", ${account[0].pid})`
 
                 con.query(sql, (err, result, fields) => {
                     if (err) { console.log(logger.Error(err)); res.sendStatus(404); } else {
                         console.log(logger.MySQL('Post Created!'))
                         res.sendStatus(200)
+                        logger.Post(mii_url, account[0].name, req.body.body)
                     }
                 })
             }

@@ -1,0 +1,31 @@
+.new_communities {
+    background-color: darkcyan;
+}
+
+.announcement_banner {
+    width: 100%;
+    padding-bottom: 20px;
+    padding-top: 20px;
+
+    position: absolute;
+    top: 0;
+
+    margin: 0;
+
+    background-image: -webkit-linear-gradient(rgb(207, 215, 226), rgb(139, 173, 211));
+    border-bottom: rgb(123, 143, 167) 2px solid;
+
+    margin-bottom: 35px;
+}
+
+.announcement_text {
+    margin-left: 14%;
+    font-size: 25px;
+
+    color: rgb(116, 136, 158);
+    text-shadow: rgb(83, 90, 99) 1px 1px
+}
+
+.new_communities {
+    
+}

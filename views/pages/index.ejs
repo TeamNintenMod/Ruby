@@ -8,24 +8,32 @@
         <content>
             
             <img id="screenshotViewer" style="z-index: 10;">
+
+            <div class="announcement_banner"><span class="announcement_text"><%= current_announcement %></span></div>
             
-            <table style="border: none;">
-                <% for (let i = 0; i < 6; i++) {%>
-                    <td style="border: none; color: black; padding-top: 5px; padding-bottom: 5px;" >
-                        <a href="<%= communities[i].community_id %>" style="display: block; text-decoration: none; width: 700px;">
-                            <img style="display: inline-block; vertical-align: middle; border-radius: 10px;" src="../../../img/icons/<%=communities[i].community_id%>.jpg"></img>
-                            <div style="display: inline-block; position: relative; left: 10px;">
-                                <span style="display: block; vertical-align: middle; text-decoration: none; font-size: 23px; color: black; font-weight: 900;  position: relative;"><%= communities[i].name %></span>
+            <table style="border: none; position: relative; bottom: 15px;">
+                <% for (let i = 0; i < communities.length; i++) {%>
+                    <td style="border: none; color: black; padding-top: 5px; padding-bottom: 10px;" >
+                        <a onclick="wiiuSound.playSoundByName('SE_WAVE_MENU', 1);" href="<%= communities[i].community_id %>" style="display: block; text-decoration: none; width: 514px; border-bottom: #acacac dashed 2px; padding-bottom: 25px; margin-right: 25px;">
+                            <img style="display: inline-block; vertical-align: middle; border-radius: 15px;" src="../../../img/icons/<%=communities[i].community_id%>.jpg" width="90px"></img>
+                            <div style="display: inline-block; position: relative; left: 10px; vertical-align: middle;">
+                                <span style="display: inline-block; width: 350px; text-decoration: none; font-size: 23px; color: black; font-weight: 900;  position: relative; text-overflow: clip;"><%= communities[i].name %></span>
 
                                 <% switch (communities[i].type) {
                                     case 'wiiu':%>
-                                    <span style="display: block; color: grey;"><span style="display: inline-block; border-radius: 50px; width: 60px; padding: 5px; text-align: center; background-color: #0099C9; font-size: 15px; color: white; font-weight: 900;">Wii U</span> Wii U Games</span>
+                                    <span style="display: block; color: grey;"><span style="display: inline-block; border-radius: 50px; width: 60px; height: 16px; padding: 5px; text-align: center; background-color: #0099C9; font-size: 14px; color: white; font-weight: 900;">WiiU</span> Wii U Games</span>
                                         <%break;
                                     case '3ds':%>
-                                    <span style="display: block; color: grey;"><span style="display: inline-block; border-radius: 50px; width: 60px; padding: 5px; text-align: center; background-color: #D3000F; font-size: 15px; color: white; font-weight: 900;">3DS</span> 3DS Games</span>
+                                    <span style="display: block; color: grey;"><span style="display: inline-block; border-radius: 50px; width: 60px; height: 16px; padding: 5px; text-align: center; background-color: #D3000F; font-size: 14px; color: white; font-weight: 900;">3DS</span> 3DS Games</span>
+                                        <%break;
+                                        case 'wii':%>
+                                    <span style="display: block; color: grey;"><span style="display: inline-block; border-radius: 50px; width: 60px; height: 16px; padding: 5px; text-align: center; background-color: #cacaca; font-size: 14px; color: rgb(255, 255, 255); font-weight: 900;">Wii</span> Wii Games</span>
+                                        <%break;
+                                        case 'vc':%>
+                                    <span style="display: block; color: grey;"><span style="display: inline-block; border-radius: 50px; width: 60px; height: 16px; padding: 5px; text-align: center; background-color: #525252; font-size: 14px; color: rgb(255, 255, 255); font-weight: 900;">VC</span> Virtual Console Games</span>
                                         <%break;
                                     default:%>
-                                    <span style="display: block; color: grey;"><span style="display: inline-block; border-radius: 50px; width: 60px; padding: 5px; text-align: center; background-color: #777777; font-size: 15px; color: white; font-weight: 900;">Topic</span> General Topic</span>
+                                    <span style="display: block; color: grey;"><span style="display: inline-block; border-radius: 50px; width: 60px; height: 16px; padding: 5px; text-align: center; background-color: #777777; font-size: 14px; color: white; font-weight: 900;">Topic</span> General Topic</span>
                                     <%break;
                                 }%>
                             </div>
@@ -34,7 +42,7 @@
                     
                     <% if (i % 2) {%>
                         <tr>
-                    <%} %>
+                    <%}%>
                 <%}%>
             </table>
         </content>

@@ -2,12 +2,7 @@ module.exports = {
   apps : [{
     name : 'NoNameVerse-Official',
     script: 'index.js',
-    ignore_watch: ["logs/"],
-    watch: true,
-    watch_delay: 1000,
     restart_delay : 3000,
-    log_file: "./logs/",
-    log_date_format: "YYYY-MM-DD HH:mm"
   }],
 
   deploy : {

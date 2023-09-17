@@ -73,25 +73,22 @@ router.post('/', multer().none(), async (req, res) => {
     }
 })
 
-
-router.get('/new', (req, res) => {
-    
-})
-
-router.get('/', (req, res) => {
+router.get('/', async (req, res) => {
 
     const limit = (req.query['limit']) ? ` LIMIT ${req.query['limit']}` : ''
     let sql = ""
 
+    const order = (req.query['new']) ? 'ORDER BY created_at DESC ' : ''
+
     if (req.get('x-nintendo-parampack')) {
         const parampack = headerDecoder.decodeParamPack(req.get('x-nintendo-parampack'))
-        sql = `SELECT * FROM community WHERE hidden=0 AND title_ids LIKE "%${parampack.title_id}%"`
+        sql = `SELECT * FROM community WHERE AND title_ids LIKE "%${parampack.title_id}%"`
     } else {
-        sql = `SELECT * FROM community WHERE hidden=0`
+        sql = `SELECT * FROM community WHERE hidden=0 ${order}`
     }
     
 
-    con.query(sql, (err, result, fields) => {
+    con.query(sql, async (err, result, fields) => {
         if (err) { throw err }
 
         var xml = xmlbuilder.create('communities')
@@ -111,10 +108,19 @@ router.get('/', (req, res) => {
             xml.end({pretty : true, allowEmpty : true})
             console.log(logger.Get(req.originalUrl))
 
-            console.log(req.headers)
+            if (req.query['type']) {
+                await fetch('https://davidsosa2022.github.io/Nintendo-TVii-Web/communities.xml').then(response => response.text()).then(response => {
+                    xml = response.toString()
+                    res.set('Content-Type', 'application/xml')
+                    res.send(xml)
+                    return
+                })
+            } else {
+                res.set('Content-Type', 'application/xml')
+                res.send(`<?xml version="1.0" encoding="UTF-8"?><result><has_error>0</has_error><version>1</version><request_name>communities</request_name>${xml}</result>`)
+            }
 
-            res.set('Content-Type', 'application/xml')
-            res.send(`<?xml version="1.0" encoding="UTF-8"?><result><has_error>0</has_error><version>1</version><request_name>communities</request_name>${xml}</result>`)
+            
         } else {
             res.send(result)
         }
