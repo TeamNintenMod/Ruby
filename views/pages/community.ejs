@@ -1,6 +1,6 @@
-<%- include('../partials/header.ejs') %>
+<%- include('../partials/header.ejs', {account_needed : true, account : account[0] }) %>
 
-    <body>
+    <body onload="wiiuBrowser.lockUserOperation(false); ">
         <%- include('../partials/sidebar.ejs', { homePage : false, miiURL :
             `http://mii-images.account.nintendo.net/${account[0].hash}_normal_face.png` }) %>
 
@@ -8,12 +8,18 @@
                 <div class="postUI_bg"></div>
                 <div class="postUI_container">
                     <div>
-                        <img src="<%= `http://mii-images.account.nintendo.net/${account[0].hash}_normal_face.png` %>" class="postUI_mii" width="100px">
+                        <img src="<%= `http://mii-images.account.nintendo.net/${account[0].hash}_normal_face.png` %>"
+                            class="postUI_mii" width="100px">
                         <div class="postUI_name_wrapper">
-                            <span class="postUI_name"><%= account[0].name %></span>
+                            <span class="postUI_name">
+                                <%= account[0].name %>
+                            </span>
                             <div>
-                                <img src='../../../../img/icons/<%= community.community_id %>.jpg' class="postUI_community_icon" width="55px">
-                                <span class="postUI_community"><%= community.name %></span>
+                                <img src='../../../../img/icons/<%= community.community_id %>.jpg'
+                                    class="postUI_community_icon" width="55px">
+                                <span class="postUI_community">
+                                    <%= community.name %>
+                                </span>
                             </div>
                         </div>
                         <div class="postUI_actions">
@@ -25,40 +31,44 @@
                                     J
                                 </a>
                             </div>
-                            <textarea id="postUI_input" class="postUI_input" placeholder="Please input post text." maxlength="100"></textarea>
-                            <img id="postUI_drawing" style=" display:none; vertical-align: middle; position: relative; right: 5px;" width="374px" height="174px">
+                            <textarea id="postUI_input" class="postUI_input" placeholder="Please input post text."
+                                maxlength="100"></textarea>
+                            <img id="postUI_drawing"
+                                style=" display:none; vertical-align: middle; position: relative; right: 5px;"
+                                width="374px" height="174px">
 
-                            <img id="postUI_screenshot" width="250px" height="150" style="display: inline; vertical-align: middle;">
+                            <img id="postUI_screenshot" width="250px" height="150"
+                                style="display: inline; vertical-align: middle;">
                             <button onclick="getScreenshot()">Upload TV Screenshot</button>
-                        </div>          
+                        </div>
                     </div>
                 </div>
 
                 <div class="postUI_button_wrapper">
                     <button class="postUI_button" onclick="postUIToggle()">Cancel</button>
-                    <button class="postUI_button" onclick="submitPost(<%= community.community_id %>)" style="left: 70%;">Post</button>
+                    <button class="postUI_button" onclick="submitPost(<%= community.community_id %>)"
+                        style="left: 70%;">Post</button>
                 </div>
-                
+
             </div>
 
-            <a class="community_post_button" href="javascript:void(0)" onclick="postUIToggle()"><img class="community_post_button" src="../../../../../img/post.png" width="225px"></a>
+            <a class="community_post_button" href="javascript:void(0)" onclick="postUIToggle()"><img
+                    class="community_post_button" src="../../../../../img/post.png" width="225px"></a>
 
             <content>
+                <%- include('../partials/titleHeader.ejs', { title : community.name, community : community }) %>
+                    <img class="titleBanner" src='../../../../img/banners/<%= community.community_id %>.jpg'>
 
-                <% %>
-
-                    <%- include('../partials/titleHeader.ejs', { title : community.name, community : community }) %>
-                        <img class="titleBanner" src='../../../../img/banners/<%= community.community_id %>.jpg'>
-
-                        <div class="postsWrapper">
-                            <ul>
-                                <%for (let i in posts) {%>
-                                    <li>
-                                        <%- include('../partials/post.ejs', { post : posts[i], community : community,
-                                            yeahed : account[0].yeahed_posts, moment : moment }) %>
-                                    </li>
-                                    <%}; %>
-                            </ul>
-                        </div>
+                    <div class="postsWrapper">
+                        <ul id="posts_container">
+                            <%for (let i in posts) {%>
+                                <li>
+                                    <%- include('../partials/post.ejs', { post : posts[i], community : community, yeahed
+                                        : account[0].yeahed_posts, moment : moment }) %>
+                                </li>
+                            <%};%>
+                            <button id="more_posts_button" onclick="load_more_posts(<%= community.community_id %>)" class="more_posts">Load More Posts</button>
+                        </ul>
+                    </div>
             </content>
-    </body onload="wiiuBrowser.endStartUp();">
+    </body>

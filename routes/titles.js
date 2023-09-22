@@ -31,22 +31,26 @@ router.get('/show', async (req, res) => {
         console.log(logger.Error('Did not find any Service Token or ParamPack. Setting both values to "0" as default.'))
     }
 
-    const account = JSON.parse(await auth.authenticateUser(serviceToken).catch(() => {
+    var account = await auth.authenticateUser(serviceToken).catch(() => {
         res.redirect('https://olvportal.nonamegiven.xyz/titles/newUser')
-    }))
+        console.log(logger.Info('New User Setup Initiated!'))
+    })
 
     if (account) {
+
+        account = JSON.parse(account)
+
         console.log(logger.Get(req.originalUrl))
 
-        var communities = JSON.parse(await UIQuery.getCommunities('newest'))
+        var key = (req.query['sort']) ? req.query['sort'] : 'popular'
+
+        var communities = JSON.parse(await UIQuery.getCommunities(key))
 
         res.render('./pages/index.ejs', {
             account: account,
             communities: communities,
             current_announcement: config.current_announcement
         })
-    } else {
-        res.redirect('https://olvportal.nonamegiven.xyz/titles/newUser')
     }
 })
 
@@ -76,7 +80,7 @@ router.get('/:community_id', async (req, res) => {
         console.log(logger.Error('Found no service token, replacing with default values.'))
     }
 
-    var posts = JSON.parse(await UIQuery.getPosts(community_id))
+    var posts = JSON.parse(await UIQuery.getPosts(community_id, 10))
     var community = JSON.parse(await UIQuery.getCommunityData(community_id))[0]
     var account = JSON.parse(await auth.authenticateUser(serviceToken))
 

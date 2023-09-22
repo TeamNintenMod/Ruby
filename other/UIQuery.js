@@ -12,6 +12,7 @@ function getPosts(community_id, limit) {
                 resolve(JSON.stringify(result))
             }
         })
+
     })
 }
 
@@ -23,6 +24,21 @@ function getCommunities(key, limit) {
     switch (key) {
         case 'newest':
             sql = `SELECT * FROM community WHERE hidden=0 ORDER BY created_at DESC ${limit}`
+            break;
+
+        case 'oldest':
+            sql = `SELECT * FROM community WHERE hidden=0 ORDER BY created_at ASC ${limit}`
+            break;
+
+        case 'popular':
+            sql = `SELECT * FROM community AS c WHERE hidden=0 
+                ORDER BY 
+                (SELECT COUNT(community_id) FROM post WHERE community_id=c.community_id)
+                DESC ${limit}`
+            break;
+
+        case 'unpopular':
+            sql = `SELECT * FROM community AS c WHERE hidden=0 ORDER BY (SELECT COUNT(community_id) FROM post WHERE community_id=c.community_id) ASC ${limit}`
             break;
 
         default:

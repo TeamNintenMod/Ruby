@@ -1,19 +1,62 @@
 .favorite_community {
     font-family: MiiverseSymbols;
+
+    font-size: 25px;
+
+    z-index: 4;
+
+    position: relative;
+
     vertical-align: middle;
 
-    float: right;
+    width: 75px;
+    height: 75px;
+
+    font-size: 35px;
+    text-shadow: rgba(88, 88, 88, 0.5) 1px 1px, rgba(156, 156, 156, 0.3) 0 -1px, rgba(255,255,255,0.5) 0 1px, rgba(0,0,0,0.3) -1px -2px;
+
+    background: -webkit-linear-gradient(-90deg, rgba(255, 255, 255, 1) 0%, rgb(221, 221, 221) 100%);
+
+    border-radius: 15px;
+    border: 1px rgb(201, 201, 201) solid;
+
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
 
     color: gray;
 
-    border-radius: 5px;
+    margin: 0px;
 
-    margin: 25px;
+    left: 160px;
+    top: 10px;
+}
 
-    font-size: 35px;
+.spoiler_button {
+    display: none;
+    
+    width: 800px;
+    height: 95px;
 
-    width: 90px;
-    height: 90px;
+    background: -webkit-linear-gradient(-90deg, rgba(255, 255, 255, 1) 0%, rgb(221, 221, 221) 100%);
+    border-radius: 15px;
+    border: 1px rgb(201, 201, 201) solid;
 
-    text-align: center;
+    font-size: 25px;
+}
+
+.more_posts {
+    display: inline-block;
+    
+    width: 400px;
+    height: 65px;
+
+    background: -webkit-linear-gradient(-90deg, rgba(255, 255, 255, 1) 0%, rgb(221, 221, 221) 100%);
+    border-radius: 15px;
+    border: 1px rgb(201, 201, 201) solid;
+
+    font-size: 25px;
+
+    margin: 0px;
+    margin-left: 324px;
+    margin-top: 25px;
+    margin-bottom: 25px;
 }

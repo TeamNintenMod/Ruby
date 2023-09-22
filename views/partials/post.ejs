@@ -1,14 +1,13 @@
-
 <div class="post_author">
-    <img src="<%= post.mii_face_url %>" width="96px" height="96px">
-    <span class="screen_name"><%= post.screen_name %></span>
+    <img src="<%= post.mii_face_url %>" width="96px" height="96px" onload="init_post(<%= post.id %>)">
+    <span class="screen_name" id="screen_name_<%= post.id %>"  <% if (post.is_spoiler) {%> style="bottom: 15px; right: 145px" <%}%> ><%= post.screen_name %></span>
     
 </div>
 
-<span class="from_now"><%= moment(post.created_at).fromNow() %> <%if(post.is_autopost) {%> Auto-post <%}%></span>
+<span class="from_now" <% if (post.is_spoiler) {%> style="display:none;" <%}%> ><%= moment(post.created_at).fromNow() %></span>
 
-<div class="post">
-    <img src="../../../../img/icons/<%= community.community_id %>.jpg" width="70px" onload="init_post(<%= post.id %>)">
+<div class="post" id="post_<%= post.id %>" <% if (post.is_spoiler) {%> style="display:none;" <%}%>>
+    <img src="../../../../img/icons/<%= post.community_id %>.jpg" width="70px">
     <% if (post.topic_tag) {%>
         <span class="topic_tag"><span class="topic_tag_symbol">t</span> <%= post.topic_tag %></span>
         <br>
@@ -30,19 +29,14 @@
     <div class="bottom_row" id="<%= post.id %>_bottom_row">
         <span class="empathy_count">
             <span class="empathy_symbol">e</span>
-            <span id="<%= post.id %>_empathy_count"> <%= post.empathy_count %></span>
+            <span id="<%= post.id %>_empathy_count">_</span>
         </span>
 
-        <% if (JSON.parse(yeahed).includes(post.id)) {%>
-            <a class="yeah" id="<%= post.id %>" style="color: #58a7db;" href="javascript:void(0)" onclick="UnYeah( <%= post.id %> )">
-                <span id="<%= post.id %>_symbol" class="yeah_symbol">E</span>
-                <span id="<%= post.id %>_text">Unyeah</span>
-            </a>
-        <%} else { %>
-            <a class="yeah" id="<%= post.id %>" href="javascript:void(0)" onclick="Yeah(<%= post.id %>)">
-                <span id="<%= post.id %>_symbol" class="yeah_symbol">E</span>
-                <span id="<%= post.id %>_text">Yeah</span>
-            </a>
-        <% } %>
+        <a class="yeah" id="<%= post.id %>" href="javascript:void(0)" onclick="Yeah(<%= post.id %>)">
+            <span id="<%= post.id %>_symbol" class="yeah_symbol">E</span>
+            <span id="<%= post.id %>_text">Yeah!</span>
+        </a>
     </div>
 </div>
+
+<button <% if (post.is_spoiler) {%> style="display:inline-block;" <%}%> class="spoiler_button" id="spoiler_button_<%=post.id%>" onclick="show_spoiler(<%= post.id %>); wiiuSound.playSoundByName('SE_WAVE_MENU', 1);">Show Spoiler</button>

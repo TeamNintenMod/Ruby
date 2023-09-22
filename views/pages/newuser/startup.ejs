@@ -1,4 +1,6 @@
-<%- include('../../partials/header') %>
+<%- include('../../partials/header', {
+    account_needed : false
+}) %>
 
 <body onload="newUser()">
     <div class="nuBox">
@@ -6,7 +8,6 @@
         <span><%= language.newUser.welcome %></span>
         <br>
     </div>
-
 
     <a class="nuNext" href="newUser/1">Next</a>
 </body>

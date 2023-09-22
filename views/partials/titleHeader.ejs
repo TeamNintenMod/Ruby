@@ -8,10 +8,12 @@
     <div class="titleMeta" >
         <%= title + " Community" %>
         <br>
-        <div class="titleDescription"><%= community.description %></div>
-
-        
+        <div class="titleDescription"><%= community.description %></div>   
     </div>
 
-    <button class="favorite_community">s</button>
+    <% if (JSON.parse(account[0].favorited_communities).includes(Number(community.community_id))) {%>
+        <button id="favorite_button_<%=community.community_id%>" onclick="favorite_community(<%= community.community_id %>)" class="favorite_community" style="color: #F7A642;">s</button>
+    <%} else {%>
+        <button id="favorite_button_<%=community.community_id%>" onclick="favorite_community(<%= community.community_id %>)" class="favorite_community" style="color: grey">s</button>
+    <%}%>
 </div>

@@ -31,10 +31,10 @@ router.post('/', (req, res) => {
             fetch(`https://nnidlt.murilo.eu.org/api.php?env=production&user_id=${nnid}`).then(response => response.text()).then(response => {
                 const responseObject = JSON.parse(response)
 
-                con.query(`INSERT INTO account (nnid, serviceToken, name, bio, admin, pid, mii, hash, yeahed_posts) VALUES("${responseObject.user_id}", "${serviceToken}", "${responseObject.name}", "${config.placeholderBio}", 0, ${responseObject.pid}, "${responseObject.data}", "${responseObject.images.hash}", "[]");`, function (err, result, fields) {
+                con.query(`INSERT INTO account (nnid, serviceToken, name, bio, admin, pid, mii, hash, banned, favorited_communities) VALUES("${responseObject.user_id}", "${serviceToken}", "${responseObject.name}", "${config.placeholderBio}", 0, ${responseObject.pid}, "${responseObject.data}", "${responseObject.images.hash}", 0, "[]");`, function (err, result, fields) {
                     if (err) {throw err} else {
                         console.log(logger.MySQL('Account Created!'))
-                        res.send('{ success : 1 }')
+                        res.sendStatus(201)
                     }   
                 })
 

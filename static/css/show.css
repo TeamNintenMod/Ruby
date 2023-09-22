@@ -23,9 +23,71 @@
     font-size: 25px;
 
     color: rgb(116, 136, 158);
-    text-shadow: rgb(83, 90, 99) 1px 1px
+    text-shadow: rgb(83, 90, 99) 1px 1px;
+
+    padding-bottom: 20px;
+    padding-top: 20px;
 }
 
 .new_communities {
     
+}
+
+.community {
+    background: rgb(223, 255, 248);
+    background: -webkit-linear-gradient(160deg, rgba(223, 255, 248, 1) 0%, rgb(231, 231, 231) 100%);
+
+    border: 3px rgb(212, 212, 212) solid;
+    border-radius: 5px;
+}
+
+.favorite_community_list {
+    font-family: MiiverseSymbols;
+
+    font-size: 25px;
+
+    z-index: 4;
+
+    position: relative;
+
+    vertical-align: middle;
+
+    width: 75px;
+    height: 75px;
+
+    font-size: 35px;
+    text-shadow: rgba(88, 88, 88, 0.5) 1px 1px, rgba(156, 156, 156, 0.3) 0 -1px, rgba(255,255,255,0.5) 0 1px, rgba(0,0,0,0.3) -1px -2px;
+
+    background: -webkit-linear-gradient(-90deg, rgba(255, 255, 255, 1) 0%, rgb(221, 221, 221) 100%);
+
+    border-radius: 15px;
+    border: 1px rgb(201, 201, 201) solid;
+
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
+}
+
+.favorited_community {
+    color: #F7A642;
+}
+
+.community_sort_by {
+    float: right;
+    position: relative;
+
+    position: absolute;
+
+    margin: 0;
+    left: 1125px;
+
+    height: 72px;
+    width: 200px;
+    top: 0;
+
+    font-size: 25px;
+
+    color: rgb(51, 78, 119);
+    background-color: rgba(0, 0, 0, 0);
+    border: 0;
+    border-left: 2px solid rgba(0, 0, 0, 0.2);
+    border-right: 2px solid rgba(0, 0, 0, 0.2);
 }
