@@ -38,7 +38,7 @@ https://discord.gg/GQN6ph7X
 
 # Setting up
 
-To start the app, you must first create a `config.json` file. Please refer to the `example-config.json` file as a base, and add in all of your neccessary information there. Keep in mind you must have a MySQL installed, or an external database created. Also, import the `other/DatabaseStructure.sql` file. This will make your database compatible with NoNameVerse's.
+Currently, NoNameVerse is in development. This means that changes happen rapidly, and setting this up and keeping up with new changes could be difficult. Until 80% of features are implemented, I won't give a detailed guide for setting up. After that point, I'm willing to help anybody set this up.
 
 # Contribution
 
