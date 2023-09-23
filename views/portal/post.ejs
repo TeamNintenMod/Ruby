@@ -1,0 +1,15 @@
+<%- include('./partials/header', {account_needed : true, account : account[0] }) %>
+    <%- include('./partials/sidebar.ejs', { homePage : false, miiURL :
+        `http://mii-images.account.nintendo.net/${account[0].hash}_normal_face.png` }) %>
+
+        <body>
+            <content>
+                <div class="postsWrapper">
+                    <ul id="posts_container">
+                        <li>
+                            <%- include('./partials/post.ejs', { post : post, moment : moment }) %>
+                        </li>
+                    </ul>
+                </div>
+            </content>
+        </body>

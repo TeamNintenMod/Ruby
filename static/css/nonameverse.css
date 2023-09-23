@@ -323,7 +323,7 @@ br {
     position: relative;
     display: block;
     margin-top: 60px;
-    width: 100%;
+    width: 1075px;
 }
 
 .postsWrapper ul li img {
@@ -382,7 +382,10 @@ br {
 
 .body_wrapper {
     width: auto;
-    margin-top: 5px;
+}
+
+.body {
+    word-wrap: break-word;
 }
 
 .topic_tag {
@@ -770,3 +773,12 @@ br {
     margin-top: 15px;
 }
 
+.reply_divider {
+    width: 800px;
+
+    border: 0.5px gray solid;
+
+    position: relative;
+
+    left: 116px;
+}

@@ -10,53 +10,42 @@ const logger = require('../other/logger')
 const moment = require('moment')
 
 const auth = require('../other/auth')
-
 const config = require('../config.json')
 
 const UIQuery = require('../other/UIQuery')
 
 router.get('/show', async (req, res) => {
 
-    let serviceToken, paramPack;
+    var service_token, param_pack;
 
     if (req.get('x-nintendo-parampack') && req.get('x-nintendo-servicetoken')) {
-        serviceToken = req.get('x-nintendo-servicetoken').slice(0, 42)
-        paramPack = headerDecoder.decodeParamPack(req.get('x-nintendo-parampack'))
+        service_token = req.get('x-nintendo-servicetoken').slice(0, 42)
+        param_pack = headerDecoder.decodeParamPack(req.get('x-nintendo-parampack'))
 
         console.log(logger.Info('Found Service Token And/Or ParamPack'))
     } else {
-        serviceToken = config.guest_token
-        paramPack = 0
+        service_token = config.guest_token
+        param_pack = 0
 
-        console.log(logger.Error('Did not find any Service Token or ParamPack. Setting both values to "0" as default.'))
+        console.log(logger.Error('Did not find any Service Token or ParamPack. Setting both values to default.'))
     }
 
-    var account = await auth.authenticateUser(serviceToken).catch(() => {
-        res.redirect('https://olvportal.nonamegiven.xyz/titles/newUser')
+    var account = await auth.authenticateUser(service_token).catch(() => {
+        res.render('portal/setup/new_user_01', {
+            language: en
+        })
         console.log(logger.Info('New User Setup Initiated!'))
     })
 
-    if (account) {
+    console.log(logger.Get(req.originalUrl))
 
-        account = JSON.parse(account)
+    var key = (req.query['sort']) ? req.query['sort'] : 'popular' 
+    var communities = JSON.parse(await UIQuery.getCommunities(key))
 
-        console.log(logger.Get(req.originalUrl))
-
-        var key = (req.query['sort']) ? req.query['sort'] : 'popular'
-
-        var communities = JSON.parse(await UIQuery.getCommunities(key))
-
-        res.render('./pages/index.ejs', {
-            account: account,
-            communities: communities,
-            current_announcement: config.current_announcement
-        })
-    }
-})
-
-router.get('/newUser', (req, res) => {
-    res.render('./pages/newuser/startup.ejs', {
-        language: en
+    res.render('portal/index.ejs', {
+        account: account,
+        communities: communities,
+        current_announcement: config.current_announcement
     })
 })
 
@@ -65,44 +54,36 @@ router.get('/', (req, res) => {
 })
 
 router.get('/newUser/1', (req, res) => {
-    res.render('./pages/newuser/nnidcreation.ejs', {
+    res.render('portal/setup/new_user_02', {
         language: en
     })
 })
 
 router.get('/:community_id', async (req, res) => {
     const community_id = req.params.community_id
-    const parser = new xmlparser.XMLParser();
+    var service_token;
 
-    let serviceToken = req.get('x-nintendo-servicetoken')
-    if (!serviceToken) {
-        serviceToken = config.guest_token
-        console.log(logger.Error('Found no service token, replacing with default values.'))
+    if (req.get('x-nintendo-parampack') && req.get('x-nintendo-servicetoken')) {
+        service_token = req.get('x-nintendo-servicetoken').slice(0, 42)
+        param_pack = headerDecoder.decodeParamPack(req.get('x-nintendo-parampack'))
+
+        console.log(logger.Info('Found Service Token And/Or ParamPack'))
+    } else {
+        service_token = config.guest_token
+        param_pack = 0
+
+        console.log(logger.Error('Did not find any Service Token or ParamPack. Setting both values to default.'))
     }
 
     var posts = JSON.parse(await UIQuery.getPosts(community_id, 10))
     var community = JSON.parse(await UIQuery.getCommunityData(community_id))[0]
-    var account = JSON.parse(await auth.authenticateUser(serviceToken))
+    var account = await auth.authenticateUser(service_token)
 
-    res.render('pages/community.ejs', {
+    res.render('portal/community.ejs', {
         posts: posts,
         community: community,
         account: account,
         moment: moment
-    })
-})
-
-router.get('/post/:title_id', (req, res) => {
-    const title_id = req.params.title_id
-
-    res.render('pages/post.ejs', {
-        title_id: title_id
-    })
-})
-
-router.get('/users/:userId', (req, res) => {
-    res.render('pages/user.ejs', {
-
     })
 })
 

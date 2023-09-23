@@ -9,9 +9,8 @@ function authenticateUser(token) {
                 if (err) { throw err }
         
                 if (JSON.stringify(result).replace('[]', '')) {
-                    console.log(logger.Info('Found account!'))
-                    
-                    resolve(JSON.stringify(result))
+                    console.log(logger.Info('Found account!')) 
+                    resolve(result)
                 } else {
                     console.log(logger.Error('Could not find account matching ' + token))
                     reject()

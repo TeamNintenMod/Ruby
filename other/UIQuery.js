@@ -16,6 +16,19 @@ function getPosts(community_id, limit) {
     })
 }
 
+function getSinglePost(post_id) {
+    const sql = `SELECT * FROM post WHERE id=${post_id}`
+
+    return new Promise((resolve, reject) => {
+        con.query(sql, (err, result, fields) => {
+            if (err) { console.log(logger.Error(err)); reject(err) } else {
+                resolve(JSON.stringify(result))
+            }
+        })
+
+    })
+}
+
 function getCommunities(key, limit) {
 
     var sql;
@@ -71,6 +84,7 @@ function getCommunityData(community_id) {
 module.exports =
 {
     getPosts,
+    getSinglePost,
     getCommunities,
     getCommunityData
 }

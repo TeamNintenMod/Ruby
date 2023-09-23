@@ -298,10 +298,10 @@ router.post('/:community_id/favorite', async (req, res) => {
 
     console.log(req.originalUrl)
 
-    const account = JSON.parse(await auth.authenticateUser(service_token).catch(() => {
+    const account = await auth.authenticateUser(service_token).catch(() => {
         res.sendStatus(403)
         return;
-    }))
+    })
 
     if (account) {
         var favorited_communities = JSON.parse(account[0].favorited_communities)

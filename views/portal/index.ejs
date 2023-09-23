@@ -1,9 +1,10 @@
-<%- include('../partials/header.ejs', {
-    account_needed : true
+<%- include('./partials/header.ejs', {
+    account_needed : true,
+    account : account
 })%>
 
 <body onload="endLoading();wiiuBrowser.lockUserOperation(false);">
-        <%- include('../partials/sidebar.ejs', {
+        <%- include('./partials/sidebar.ejs', {
             homePage : true,
             miiURL : `http://mii-images.account.nintendo.net/${account[0].hash}_normal_face.png`,
         }) %>

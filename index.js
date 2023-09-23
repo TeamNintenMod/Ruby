@@ -15,10 +15,13 @@ const logger = require('./other/logger')
 const cookieparser = require('cookie-parser')
 
 const accountRoute = require("./routes/api/v1/people")
-const titlesRoute = require('./routes/titles')
 const communityRoute = require('./routes/api/v1/communties')
 const endpointRoute = require('./routes/api/v1/endpoint')
 const postsRoute = require('./routes/api/v1/posts')
+
+const titlesRoute = require('./routes/titles')
+const UIpostsRoute = require('./routes/posts')
+
 const xmljs= require('xml-js');
 const xml = require('xml')
 
@@ -46,11 +49,15 @@ app.use(function (req, res, next) {
     next();
 })
 
+//API
 app.use('/v1/people', accountRoute)
 app.use('/v1/communities', communityRoute)
 app.use('/v1/endpoint', endpointRoute)
 app.use('/v1/posts', postsRoute)
+
+//UI
 app.use('/titles', titlesRoute)
+app.use('/posts', UIpostsRoute)
 
 app.use(express.static('static'))
 

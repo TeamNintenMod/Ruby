@@ -69,12 +69,11 @@ router.post('/', multer().none(), async (req, res) => {
             paintingPNG = headerDecoder.paintingProccess(painting)
         }
 
-        const account = JSON.parse(await auth.authenticateUser(serviceToken.slice(0, 42)))
+        const account = await auth.authenticateUser(serviceToken.slice(0, 42))
 
         if (account) {
 
-            var mii_url;
-            var sql;
+            var mii_url, sql;
 
             if (req.body.feeling_id == 0) {
                 mii_url = `http://mii-images.account.nintendo.net/${account[0].hash}_normal_face.png`
@@ -137,10 +136,10 @@ router.post('/:id/empathies', async (req, res) => {
     const post_id = req.params.id
     const service_token = req.get('x-nintendo-servicetoken')
 
-    const account = JSON.parse(await auth.authenticateUser(service_token).catch(() => {
+    var account = await auth.authenticateUser(service_token).catch(() => {
         res.sendStatus(403)
-        return;
-    }))[0]
+    })
+    account = account[0]
 
     if (account) {
         var sql = `SELECT * FROM empathies WHERE pid=${account.pid} AND post_id=${post_id}`
@@ -161,7 +160,7 @@ router.post('/:id/empathies', async (req, res) => {
                             })
                         } else {
                             //2023-09-20 15:18:42
-                            sql = `INSERT INTO empathies (post_id, pid) VALUES (${post_id}, ${account.pid})`
+                            sql = `INSERT INTO empathies (post_id, pid, created_at) VALUES (${post_id}, ${account.pid}, NOW())`
                             con.query(sql, (err, result, fields) => {
                                 if (err) { console.log(logger.Error(err)); res.sendStatus(500) } else {
                                     res.sendStatus(201)
@@ -181,7 +180,7 @@ router.post('/:id/empathies', async (req, res) => {
 
 router.get('/:id/empathies', (req, res) => {
     const post_id = req.params.id
-    
+
     var sql = `SELECT * FROM empathies WHERE post_id=${post_id}`
 
     con.query(sql, (err, result, fields) => {
