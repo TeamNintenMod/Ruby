@@ -8,12 +8,11 @@
     <link rel="stylesheet" href="../../css/nonameverse.css">
     <link rel="stylesheet" href="../../css/show.css">
     <link rel="stylesheet" href="../../css/community.css">
+    <link rel="stylesheet" href="../../css/user.css">
 </head>
 
 <script src="../../../../../js/nonameverse.js"></script>
 
-<% if (account_needed) {%>
-    <script>
-        init_account_data('<%- JSON.stringify(account) %>')
-    </script>
-<%} %>
+<script>
+    init_account_data('<%- JSON.stringify(account) %>')
+</script>

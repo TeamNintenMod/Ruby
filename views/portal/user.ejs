@@ -1,9 +1,44 @@
-<%- include('../partials/header.ejs') %>
+<%- include('./partials/header.ejs', {account_needed : true, account : account}) %>
 
-<body>
-    <%- include('../partials/sidebar.ejs', {
-        homePage : false,
-        miiURL : `http://mii-images.account.nintendo.net/${account[0].hash}_normal_face.png`
-    }) %>
+    <body onload="endLoading();">
 
-</body onload="wiiuBrowser.endStartUp();">
+        <%- include('./partials/sidebar.ejs', { homePage : false, miiURL :
+            `http://mii-images.account.nintendo.net/${account.hash}_normal_face.png`, page : 'user' }) %>
+
+
+            <content>
+                <div class="user_header">
+                    <img src=<%if (!user.banner) {%> "https://olvportal.nonamegiven.xyz/img/user_banners/blank.jpg" <%} else {%> "https://olvportal.nonamegiven.xyz/img/user_banners/<%= user.banner %>" <%}%> class="user_banner" width="1280px">
+                    <div class="user_info">
+                        <img src="http://mii-images.account.nintendo.net/<%=user.hash%>_normal_face.png" class="user_mii" width="120px">
+
+                        <div class="user_meta">
+                            <span class="user_name"><%= user.name %></span> <br>
+                            <span class="user_nnid"><%= user.nnid %></span>
+                        </div>
+
+                        <div class="user_stats">
+                            <div style="border-bottom: 1px solid #01B0F0; position: relative; height: 69px; font-size: 35px; color: white; width: 354px;">
+                                <span class="symbols" style="font-size: 55px; margin-left: 15px; display: inline-block; vertical-align: middle;">e</span>
+                                <span style="display: inline-block; vertical-align: middle; margin-left: 15px;"><%=yeahs.length%> Yeah(s)</span>
+                            </div>
+                            <div style="font-size: 35px; color: white; width: 354px;" >
+                                <span class="symbols" style="font-size: 55px; margin-left: 15px; display: inline-block; vertical-align: middle;">p</span>
+                                <span style="display: inline-block; vertical-align: middle; margin-left: 15px;"><%=posts.length%> Post(s)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="postsWrapper" style="position: relative; bottom: 165px;">
+                    <ul id="posts_container" style="position: relative;">
+                        <% for (let i in posts) {%>
+                            <li>
+                                <%- include('./partials/post.ejs', { post : posts[i], href_needed: true, moment : moment }) %>              
+                            </li>
+                        <%};%>
+                    </ul>
+                </div>
+            </content>
+
+    </body>

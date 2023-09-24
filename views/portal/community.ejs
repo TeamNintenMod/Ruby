@@ -1,8 +1,7 @@
 <%- include('./partials/header', {account_needed : true, account : account[0] }) %>
 
     <body onload="wiiuBrowser.lockUserOperation(false); ">
-        <%- include('./partials/sidebar.ejs', { homePage : false, miiURL :
-            `http://mii-images.account.nintendo.net/${account[0].hash}_normal_face.png` }) %>
+        <%- include('./partials/sidebar.ejs', { homePage : false, miiURL : `http://mii-images.account.nintendo.net/${account[0].hash}_normal_face.png`, page : "community" }) %>
 
             <div class="postUI" style="display: none;" id="postUI">
                 <div class="postUI_bg"></div>
@@ -60,17 +59,15 @@
                     <img class="titleBanner" src='../../../../img/banners/<%= community.community_id %>.jpg'>
 
                     <div class="postsWrapper">
-                        <ul id="posts_container">
+                        <ul id="posts_container" style="position: relative;">
                             <% for (let i in posts) {%>
-                                <li href="javascript:void(0)">
-                                    <%- include('./partials/post.ejs', { post : posts[i], community : community, yeahed
-                                        : account[0].yeahed_posts, moment : moment }) %>
+                                <li>
+                                    <%- include('./partials/post.ejs', { post : posts[i], href_needed: true, moment : moment }) %>              
                                 </li>
                             <%};%>
                             <% if (posts.length >= 10) {%>
                                 <button id="more_posts_button" onclick="load_more_posts(<%= community.community_id %>)" class="more_posts">Load More Posts</button>
                             <%} %>
-                            
                         </ul>
                     </div>
             </content>

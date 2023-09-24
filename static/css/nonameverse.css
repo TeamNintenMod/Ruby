@@ -6,13 +6,15 @@
 /* navbar */
 
 #sidebar {
-    background-color: #58a7db;
+    background: -webkit-linear-gradient(0deg, white, rgb(238, 238, 238));
 
     display: block;
     position: fixed;
 
     border-top-right-radius: 65px;
     border-bottom-right-radius: 65px;
+
+    color: #58a7db;
 
     z-index: 5;
 
@@ -24,7 +26,7 @@
     margin: 0px;
     margin-top: 0px;
 
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0), 0 6px 20px 0 rgba(0, 0, 0, 0.7);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0), 0 6px 20px 0 rgba(0, 0, 0, 0.4);
 
     font-size: 75px;
 }
@@ -37,15 +39,18 @@
 
     text-align: center;
     height: 100%;
-    ;
+
     width: 100%;
 }
 
-#sidebar li {
+#sidebar ul li {
     padding-top: 10px;
+    padding-bottom: 10px;
+
+    height: 100px;
 }
 
-#sidebar a {
+.sidebar_option {
 
     font-family: MiiverseSymbols;
 
@@ -54,11 +59,41 @@
 
     text-decoration: none;
     display: block;
-
-    margin-bottom: 10px;
     text-align: center;
 
+    background: -webkit-radial-gradient(rgb(189, 189, 189), rgb(110, 110, 110));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
     color: white;
+    text-shadow: 0px 3px 3px rgba(192, 192, 192, 0.5);
+
+    height: 100px;
+
+    display: inline-block;
+}
+
+.sidebar_option_text {
+    font-family: 'Times New Roman', Times, serif;
+
+    font-size: 40px;
+    position: relative;
+
+    display: inline-block;
+}
+
+.selected_sidebar {
+    font-family: MiiverseSymbols;
+    text-decoration: none;
+
+    background: -webkit-radial-gradient(#6fc1f8, #69b0df);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    text-shadow: 0px 3px 3px rgba(111,193,248, 0.5);
+
+    display: block;
+    width: 100%;
 }
 
 #backexit {
@@ -66,15 +101,16 @@
 }
 
 #mii img {
-    border-radius: 100%;
+    border-radius: 15px;
+    border: 1px rgb(214, 214, 214) solid;
     background-color: white;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    border: none;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
 }
 
 .mii {
     border-top: none;
 }
+
 
 /* basic stuff */
 
@@ -188,6 +224,11 @@ content>*>*>* {
     margin-left: 15%;
 }
 
+.symbols {
+    font-family: MiiverseSymbols;
+    color: white;
+}
+
 .titleHeader {
     width: 100%;
     margin: 0px;
@@ -243,6 +284,7 @@ content>*>*>* {
 }
 
 br {
+    all: unset;
     margin: 0;
 }
 
@@ -382,6 +424,7 @@ br {
 
 .body_wrapper {
     width: auto;
+    color: rgb(0, 0, 0);
 }
 
 .body {
@@ -395,10 +438,13 @@ br {
     font-size: 20px;
 
     text-overflow: ellipsis;
+
+    text-decoration: none;
 }
 
 .topic_tag_symbol {
     font-family: MiiverseSymbols;
+    text-decoration: none;
 }
 
 .community_post_button {
@@ -743,7 +789,7 @@ br {
 
     border-bottom-left-radius: 10px;
 
-    text-shadow: rgba(88, 88, 88, 0.5) -1px 0, rgba(156, 156, 156, 0.3) 0 -1px, rgba(255,255,255,0.5) 0 1px, rgba(0,0,0,0.3) -1px -2px; 
+    text-shadow: rgba(88, 88, 88, 0.5) -1px 0, rgba(156, 156, 156, 0.3) 0 -1px, rgba(255, 255, 255, 0.5) 0 1px, rgba(0, 0, 0, 0.3) -1px -2px;
 }
 
 .postUI_text {
@@ -766,7 +812,7 @@ br {
 
     border-top-left-radius: 10px;
 
-    text-shadow: rgba(148, 148, 148, 0.5) -1px 0, rgba(156, 156, 156, 0.3) 0 -1px, rgba(255,255,255,0.5) 0 1px, rgba(0,0,0,0.3) -1px -2px; 
+    text-shadow: rgba(148, 148, 148, 0.5) -1px 0, rgba(156, 156, 156, 0.3) 0 -1px, rgba(255, 255, 255, 0.5) 0 1px, rgba(0, 0, 0, 0.3) -1px -2px;
 }
 
 .screenshot {

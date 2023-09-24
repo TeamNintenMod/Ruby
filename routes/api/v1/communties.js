@@ -85,7 +85,7 @@ router.get('/', async (req, res) => {
 
     if (req.get('x-nintendo-parampack')) {
         const parampack = headerDecoder.decodeParamPack(req.get('x-nintendo-parampack'))
-        sql = `SELECT * FROM community WHERE AND title_ids LIKE "%${parampack.title_id}%"`
+        sql = `SELECT * FROM community WHERE hidden=0 AND title_ids LIKE "%${parampack.title_id}%"`
     } else {
         sql = `SELECT * FROM community WHERE hidden=0 ${order}`
     }

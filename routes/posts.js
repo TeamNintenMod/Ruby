@@ -38,7 +38,7 @@ router.get('/:post_id', async (req, res) => {
     var post = JSON.parse(await UIQuery.getSinglePost(post_id))[0]
 
     res.render('portal/post', {
-        account : account,
+        account : account[0],
         post : post,
         moment : moment
     })

@@ -1,0 +1,73 @@
+.user_header {
+    margin: 0;
+}
+
+.user_banner {
+    margin: 0;
+}
+
+.user_info {
+    position: relative;
+
+    bottom: 160px;
+}
+
+.user_mii {
+    margin: 0;
+
+    border-radius: 15px;
+    border: 1px rgb(214, 214, 214) solid;
+    background-color: white;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
+
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.user_nnid {
+    display: inline-block;
+    vertical-align: middle;
+
+    color: gray;
+    font-size: 25px;
+
+    margin: 0px;
+    margin-left: 5px;
+}
+
+.user_name {
+    display: inline-block;
+    color: rgb(0, 0, 0);
+    font-size: 25px;
+
+    margin: 0px;
+    margin-left: 5px;
+}
+
+.user_meta {
+    display: inline-block;
+    margin: 0;
+
+    vertical-align: middle;
+}
+
+.user_stats {
+    margin: 0;
+    position: relative;
+    margin-right: 25px;
+
+    height: 135px;
+    width: 350px;
+
+    background: -webkit-linear-gradient(90deg, #03B7FF, #A5E5FF);
+
+    border: 2px solid #01B0F0;
+
+    border-radius: 10px;
+
+    float: right;
+}
+
+.posts_wrapper {
+    bottom: 100px;
+}

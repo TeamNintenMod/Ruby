@@ -1,15 +1,16 @@
 <div id="sidebar">
     <ul>
-        <li style="border: none;"><a id="mii"><img src="<%=miiURL%>" width="95" height="95"></a></li>
-        <li><a>a</a></li>
-        <li><a onclick="wiiuSound.playSoundByName('SE_WAVE_MENU', 1);" href="../../../../../../../titles/show">c</a></li>
-        <li><a>n</a></li>
-        <li><a>m</a></li>
+        <li style="border: none;"><a onclick="wiiuSound.playSoundByName('SE_WAVE_MENU', 1);" href="../users/me" id="mii"><img src="<%=miiURL%>" width="95" height="95"></a></li>
+        <li><a <% if (page == "feed") {%> class="selected_sidebar" <%}%> class="sidebar_option">a</a></li>
+        <li><a <% if (page == "communities") {%> class="selected_sidebar" <%}%> class="sidebar_option" onclick="wiiuSound.playSoundByName('SE_WAVE_MENU', 1);" href="../../../../../../../titles/show">c</a></li>
+        <li><a <% if (page == "messages") {%> class="selected_sidebar" <%}%> class="sidebar_option">m</a></li>
+        <li><a <% if (page == "news") {%> class="selected_sidebar" <%}%> class="sidebar_option">n</a></li>
+        
 
         <% if (!homePage) {%>
-            <li><a id="backexit" href="javascript:void(0)" onclick="wiiuSound.playSoundByName('SE_WAVE_MENU', 1); history.back()" style="cursor: pointer;">b</a></li>
+            <li><a class="sidebar_option" id="backexit" href="javascript:void(0)" onclick="wiiuSound.playSoundByName('SE_WAVE_MENU', 1); history.back()" style="cursor: pointer;">b</a></li>
         <%} else {%>
-            <li><a id="backexit" href="javascript:void(0)" onclick="wiiuSound.playSoundByName('SE_WAVE_EXIT', 1); wiiuBrowser.closeApplication();" style="cursor: pointer;">x</a></li>
+            <li><a class="sidebar_option" id="backexit" href="javascript:void(0)" onclick="wiiuSound.playSoundByName('SE_WAVE_EXIT', 1); wiiuBrowser.closeApplication();" style="cursor: pointer;">x</a></li>
         <% } %>
     </ul>
 </div>

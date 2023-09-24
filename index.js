@@ -21,6 +21,7 @@ const postsRoute = require('./routes/api/v1/posts')
 
 const titlesRoute = require('./routes/titles')
 const UIpostsRoute = require('./routes/posts')
+const usersRoute = require('./routes/users')
 
 const xmljs= require('xml-js');
 const xml = require('xml')
@@ -58,6 +59,7 @@ app.use('/v1/posts', postsRoute)
 //UI
 app.use('/titles', titlesRoute)
 app.use('/posts', UIpostsRoute)
+app.use('/users', usersRoute)
 
 app.use(express.static('static'))
 

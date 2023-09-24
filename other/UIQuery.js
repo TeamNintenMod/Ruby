@@ -81,10 +81,49 @@ function getCommunityData(community_id) {
     })
 }
 
+function getUserProfile(pid) {
+    const sql = `SELECT * FROM account WHERE pid=${pid}`
+
+    return new Promise((resolve, reject) => {
+        con.query(sql, (err, result, fields) => {
+            if (err) { console.log(logger.Error(err)); reject(err) } else {
+                resolve(JSON.stringify(result))
+            }
+        })
+    })
+}
+
+function getAllEmpathiesToUser(pid) {
+    const sql = `SELECT * FROM empathies WHERE post_id IN (SELECT id FROM post WHERE pid=${pid})`
+
+    return new Promise((resolve, reject) => {
+        con.query(sql, (err, result, fields) => {
+            if (err) { console.log(logger.Error(err)); reject(err) } else {
+                resolve(JSON.stringify(result))
+            }
+        })
+    })
+}
+
+function getAllPostsFromUser(pid) {
+    const sql = `SELECT * FROM post WHERE pid=${pid} ORDER BY created_at DESC`
+
+    return new Promise((resolve, reject) => {
+        con.query(sql, (err, result, fields) => {
+            if (err) { console.log(logger.Error(err)); reject(err) } else {
+                resolve(JSON.stringify(result))
+            }
+        })
+    })
+}
+
 module.exports =
 {
     getPosts,
     getSinglePost,
     getCommunities,
-    getCommunityData
+    getCommunityData,
+    getUserProfile,
+    getAllEmpathiesToUser,
+    getAllPostsFromUser
 }

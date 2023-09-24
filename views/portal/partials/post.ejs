@@ -1,15 +1,18 @@
+<div class="post_author">
+    <a href="/users/show?pid=<%= post.pid %>">
+        <img src="<%= post.mii_face_url %>" width="96px" height="96px" onload="init_post(<%= post.id %>)" >
+    </a>
+    
+    <span class="screen_name" id="screen_name_<%= post.id %>" <% if (post.is_spoiler) {%> style="bottom: 15px;
+        right: 145px" <%}%> ><%= post.screen_name %></span>
 
-    <div class="post_author">
-        <img src="<%= post.mii_face_url %>" width="96px" height="96px" onload="init_post(<%= post.id %>)">
-        <span class="screen_name" id="screen_name_<%= post.id %>" <% if (post.is_spoiler) {%> style="bottom: 15px;
-            right: 145px" <%}%> ><%= post.screen_name %></span>
-    
-    </div>
-    
-    <span class="from_now" <% if (post.is_spoiler) {%> style="display:none;" <%}%> ><%= moment(post.created_at).fromNow() %>
-                </span>
-    
-    <div class="post" id="post_<%= post.id %>" <% if (post.is_spoiler) {%> style="display:none;" <%}%>>
+</div>
+
+<span class="from_now" <% if (post.is_spoiler) {%> style="display:none;" <%}%> ><%= moment(post.created_at).fromNow() %>
+</span>
+
+<div class="post" id="post_<%= post.id %>" <% if (post.is_spoiler) {%> style="display:none;" <%}%>>
+        <a <% if (href_needed) {%> href="/posts/<%= post.id %>" <%} %> style="width: 750px; position: relative; display: block; text-decoration: none;">
             <img src="../../../../img/icons/<%= post.community_id %>.jpg" width="70px">
             <% if (post.topic_tag) {%>
                 <span class="topic_tag"><span class="topic_tag_symbol">t</span>
@@ -18,12 +21,12 @@
                 <br>
                 <%}%>
                     <div class="body_wrapper">
-    
+
                         <% if (post.screenshot) {%>
                             <img class="screenshot" src="data:image/png;base64,<%= post.screenshot %>" width="750px"
                                 height="421px">
                             <%} %>
-    
+
                                 <% if (post.body) { %>
                                     <span class="body" <% if (post.screenshot) {%> style="margin-top: 15px; position:
                                         relative; top: 15px" <%} %>><%= post.body %></span>
@@ -32,21 +35,22 @@
                                             (post.screenshot) {%> style="margin-top: 15px;" width='750px' <%} else {%>
                                             width='600px' <%}%>>
                                                 <%} %>
-    
+
                     </div>
-    
+        </a>
+
                     <div class="bottom_row" id="<%= post.id %>_bottom_row">
                         <span class="empathy_count">
                             <span class="empathy_symbol">e</span>
                             <span id="<%= post.id %>_empathy_count">_</span>
                         </span>
-    
+
                         <a class="yeah" id="<%= post.id %>" href="javascript:void(0)" onclick="Yeah(<%= post.id %>)">
                             <span id="<%= post.id %>_symbol" class="yeah_symbol">E</span>
                             <span id="<%= post.id %>_text">Yeah!</span>
                         </a>
                     </div>
-    </div>
-    
-    <button <% if (post.is_spoiler) {%> style="display:inline-block;" <%}%> class="spoiler_button" id="spoiler_button_<%=post.id%>" onclick="show_spoiler(<%= post.id %>); wiiuSound.playSoundByName('SE_WAVE_MENU', 1);">Show Spoiler</button>
+        
+</div>
 
+<button <% if (post.is_spoiler) {%> style="display:inline-block;" <%}%> class="spoiler_button" id="spoiler_button_<%=post.id%>" onclick="show_spoiler(<%= post.id %>); wiiuSound.playSoundByName('SE_WAVE_MENU', 1);">Show Spoiler</button>

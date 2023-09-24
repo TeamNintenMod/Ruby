@@ -62,7 +62,7 @@ router.get('/', (req, res) => {
           <country_id>49</country_id>
           <created_at>2018-02-25 03:23:06</created_at>
           <feeling_id>0</feeling_id>
-          <id>AYYGAABB9WcligYJs4whmA</id>
+          <id>4</id>
           <is_autopost>0</is_autopost>
           <is_community_private_autopost>0</is_community_private_autopost>
           <is_spoiler>0</is_spoiler>
@@ -71,7 +71,7 @@ router.get('/', (req, res) => {
           <language_id>1</language_id>
           <mii>AwAAQEp1suGiJbAC3DXFNXg5ODM4EQAAomNOAG8AUABuAGkAZAAAAAAAAAAAAGIqAJBCARFoRBgpFEYUgRIXaA0AACkAUkhUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPfy</mii>
           <mii_face_url>http://example.com/image.tga</mii_face_url>
-          <number>784327</number>
+          <number>4</number>
           <pid>1754471381</pid>
           <platform_id>1</platform_id>
           <region_id>2</region_id>
@@ -90,7 +90,7 @@ router.get('/', (req, res) => {
           <country_id>49</country_id>
           <created_at>2018-02-25 03:23:06</created_at>
           <feeling_id>0</feeling_id>
-          <id>AYYGAABB9WcligYJs4whmA</id>
+          <id>6</id>
           <is_autopost>0</is_autopost>
           <is_community_private_autopost>0</is_community_private_autopost>
           <is_spoiler>1</is_spoiler>
@@ -99,7 +99,7 @@ router.get('/', (req, res) => {
           <language_id>1</language_id>
           <mii>AwEAQBs8xqsHR9PC3DrqBYXEaBemLwAAVllEAGEAdgBpAGQAIABKAG8AYQBxAGJaABAyAAJoRBgGNEYUgRIZaA0AACkAUmdQRAAuAFMAAABkACAAUwBvAHMAYQAAALCc</mii>
           <mii_face_url>http://example.com/image.tga</mii_face_url>
-          <number>124</number>
+          <number>6</number>
           <pid>1739044112</pid>
           <platform_id>1</platform_id>
           <region_id>2</region_id>

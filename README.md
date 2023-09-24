@@ -22,7 +22,7 @@ https://discord.gg/GQN6ph7X
 - [x] Displays communities
 - [x] Posting from portal
 - [x] Yeah'ing posts
-- [ ] Displays user profiles
+- [x] Displays user profiles
 - [ ] Allows for editing settings
 - [ ] Displays all communities in a seperate menu
 - [ ] English, Spanish, and French translations (more ofc this is just a starting point :>)

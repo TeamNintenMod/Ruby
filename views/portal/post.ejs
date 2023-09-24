@@ -1,13 +1,13 @@
-<%- include('./partials/header', {account_needed : true, account : account[0] }) %>
+<%- include('./partials/header', {account_needed : true, account : account }) %>
     <%- include('./partials/sidebar.ejs', { homePage : false, miiURL :
-        `http://mii-images.account.nintendo.net/${account[0].hash}_normal_face.png` }) %>
+        `http://mii-images.account.nintendo.net/${account.hash}_normal_face.png`, page : 'post' }) %>
 
-        <body>
+        <body onload="endLoading();">
             <content>
                 <div class="postsWrapper">
                     <ul id="posts_container">
                         <li>
-                            <%- include('./partials/post.ejs', { post : post, moment : moment }) %>
+                            <%- include('./partials/post.ejs', { post : post, href_needed: false, moment : moment }) %>
                         </li>
                     </ul>
                 </div>
