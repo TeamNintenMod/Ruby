@@ -1,4 +1,4 @@
-# NoNameVerse
+# Sapphire
 
 This is an attempt to create a semi-miiversey social media platform, written in Node.JS, Powered by a MySQL server.
 
