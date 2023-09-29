@@ -38,7 +38,7 @@ https://discord.gg/GQN6ph7X
 
 # Setting up
 
-Currently, NoNameVerse is in development. This means that changes happen rapidly, and setting this up and keeping up with new changes could be difficult. Until 80% of features are implemented, I won't give a detailed guide for setting up. After that point, I'm willing to help anybody set this up.
+Currently, Sapphire is in development. This means that changes happen rapidly, and setting this up and keeping up with new changes could be difficult. Until 80% of features are implemented, I won't give a detailed guide for setting up. After that point, I'm willing to help anybody set this up.
 
 # Contribution
 
