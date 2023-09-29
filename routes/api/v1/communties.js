@@ -17,7 +17,6 @@ const fs = require('fs')
 
 const fetch = require('node-fetch')
 const xml = require('xml')
-const auth = require('../../../other/auth')
 const { XMLBuilder } = require('fast-xml-parser')
 
 const ejs = require('ejs')
@@ -31,7 +30,7 @@ router.post('/', multer().none(), async (req, res) => {
     const param_pack = headerDecoder.decodeParamPack(req.get('x-nintendo-parampack'))
     const service_token = req.get('x-nintendo-servicetoken')
 
-    const account = JSON.parse(await auth.authenticateUser(service_token.slice(0, 42)))
+    const account = req.account
 
     if (account) {
         const sql1 = `SELECT * FROM community WHERE title_ids LIKE "%${param_pack.title_id}%"`
@@ -154,10 +153,7 @@ router.get('/:community_id/posts', (req, res) => {
     const search_key = (req.query['search_key']) ? ` AND search_key LIKE "%${req.query['search_key']}%" ` : ''
     const with_mii = (req.query['with_mii']) ? ` AND mii IS NOT NULL ` : ''
 
-    console.log(logger.Get(req.originalUrl))
-
     if (req.get('x-nintendo-parampack')) {
-        console.log(logger.Info('Found ParemPack!'))
         paremPack = headerDecoder.decodeParamPack(paremPack)
 
         con.query(`SELECT * FROM community WHERE title_ids LIKE "%${paremPack.title_id}%"`, (err, result, fields) => {
@@ -296,14 +292,11 @@ router.post('/:community_id/favorite', async (req, res) => {
     var service_token = (req.get('x-nintendo-servicetoken')) ? req.get('x-nintendo-servicetoken') : ''
     var community_id = req.params.community_id
 
-    console.log(req.originalUrl)
+    console.log(logger.Info(req.originalUrl))
 
-    const account = await auth.authenticateUser(service_token).catch(() => {
-        res.sendStatus(403)
-        return;
-    })
+    const account = req.account
 
-    if (account) {
+    if (account[0]) {
         var favorited_communities = JSON.parse(account[0].favorited_communities)
 
         if (!favorited_communities.includes(Number(community_id))) {
@@ -323,7 +316,10 @@ router.post('/:community_id/favorite', async (req, res) => {
                 }
             })
         }
-    } else { res.sendStatus(403)}
+    } else {
+        console.log('h')
+        res.sendStatus(403)
+    }
 })
 
 router.get('/:community_id/loadmoreposts', async (req, res) => {
@@ -341,9 +337,10 @@ router.get('/:community_id/loadmoreposts', async (req, res) => {
         for (let i = 0; i < result.length; i++) {
             const element = result[i];
             
-            var t = await ejs.renderFile('views/partials/post.ejs', {
+            var t = await ejs.renderFile('views/portal/partials/post.ejs', {
                 post : element,
-                moment : moment
+                moment : moment,
+                href_needed : true
             }, {rmWhitespace : true})
 
             posts += ('<li>' + t + '</li>')

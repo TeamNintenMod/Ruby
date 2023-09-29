@@ -2,17 +2,16 @@ const express = require('express')
 const router = express.Router()
 
 const xmlparser = require('fast-xml-parser')
-const headerDecoder = require('../other/decoder')
+const headerDecoder = require('../../other/decoder')
 
-const en = require('../languages/en.json')
-const logger = require('../other/logger')
+const en = require('../../languages/en.json')
+const logger = require('../../other/logger')
 
 const moment = require('moment')
 
-const auth = require('../other/auth')
-const config = require('../config.json')
+const config = require('../../config.json')
 
-const UIQuery = require('../other/UIQuery')
+const UIQuery = require('../../other/UIQuery')
 
 router.get('/show', async (req, res) => {
 
@@ -30,20 +29,16 @@ router.get('/show', async (req, res) => {
         console.log(logger.Error('Did not find any Service Token or ParamPack. Setting both values to default.'))
     }
 
-    var account = await auth.authenticateUser(service_token).catch(() => {
-        res.render('portal/setup/new_user_01', {
-            language: en
-        })
-        console.log(logger.Info('New User Setup Initiated!'))
-    })
+    var account = req.account
+    var language = req.language
 
     console.log(logger.Get(req.originalUrl))
 
-    var key = (req.query['sort']) ? req.query['sort'] : 'popular' 
-    var communities = JSON.parse(await UIQuery.getCommunities(key))
+    var communities = JSON.parse(await UIQuery.getCommunities('newest'))
 
     res.render('portal/index.ejs', {
         account: account,
+        language : language,
         communities: communities,
         current_announcement: config.current_announcement
     })
@@ -77,12 +72,14 @@ router.get('/:community_id', async (req, res) => {
 
     var posts = JSON.parse(await UIQuery.getPosts(community_id, 10))
     var community = JSON.parse(await UIQuery.getCommunityData(community_id))[0]
-    var account = await auth.authenticateUser(service_token)
+    var account = req.account
+    var language = req.language
 
     res.render('portal/community.ejs', {
         posts: posts,
         community: community,
         account: account,
+        language : language,
         moment: moment
     })
 })

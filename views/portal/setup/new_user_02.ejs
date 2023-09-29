@@ -8,9 +8,9 @@
         <h1><%= language.newUser.nnidSetupHeader %></h1>
         <span><%= language.newUser.nnidSetup %></span>
         <br>
-        <input id="nnidInput" keyboard="nnid" class="nunnidInput" placeholder="NNID..">
+        <input id="nnidInput" keyboard="nnid" maxlength="30" class="nunnidInput" placeholder="NNID..">
     </div>
 
-    <a class="nuBack" href="javascript:void(0)" onclick="history.back()">Back</a>
-    <a class="nuNext" href="javascript:void(0)" onclick="submitUser()">Next</a>
+    <a onclick="wiiuSound.playSoundByName('SE_WAVE_MENU', 1); history.back();" class="nuBack" href="javascript:void(0)">Back</a>
+    <a onclick="wiiuSound.playSoundByName('SE_WAVE_MENU', 1); submitUser();" class="nuNext" href="javascript:void(0)">Next</a>
 </body>

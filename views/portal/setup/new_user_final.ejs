@@ -1,0 +1,21 @@
+<%- include('../partials/header', {
+    account_needed : true,
+    account : account[0]
+}) %>
+
+
+<body onload="wiiuBrowser.lockUserOperation(false); wiiuSound.playSoundByName('JGL_OLV_INIT_END', 3);" >
+
+    <div class="nuBox" style="padding: 0; width: 940px; height: 560px;">
+
+        <img style="width: 100%;" src="../../../img/setup/final.png">
+
+        <span class="nuWelcomeText"><%= language.newUser.welcomeEnding %></span>
+        
+    </div>
+
+    
+
+    <a onclick="history.back(); wiiuSound.playSoundByName('SE_WAVE_MENU', 1);" class="nuBack" href="javascript:void(0)">Back</a>
+    <a onclick="window.location.href = '../titles/show'; wiiuSound.playSoundByName('SE_WAVE_MENU', 1);" class="nuNext" href="javascript:void(0)">Next</a>
+</body>

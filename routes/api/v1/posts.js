@@ -9,7 +9,6 @@ const logger = require('../../../other/logger')
 const { community_posts } = require('../../../config.json')
 
 const multer = require('multer')
-const auth = require('../../../other/auth')
 
 const moment = require('moment')
 const xml = require('xml')
@@ -73,7 +72,7 @@ router.post('/', multer().none(), async (req, res) => {
             paintingPNG = headerDecoder.paintingProccess(painting)
         }
 
-        const account = await auth.authenticateUser(serviceToken.slice(0, 42))
+        const account = req.account
 
         if (account) {
 
@@ -140,10 +139,7 @@ router.post('/:id/empathies', async (req, res) => {
     const post_id = req.params.id
     const service_token = req.get('x-nintendo-servicetoken')
 
-    var account = await auth.authenticateUser(service_token).catch(() => {
-        res.sendStatus(403)
-    })
-    account = account[0]
+    var account = req.account[0]
 
     if (account) {
         var sql = `SELECT * FROM empathies WHERE pid=${account.pid} AND post_id=${post_id}`
@@ -183,11 +179,7 @@ router.post('/:id/empathies', async (req, res) => {
 })
 
 router.get('/:id/empathies', (req, res) => {
-    const post_id = req.params.id
-
-    var sql = `SELECT * FROM empathies WHERE post_id=${post_id}`
-
-    con.query(sql, (err, result, fields) => {
+    con.query(`SELECT * FROM empathies WHERE post_id=${req.params.id}`, (err, result, fields) => {
         res.send(JSON.stringify(result))
     })
 })

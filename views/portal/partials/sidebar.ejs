@@ -10,7 +10,7 @@
         <% if (!homePage) {%>
             <li><a class="sidebar_option" id="backexit" href="javascript:void(0)" onclick="wiiuSound.playSoundByName('SE_WAVE_MENU', 1); history.back()" style="cursor: pointer;">b</a></li>
         <%} else {%>
-            <li><a class="sidebar_option" id="backexit" href="javascript:void(0)" onclick="wiiuSound.playSoundByName('SE_WAVE_EXIT', 1); wiiuBrowser.closeApplication();" style="cursor: pointer;">x</a></li>
+            <li class="exit"><a class="sidebar_option"  id="backexit" href="javascript:void(0)" onclick="wiiuSound.playSoundByName('SE_WAVE_EXIT', 1); wiiuBrowser.closeApplication();" style="cursor: pointer;">x</a></li>
         <% } %>
     </ul>
 </div>

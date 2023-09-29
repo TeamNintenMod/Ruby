@@ -1,6 +1,6 @@
-<%- include('./partials/header', {account_needed : true, account : account }) %>
+<%- include('./partials/header', {account_needed : true, account : account[0] }) %>
     <%- include('./partials/sidebar.ejs', { homePage : false, miiURL :
-        `http://mii-images.account.nintendo.net/${account.hash}_normal_face.png`, page : 'post' }) %>
+        `http://mii-images.account.nintendo.net/${account[0].hash}_normal_face.png`, page : 'post' }) %>
 
         <body onload="endLoading();">
             <content>
@@ -11,5 +11,6 @@
                         </li>
                     </ul>
                 </div>
+                
             </content>
         </body>

@@ -14,5 +14,7 @@
 <script src="../../../../../js/nonameverse.js"></script>
 
 <script>
-    init_account_data('<%- JSON.stringify(account) %>')
+    <% if (account_needed) {%>
+        init_account_data('<%- JSON.stringify(account) %>')
+    <%}%>
 </script>

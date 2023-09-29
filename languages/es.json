@@ -4,6 +4,7 @@
     },
 
     "ui" : {
+        "communities" : "Comunidades",
         "newCommunties" : "",
         "popularCommunities" : ""
     },

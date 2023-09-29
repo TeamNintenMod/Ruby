@@ -1,0 +1,30 @@
+<%- include('../partials/header', {
+    account_needed : true,
+    account : account[0]
+}) %>
+
+
+<body onload="wiiuBrowser.lockUserOperation(false);" >
+    <div class="nuRulesHeader"><%= language.newUser.rulesHeader %></div>
+
+    <div style="width: 980px; margin-left: 150px; margin-right: 150px; margin-top: 25px; font-size: 25px; margin-bottom: 50px;">
+        <%= language.newUser.preRules %>
+    </div>
+
+    <% for (let i = 0; i < language.rules.length; i++) {
+        const element = language.rules[i];%>
+        
+        <div class="nuRule"><%= element.name %></div>
+        <div style="width: 980px; margin-left: 150px; margin-right: 150px; margin-top: 25px; font-size: 25px; margin-bottom: 0px"><%= element.description %>
+            <div style="width: 980px; text-align: center; margin-top: 25px;">
+                <% if (element.image) {%>
+                    <img src="../img/setup/<%= element.image %>.png">
+                <%} %>
+            </div>
+        </div>
+        
+    <%} %>
+
+    <a onclick="wiiuSound.playSoundByName('SE_WAVE_MENU', 1); history.back();" class="nuBack" href="javascript:void(0)" onclick="history.back()">Back</a>
+    <a onclick="wiiuSound.playSoundByName('SE_WAVE_MENU', 1);" class="nuNext" href="/setup/05">Next</a>
+</body>

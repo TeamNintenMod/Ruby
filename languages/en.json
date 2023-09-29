@@ -4,35 +4,55 @@
     },
 
     "ui" : {
-        "newCommunties" : "New Communities",
-        "popularCommunities" : "Popular Communities"
+        "communities" : "Communities",
+        "newCommunities" : "New Communities",
+        "popularCommunities" : "Popular Communities",
+        "all_communities" : "All Communities",
+
+        "profile" : "Profile",
+        "your" : "Your",
+        "profile_settings" : "Profile Settings",
+
+        "country" : "Country",
+        "game_experience" : "Game Experience",
+        "yeahs" : "Yeahs",
+        "posts" : "Posts"
     },
 
     "newUser" : {
         "welcomeHeader" : "Welcome to NoNameVerse!",
         "welcome" : "Welcome to NoNameVerse. An online social networking platform, designed to help Wii U owners around the world connect with eachother. It seems like it's your first time here, let's get you set up!",
 
-        "rulesHeader" : "Rules to follow.",
-        "preRules" : "Before you sign up, you must agree to the rules that we have in place.",
+        "rulesHeader" : "Rules to keep in mind..",
+        "preRules" : "To ensure a safe environment for all people, rules are put in place. Please read each of these rules carefully, and make sure to follow them while using NoNameVerse.",
 
         "nnidSetupHeader" : "NNID Setup.",
         "nnidSetup" : "Please input the NNID of the current account you are on.",
-        "nnidWarning" : "Warning, you will not be allowed to change this in the future. Are you ready to proceed?",
-        "nnidComplete" : "Great! Your account is now fully set up! Have fun out there."
+
+        "nnidComplete" : "Great! You're now an official NoNameVerse member! Before you start, let's go over the rules..",
+        "nnidCompleteHeader" : "Congrats!",
+
+        "welcomeEnding" : "Welcome to NoNameVerse!"
     },
 
     "rules" : [
         {
             "name" : "No NSFW",
-            "description" : "Please do not upload any sort of NSFW or gross things that users may feel are uncomfortable. This includes drawings. Everyone deserves a happy and safe miiverse."
+            "description" : "Please do not upload any sort of NSFW or gross things that users may feel are uncomfortable. This includes drawings, screenshots, or text. Everyone deserves a happy and safe space."
+        },
+        {
+            "name" : "No Offensive Content",
+            "description" : "Anything deemed as offensive will not be tolerated, this includes: Racism, Discrimination, Homophobia, Transphobia, or any hateful speech.",
+            "image" : "offensive"
         },
         {
             "name" : "Don't post spoilers!",
-            "description" : "Many people come into NoNameVerse, looking for new tips or tricks to their favorite games, not for the whole game to be spoiled. If you're posting something containing a spoiler for a game, make sure to tick the spoiler box!"
+            "description" : "Many people come into NoNameVerse, looking for new tips or tricks to their favorite games, not for the whole game to be spoiled. If you're posting something containing a spoiler for a game, make sure to tick the spoiler box!",
+            "image" : "spoiler"
         }, 
         {
             "name" : "No Sensitive Information",
-            "description" : "Please do not upload any sort of sensitive information to NoNameVerse. This includes things such as, Addresses, Full Names, IP Addresses, Cities, States, anything like that. This ensures that nobody can do anything with that information, since it wasnt there at all!"
+            "description" : "Please do not upload any sort of sensitive information to NoNameVerse. This includes things such as, Addresses, Full Names, IP Addresses, Cities, States, anything like that."
         },
         {
             "name" : "Let's follow these rules and keep NoNameVerse safe!",

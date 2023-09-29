@@ -24,14 +24,14 @@
 
                         <% if (post.screenshot) {%>
                             <img class="screenshot" src="data:image/png;base64,<%= post.screenshot %>" width="750px"
-                                height="421px">
+                                height="421px" onload="init_post(<%= post.id %>)">
                             <%} %>
 
                                 <% if (post.body) { %>
                                     <span class="body" <% if (post.screenshot) {%> style="margin-top: 15px; position:
                                         relative; top: 15px" <%} %>><%= post.body %></span>
                                     <%} else { %>
-                                        <img class="painting" src="data:image/png;base64,<%=post.painting_png%>" <%if
+                                        <img onload="init_post(<%= post.id %>)" class="painting" src="data:image/png;base64,<%=post.painting_png%>" <%if
                                             (post.screenshot) {%> style="margin-top: 15px;" width='750px' <%} else {%>
                                             width='600px' <%}%>>
                                                 <%} %>

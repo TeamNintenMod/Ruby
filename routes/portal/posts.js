@@ -2,18 +2,16 @@ const express = require('express')
 const router = express.Router()
 
 const xmlparser = require('fast-xml-parser')
-const headerDecoder = require('../other/decoder')
+const headerDecoder = require('../../other/decoder')
 
-const en = require('../languages/en.json')
-const logger = require('../other/logger')
+const en = require('../../languages/en.json')
+const logger = require('../../other/logger')
 
 const moment = require('moment')
 
-const auth = require('../other/auth')
+const config = require('../../config.json')
 
-const config = require('../config.json')
-
-const UIQuery = require('../other/UIQuery')
+const UIQuery = require('../../other/UIQuery')
 
 router.get('/:post_id', async (req, res) => {
 
@@ -34,11 +32,14 @@ router.get('/:post_id', async (req, res) => {
         console.log(logger.Error('Did not find any Service Token or ParamPack. Setting both values to default.'))
     }
 
-    var account = await auth.authenticateUser(service_token)
+    var account = req.account
+    var language = req.language
+    
     var post = JSON.parse(await UIQuery.getSinglePost(post_id))[0]
 
     res.render('portal/post', {
-        account : account[0],
+        account : account,
+        language : language,
         post : post,
         moment : moment
     })

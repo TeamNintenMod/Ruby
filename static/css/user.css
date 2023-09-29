@@ -1,5 +1,8 @@
 .user_header {
     margin: 0;
+
+    position: relative;
+    top: 72px;
 }
 
 .user_banner {
@@ -9,7 +12,9 @@
 .user_info {
     position: relative;
 
-    bottom: 160px;
+    bottom: 195px;
+
+    margin-left: 210px;
 }
 
 .user_mii {
@@ -18,7 +23,7 @@
     border-radius: 15px;
     border: 1px rgb(214, 214, 214) solid;
     background-color: white;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
 
     display: inline-block;
     vertical-align: middle;
@@ -29,7 +34,7 @@
     vertical-align: middle;
 
     color: gray;
-    font-size: 25px;
+    font-size: 18px;
 
     margin: 0px;
     margin-left: 5px;
@@ -70,4 +75,61 @@
 
 .posts_wrapper {
     bottom: 100px;
+}
+
+.user_stat {
+    display: inline-block;
+
+    width: 200px;
+    
+    padding-top: 2px;
+    padding-bottom: 2px;
+
+    text-align: center;
+
+    color: white;
+    background-color: gray;
+    border-radius: 25px;
+}
+
+.user_stats_table tr td {
+    padding-bottom: 4px;
+}
+
+.profile_settings {
+    background: -webkit-linear-gradient(-90deg, rgba(255, 255, 255, 1) 0%, rgb(235, 235, 235) 100%);
+
+    border-radius: 10px;
+
+    width: 200px;
+    padding-bottom: 25px;
+    padding-bottom: 25px;
+
+    padding: 5px;
+
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.5);
+
+    font-size: 20px;
+
+    text-align: center;
+
+    margin-left: 600px;
+    
+    position: relative;
+    bottom: 25px;
+}
+
+.profile_settings .symbols {
+    background: -webkit-radial-gradient(#75c5fa, #5ca3d3);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    color: white;
+    text-shadow: 0px 3px 3px rgba(192, 192, 192, 0.5);
+
+    font-size: 35px;
+
+    display: inline-block;
+
+    vertical-align: middle;
 }

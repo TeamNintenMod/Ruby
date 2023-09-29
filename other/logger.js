@@ -8,7 +8,7 @@ function Get(input) {
     return `(${moment().format("HH:mm:ss")}) [GET] ${input}`.green
 }
 
-function Post(mii_image_url, name, body) {
+function PostWebhook(mii_image_url, name, body) {
     
     var params = {
         username: "Post Logger",
@@ -54,10 +54,15 @@ function Error(input) {
     return `(${moment().format("HH:mm:ss")}) [ERROR] ${input}`.red
 }
 
+function Post(input) {
+    return `(${moment().format("HH:mm:ss")}) [POST] ${input}`.yellow
+}
+
 module.exports = {
     Get,
     Post,
     Info,
     MySQL,
-    Error
+    Error,
+    PostWebhook
 }

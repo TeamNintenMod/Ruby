@@ -85,7 +85,7 @@ function submitUser() {
     
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4 && xhr.status === 201) {
-                window.location.replace("/titles/show")
+                window.location.replace("/setup/03")
             }
         }
     }

@@ -1,6 +1,6 @@
 <%- include('./partials/header.ejs', {
     account_needed : true,
-    account : account
+    account : account[0]
 })%>
 
 <body onload="endLoading();wiiuBrowser.lockUserOperation(false);">
@@ -10,39 +10,27 @@
             page : "communities"
         }) %>
         <content>
-            
             <img id="screenshotViewer" style="z-index: 10;">
 
             <div class="announcement_banner">
-                <span class="announcement_text"><%= current_announcement %></span>
-
-                <select id="community_sort_select" onchange="sort_communities();" class="community_sort_by" style="left: 1080px;">
-                    <option value="default">Sort By..</option>
-                    <option value="Popular">Popular</option>
-                    <option value="Newest">Newest</option>
-                    <option value="Oldest">Oldest</option>
-                </select>
+                <span class="announcement_text"><%= language.ui.communities %></span>
             </div>
 
             <div style="margin-top: 100px; display: none;">
                 <input keyboard="nnid" invalidchar="downloadcode" capslock="true" maxlength="16" minlength="16" separate="0x00000888">
-                <button style="margin: 0;" onclick="wiiuSound.playSoundByName('SE_OLV_INVALID', 1)">Test</button>
-                <button style="margin: 0;" onclick="wiiuSound.playSoundByName('SE_SF_TOUCH_ON', 1)">Test1</button>
-                <button style="margin: 0;" onclick="wiiuSound.playSoundByName('SE_SF_VW_TVNOMI', 1)">Test2</button>
-                <button style="margin: 0;" onclick="wiiuSound.playSoundByName('SE_OLV_CURTAIN_SWAP_1', 1)">Test3</button>
-                <button style="margin: 0;" onclick="wiiuSound.playSoundByName('SE_WAVE_OK', 1)">Test4</button>
-                <button style="margin: 0;" onclick="wiiuSound.playSoundByName('SE_WAVE_BALLOON_CLOSE', 1)">Test5</button>
-                <button style="margin: 0;" onclick="wiiuSound.playSoundByName('SE_BAR_WAITING', 1)">Test6</button>
+                <button style="margin: 0;" onclick='wiiuBOSS.registerBossTask("oltopic")'>Test</button>
             </div>
+
+            <div class="new_communities"><%= language.ui.newCommunities %></div>
             
             
-            <table style="border: none; position: relative; bottom: 15px;">
+            <table class="communities" style="border: none; position: relative; bottom: 15px;">
                 <% for (let i = 0; i < communities.length; i++) {%>
-                    <td class="community" style="color: black; padding-top: 15px; padding-bottom: 15px; width: 1025px;" >
-                        <a onclick="wiiuSound.playSoundByName('SE_WAVE_MENU', 1);" href="<%= communities[i].community_id %>" style="display: block; text-decoration: none; margin-right: 25px; width: 900px; display: inline-block;">
-                            <img style="display: inline-block; margin-left: 25px; vertical-align: middle; border-radius: 15px;" src="../../../img/icons/<%=communities[i].community_id%>.jpg" width="115px"></img>
+                    <td class="community" style="color: black; padding-top: 15px; padding-bottom: 15px; width: 1055px;" >
+                        <a style="display: block; text-decoration: none; margin-right: 65px; width: 900px; display: inline-block;">
+                            <img style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0), 0 6px 20px 0 rgba(0, 0, 0, 0.4); display: inline-block; margin-left: 25px; vertical-align: middle; border-radius: 15px; border-bottom: #818181 2px solid;" src="../../../img/icons/<%=communities[i].community_id%>.jpg" width="100px"></img>
                             <div style="display: inline-block; position: relative; left: 10px; vertical-align: middle;">
-                                <span style="display: inline-block; width: 350px; text-decoration: none; font-size: 26px; color: black; font-weight: 900;  position: relative; text-overflow: clip;"><%= communities[i].name %></span>
+                                <span style="display: inline-block; width: 350px; text-decoration: none; font-size: 24px; color: black; font-weight: 900;  position: relative; text-overflow: clip;"><%= communities[i].name %></span>
 
                                 <% switch (communities[i].type) {
                                     case 'wiiu':%>
@@ -63,13 +51,7 @@
                                 }%>
                             </div>     
                         </a>
-
-                        <% if (JSON.parse(account[0].favorited_communities).includes(Number(communities[i].community_id))) {%>
-                            <button id="favorite_button_<%=communities[i].community_id%>" onclick="favorite_community(<%= communities[i].community_id %>)" class="favorite_community_list" style="color: #F7A642">s</button>
-                        <%} else {%>
-                            <button id="favorite_button_<%=communities[i].community_id%>" onclick="favorite_community(<%= communities[i].community_id %>)" class="favorite_community_list" style="color: grey">s</button>
-                        <%}%>
-                        
+                            <a id="favorite_button_<%=communities[i].community_id%>" class="arrow" onclick="wiiuSound.playSoundByName('SE_WAVE_MENU', 1);" href="<%= communities[i].community_id %>" >A</a>
                     </td>
                     
                    <tr></tr>
