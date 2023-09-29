@@ -20,19 +20,19 @@
     },
 
     "newUser" : {
-        "welcomeHeader" : "Welcome to NoNameVerse!",
-        "welcome" : "Welcome to NoNameVerse. An online social networking platform, designed to help Wii U owners around the world connect with eachother. It seems like it's your first time here, let's get you set up!",
+        "welcomeHeader" : "Welcome to Sapphire!",
+        "welcome" : "Welcome to Sapphire. An online social networking platform, designed to help Wii U owners around the world connect with eachother. It seems like it's your first time here, let's get you set up!",
 
         "rulesHeader" : "Rules to keep in mind..",
-        "preRules" : "To ensure a safe environment for all people, rules are put in place. Please read each of these rules carefully, and make sure to follow them while using NoNameVerse.",
+        "preRules" : "To ensure a safe environment for all people, rules are put in place. Please read each of these rules carefully, and make sure to follow them while using Sapphire.",
 
         "nnidSetupHeader" : "NNID Setup.",
         "nnidSetup" : "Please input the NNID of the current account you are on.",
 
-        "nnidComplete" : "Great! You're now an official NoNameVerse member! Before you start, let's go over the rules..",
+        "nnidComplete" : "Great! You're now an official Sapphire member! Before you start, let's go over the rules..",
         "nnidCompleteHeader" : "Congrats!",
 
-        "welcomeEnding" : "Welcome to NoNameVerse!"
+        "welcomeEnding" : "Welcome to Sapphire!"
     },
 
     "rules" : [
@@ -47,15 +47,15 @@
         },
         {
             "name" : "Don't post spoilers!",
-            "description" : "Many people come into NoNameVerse, looking for new tips or tricks to their favorite games, not for the whole game to be spoiled. If you're posting something containing a spoiler for a game, make sure to tick the spoiler box!",
+            "description" : "Many people come into Sapphire, looking for new tips or tricks to their favorite games, not for the whole game to be spoiled. If you're posting something containing a spoiler for a game, make sure to tick the spoiler box!",
             "image" : "spoiler"
         }, 
         {
             "name" : "No Sensitive Information",
-            "description" : "Please do not upload any sort of sensitive information to NoNameVerse. This includes things such as, Addresses, Full Names, IP Addresses, Cities, States, anything like that."
+            "description" : "Please do not upload any sort of sensitive information to Sapphire. This includes things such as, Addresses, Full Names, IP Addresses, Cities, States, anything like that."
         },
         {
-            "name" : "Let's follow these rules and keep NoNameVerse safe!",
+            "name" : "Let's follow these rules and keep Sapphire safe!",
             "description" : "Following these rules ensures a safe and fun zone for all walks of life, to explore, meet new friends, and have fun!"
         }
     ]

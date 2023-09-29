@@ -7,7 +7,7 @@ https://discord.gg/GQN6ph7X
 # So Far..
 ## API
 - [x] Proper endpoint
-- [ ] Topics (Wara Wara Plaza)
+- [x] Topics (Wara Wara Plaza)
 - [x] People (Semi Working, displays moderators/developers)
 - [x] In-Game Posting
 - [x] Post's showing in-game
