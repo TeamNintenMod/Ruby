@@ -2,7 +2,7 @@
 
 This is an attempt to create a semi-miiversey social media platform, written in Node.JS, Powered by a MySQL server.
 
-https://discord.gg/GQN6ph7X
+[Discord Server Link](https://discord.gg/MaGtyJg6rH)
 
 # So Far..
 ## API
