@@ -2,7 +2,7 @@
 
 This is an attempt to create a semi-miiversey social media platform, written in Node.JS, Powered by a MySQL server.
 
-https://discord.gg/GQN6ph7X
+[Discord Server Link](https://discord.gg/MaGtyJg6rH)
 
 # So Far..
 ## API
@@ -31,7 +31,7 @@ https://discord.gg/GQN6ph7X
 
 ## Admin
 - [ ] Proper admin view panel
-- [ ] Ban system
+- [x] Ban system (Semi-Working)
 - [ ] Timed ban system
 - [ ] Deleting posts
 - [ ] Altering communities
