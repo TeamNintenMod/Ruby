@@ -10,24 +10,19 @@
             page : "communities"
         }) %>
         <content>
-            <img id="screenshotViewer" style="z-index: 10;">
+
+            <a class="all_communities">All Communities</a>
 
             <div class="announcement_banner">
                 <span class="announcement_text"><%= language.ui.communities %></span>
             </div>
 
-            <div style="margin-top: 100px; display: none;">
-                <input keyboard="nnid" invalidchar="downloadcode" capslock="true" maxlength="16" minlength="16" separate="0x00000888">
-                <button style="margin: 0;" onclick='wiiuBOSS.registerBossTask("oltopic")'>Test</button>
-            </div>
-
-            <div class="new_communities"><%= language.ui.new_communities %></div>
-            
+            <div class="new_communities" style="margin-top: 95px;"><%= language.ui.popular_communities %></div>
             
             <table class="communities" style="border: none; position: relative; bottom: 15px;">
                 <% for (let i = 0; i < communities.length; i++) {%>
-                    <td class="community" style="color: black; padding-top: 15px; padding-bottom: 15px; width: 1055px;" >
-                        <a style="display: block; text-decoration: none; margin-right: 65px; width: 900px; display: inline-block;">
+                    <td class="community" style="color: black; padding-top: 15px; padding-bottom: 15px; width: 350px;" >
+                        <a style="display: block; text-decoration: none; width: 535px; display: inline-block;" href="../communities/<%=communities[i].community_id%>">
                             <img style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0), 0 6px 20px 0 rgba(0, 0, 0, 0.4); display: inline-block; margin-left: 25px; vertical-align: middle; border-radius: 15px; border-bottom: #818181 2px solid;" src="../../../img/icons/<%=communities[i].community_id%>.jpg" width="100px"></img>
                             <div style="display: inline-block; position: relative; left: 10px; vertical-align: middle;">
                                 <span style="display: inline-block; width: 350px; text-decoration: none; font-size: 24px; color: black; font-weight: 900;  position: relative; text-overflow: clip;"><%= communities[i].name %></span>
@@ -51,10 +46,12 @@
                                 }%>
                             </div>     
                         </a>
-                            <a id="favorite_button_<%=communities[i].community_id%>" class="arrow" onclick="wiiuSound.playSoundByName('SE_WAVE_MENU', 1);" href="<%= communities[i].community_id %>" >A</a>
                     </td>
                     
-                   <tr></tr>
+                    <% if (i % 2) {%>
+                        <tr></tr>
+                    <%} %>
+                   
                 <%}%>
             </table>
         </content>

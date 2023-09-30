@@ -1,6 +1,6 @@
 <%- include('./partials/header', {account_needed : true, account : account[0] }) %>
 
-    <body onload="wiiuBrowser.lockUserOperation(false); ">
+    <body onload="wiiuBrowser.lockUserOperation(false); endLoading();">
         <%- include('./partials/sidebar.ejs', { homePage : false, miiURL : `http://mii-images.account.nintendo.net/${account[0].hash}_normal_face.png`, page : "community" }) %>
 
             <div class="postUI" style="display: none;" id="postUI">

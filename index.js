@@ -27,6 +27,7 @@ const setupRoute = require('./routes/portal/setup')
 const titlesRoute = require('./routes/portal/titles')
 const UIpostsRoute = require('./routes/portal/posts')
 const usersRoute = require('./routes/portal/users')
+const communitiesRoute = require('./routes/portal/communities')
 
 const xmljs= require('xml-js');
 const xml = require('xml')
@@ -69,6 +70,7 @@ app.use('/setup', setupRoute)
 app.use('/titles', titlesRoute)
 app.use('/posts', UIpostsRoute)
 app.use('/users', usersRoute)
+app.use('/communities', communitiesRoute)
 
 app.use(express.static('static'))
 

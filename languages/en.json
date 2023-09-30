@@ -5,8 +5,8 @@
 
     "ui" : {
         "communities" : "Communities",
-        "newCommunities" : "New Communities",
-        "popularCommunities" : "Popular Communities",
+        "new_communities" : "New Communities",
+        "popular_communities" : "Popular Communities",
         "all_communities" : "All Communities",
 
         "profile" : "Profile",

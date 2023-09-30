@@ -21,6 +21,10 @@ const { XMLBuilder } = require('fast-xml-parser')
 
 const ejs = require('ejs')
 
+const util = require('util')
+
+const query = util.promisify(con.query).bind(con)
+
 router.post('/', multer().none(), async (req, res) => {
     const name = req.body.name
     const icon = req.body.icon
@@ -31,48 +35,6 @@ router.post('/', multer().none(), async (req, res) => {
     const service_token = req.get('x-nintendo-servicetoken')
 
     const account = req.account
-
-    if (account) {
-        const sql1 = `SELECT * FROM community WHERE title_ids LIKE "%${param_pack.title_id}%"`
-        con.query(sql1, (err, result1, fields) => {
-            if (err) { console.log(logger.Error(err)); res.sendStatus(503) } else {
-
-                const sql2 = `INSERT INTO community ( is_user_community, olive_community_id, community_id, name, description, app_data, icon, hidden, wii_vc, title_ids, pid) VALUES(1, ${Number(result1[result1.length - 1].community_id) + 5}, ${Number(result1[result1.length - 1].community_id) + 5}, "${name + " Tournament"}", "${description}", "${app_data.replace(/\0/g, "").replace(/\r?\n|\r/g, "").trim()}", "${icon.replace(/\0/g, "").replace(/\r?\n|\r/g, "").trim()}", 0, 0, "${result1[result1.length - 1].title_ids}", ${account[0].pid})`
-
-                con.query(sql2, (err, result, fields) => {
-                    if (err) { console.log(logger.Error(err)); res.sendStatus(503) } else {
-                        console.log(logger.MySQL('Created New User Community'))
-
-                        const banner = fs.readFileSync(__dirname + '/files/bannerTemplate.jpg')
-                        fs.writeFileSync(`static/img/banners/${Number(result1[result1.length - 1].community_id) + 5}.jpg`, banner)
-
-                        fs.writeFile(`static/img/icons/${Number(result1[result1.length - 1].community_id) + 5}.jpg`, headerDecoder.paintingProccess(icon), 'base64', function (err) {
-                            console.log(err)
-
-                            var xml = xmlbuilder.create('result')
-                                .e('has_error', "0").up()
-                                .e('version', '1').up()
-                                .e('request_name', 'communities').up()
-                                .e('community')
-                                .e('community_id', Number(result1[result1.length - 1].community_id) + 5).up()
-                                .e('name', name).up()
-                                .e('description', description).up()
-                                .e('icon', icon.replace(/\0/g, "").replace(/\r?\n|\r/g, "").trim()).up()
-                                .e('icon_3ds', "").up()
-                                .e('pid', account[0].pid).up()
-                                .e('app_data', app_data.replace(/\0/g, "").replace(/\r?\n|\r/g, "").trim()).up()
-                                .e('is_user_community', "1").up().up().end({ allowEmpty: true, pretty: true })
-
-                            res.set('Content-Type', 'application/xml')
-                            res.send(xml)
-                        })
-                    }
-                })
-            }
-        })
-    } else {
-        res.sendStatus(403)
-    }
 })
 
 router.get('/', async (req, res) => {
@@ -89,207 +51,143 @@ router.get('/', async (req, res) => {
         sql = `SELECT * FROM community WHERE hidden=0 ${order}`
     }
 
+    const communities = await query(sql)
 
-    con.query(sql, async (err, result, fields) => {
-        if (err) { throw err }
+    var xml = xmlbuilder.create('communities')
 
-        var xml = xmlbuilder.create('communities')
-        if (!req.query['json']) {
-            result.forEach(element => {
-                xml.ele('community')
-                    .ele('olive_community_id', element.olive_community_id).up()
-                    .ele('community_id', element.community_id).up()
-                    .ele('description', element.description).up()
-                    .ele('name', element.name).up()
-                    .ele('icon', element.icon).up()
-                    .ele('icon_3ds', element.icon_3ds).up()
-                    .ele('pid', element.pid).up()
-                    .ele("app_data", element.app_data).up()
-                    .ele('is_user_community', element.is_user_community)
-            });
+    communities.forEach(element => {
+        xml.ele('community')
+            .ele('olive_community_id', element.olive_community_id).up()
+            .ele('community_id', element.community_id).up()
+            .ele('description', element.description).up()
+            .ele('name', element.name).up()
+            .ele('icon', element.icon).up()
+            .ele('icon_3ds', element.icon_3ds).up()
+            .ele('pid', element.pid).up()
+            .ele("app_data", element.app_data).up()
+            .ele('is_user_community', element.is_user_community)
+    });
 
-            xml.end({ pretty: true, allowEmpty: true })
-            console.log(logger.Get(req.originalUrl))
+    xml.end({ pretty: true, allowEmpty: true })
 
-            res.set('Content-Type', 'application/xml')
-            res.send(`<?xml version="1.0" encoding="UTF-8"?><result><has_error>0</has_error><version>1</version><request_name>communities</request_name>${xml}</result>`)
-        } else {
-            res.send(result)
-        }
-    })
+    res.set('Content-Type', 'application/xml')
+
+    //TODO: make xml gen do all of this so i don't have to add all of t
+    res.send(`<?xml version="1.0" encoding="UTF-8"?><result><has_error>0</has_error><version>1</version><request_name>communities</request_name>${xml}</result>`)
 })
 
-router.get('/:community_id', (req, res) => {
+router.get('/:community_id', async (req, res) => {
     const limit = req.query['limit']
     const community_id = req.params.community_id
 
-    let sql = "SELECT * FROM community WHERE `community_id`=" + community_id
+    var sql = `SELECT * FROM community WHERE community_id=${community_id}`
 
-    con.query(sql, (err, result, fields) => {
-        if (err) { console.log(logger.Error(err)); res.sendStatus(500); return; }
+    const community = (await query(sql))[0]
 
-        if (!req.query['json'] == 1) {
-            const xmlResult = `<?xml version="1.0" encoding="UTF-8"?><result><has_error>0</has_error><version>1</version><request_name>communities</request_name><communities>` + json2xml.json2xml(result, { compact: true, fullTagEmptyElement: true }).replace(/[0-9]+>/g, "community>") + '</communities></result>'//.replace(/[0-9]>+/g, "community>")
+    var xml = new xmlbuilder.create('result')
+        .e('has_error', '0').up()
+        .e('version', '1').up()
+        .e('request_name', 'community').up()
+        .e('communites')
+        .e('community')
+        .e('olive_community_id', community.olive_community_id).up()
+        .e('community_id', community.community_id).up()
+        .e('description', community.description).up()
+        .e('name', community.name).up()
+        .e('icon', community.icon).up()
+        .e('icon_3ds', community.icon_3ds).up()
+        .e('pid', community.pid).up()
+        .e("app_data", community.app_data).up()
+        .e('is_user_community', community.is_user_community).up().up()
 
-            console.log(logger.Get(req.originalUrl))
+    res.set('Content-Type', 'application/xml')
+    res.send(xml.end({ pretty: true, allowEmpty: true }))
 
-            res.set('Content-Type', 'text/xml')
-
-            res.send(xmlResult)
-
-        } else {
-            res.set('Content-Type', 'application/json')
-            res.send(result)
-        }
-    })
 })
 
-router.get('/:community_id/posts', (req, res) => {
-
-    let paremPack = req.get('x-nintendo-parampack')
+router.get('/:community_id/posts', async (req, res) => {
+    var param_pack;
 
     //setting querys
     const limit = (req.query['limit']) ? ` LIMIT ${req.query['limit']}` : ''
     const search_key = (req.query['search_key']) ? ` AND search_key LIKE "%${req.query['search_key']}%" ` : ''
     const with_mii = (req.query['with_mii']) ? ` AND mii IS NOT NULL ` : ''
+    const distinct_pid = (req.query['distinct_pid']) ? ` GROUP BY pid ` : ''
+
+    var community, community_id;
 
     if (req.get('x-nintendo-parampack')) {
-        paremPack = headerDecoder.decodeParamPack(paremPack)
+        param_pack = headerDecoder.decodeParamPack(req.get('x-nintendo-parampack'))
 
-        con.query(`SELECT * FROM community WHERE title_ids LIKE "%${paremPack.title_id}%"`, (err, result, fields) => {
-            if (err) { throw err }
+        community = await query(`SELECT * FROM community WHERE title_ids LIKE "%${param_pack.title_id}%"`)
 
-            if (JSON.stringify(result).replace('[]', '')) {
-                var community_id;
-                if (result[0].community_id) {
-                    community_id = result[0].community_id
-                } else {
-                    community_id = 0
-                }
-    
-                var sql = `SELECT * FROM post WHERE community_id=${community_id} ${search_key}${with_mii} ORDER BY id DESC ${limit}`
-    
-                con.query(sql, (err, result, fields) => {
-                    if (err) { throw err }
-    
-                    let xml = xmlbuilder.create('result')
-                        .e('has_error', "0").up()
-                        .e('version', "1").up()
-                        .e('request_name', 'posts').up()
-                        .e('topic').e('community_id', community_id).up().up()
-                        .e('posts');
-                    for (let i = 0; i < result.length; i++) {
-                        xml = xml.e("post")
-                            .e("app_data", result[i].app_data).up()
-                            .e("body", result[i].body).up()
-                            .e("community_id", result[i].community_id).up()
-                            .e('mii', result[i].mii).up()
-                            .e('mii_face_url', result[i].mii_face_url).up()
-                            .e("country_id", result[i].country_id).up()
-                            .e("created_at", result[i].created_at).up()
-                            .e("feeling_id", result[i].feeling_id).up()
-                            .e("id", result[i].id).up()
-                            .e("is_autopost", result[i].is_autopost).up()
-                            .e("is_community_private_autopost", "0").up()
-                            .e("is_spoiler", result[i].is_spoiler).up()
-                            .e("is_app_jumpable", result[i].is_app_jumpable).up()
-                            .e("empathy_count", result[i].empathy_count).up()
-                            .e("language_id", result[i].language_id).up()
-                            .e("number", result[i].number).up();
-                        if (result[i].painting) {
-                            xml = xml.e("painting")
-                                .e("format", "tga").up()
-                                .e("content", result[i].painting).up()
-                                .e("size", result[i].painting.length).up()
-                                .e("url", "https://s3.amazonaws.com/olv-public/pap/WVW69koebmETvBVqm1").up()
-                                .up();
-                        }
-                        if (result[i].topic_tag) {
-                            xml = xml.e('topic_tag').e('name', result[i].topic_tag).up().e('title_id', result[i].title_id).up().up()
-                        }
-                        xml = xml.e("pid", result[i].pid).up()
-                            .e("platform_id", result[i].platform_id).up()
-                            .e("region_id", result[i].region_id).up()
-                            .e("reply_count", result[i].reply_count).up()
-                            .e("screen_name", result[i].screen_name).up()
-                            .e("title_id", result[0].title_id).up().up()
-    
-                    }
-    
-                    res.set('Content-Type', 'application/xml')
-                    res.send(`<?xml version="1.0" encoding="UTF-8"?><result><has_error>0</has_error><version>1</version><request_name>specified_posts</request_name><topic><community_id>${community_id}</community_id></topic>${xml}</result>`)
-                })
-            } else {
-                res.sendStatus(404)
-                console.log(logger.Error(`Couldn't find posts for title id ${paremPack.title_id}`))
-            }
-        })
+        if (community[0]) {
+            community_id = community[0].community_id
+        } else {
+            console.log(logger.Error(`Couldn't find posts for ${param_pack.title_id}`))
+            res.sendStatus(404)
+            return;
+        }
+    } else {
+        community_id = req.params.community_id
     }
-    else {
-        var community_id = req.params.community_id
 
-        const sql = `SELECT * FROM post WHERE community_id=${community_id} ${search_key}${with_mii}ORDER BY id DESC${limit}`
+    var sql = `SELECT * FROM post WHERE community_id=${community_id} ${search_key}${with_mii}${distinct_pid} ORDER BY id DESC ${limit}`
 
-        con.query(sql, (err, result, fields) => {
-            if (err) { throw err }
+    const posts = await query(sql)
 
-            if (!req.query['json'] == 1) {
-                let xml = xmlbuilder.create('result')
-                    .e('has_error', "0").up()
-                    .e('version', "1").up()
-                    .e('request_name', 'posts').up()
-                    .e('topic').e('community_id', community_id).up().up()
-                    .e('posts');
-                for (let i = 0; i < result.length; i++) {
-                    xml = xml.e("post")
-                        .e("app_data", result[i].app_data).up()
-                        .e("body", result[i].body).up()
-                        .e("community_id", result[i].community_id).up()
-                        .e('mii', result[i].mii).up()
-                        .e('mii_face_url', result[i].mii_face_url).up()
-                        .e("country_id", result[i].country_id).up()
-                        .e("created_at", result[i].created_at).up()
-                        .e("feeling_id", result[i].feeling_id).up()
-                        .e("id", result[i].id).up()
-                        .e("is_autopost", result[i].is_autopost).up()
-                        .e("is_community_private_autopost", "0").up()
-                        .e("is_spoiler", result[i].is_spoiler).up()
-                        .e("is_app_jumpable", result[i].is_app_jumpable).up()
-                        .e("empathy_count", result[i].empathy_count).up()
-                        .e("language_id", result[i].language_id).up()
-                        .e("number", result[i].number).up();
-                    if (result[i].painting) {
-                        xml = xml.e("painting")
-                            .e("format", "tga").up()
-                            .e("content", result[i].painting).up()
-                            .e("size", result[i].painting.length).up()
-                            .e("url", "https://s3.amazonaws.com/olv-public/pap/WVW69koebmETvBVqm1").up()
-                            .up();
-                    }
-                    if (result[i].topic_tag) {
-                        xml = xml.e('topic_tag').e('name', result[i].topic_tag).up().e('title_id', result[i].title_id).up().up()
-                    }
-                    xml = xml.e("pid", result[i].pid).up()
-                        .e("platform_id", result[i].platform_id).up()
-                        .e("region_id", result[i].region_id).up()
-                        .e("reply_count", result[i].reply_count).up()
-                        .e("screen_name", result[i].screen_name).up()
-                        .e("title_id", result[0].title_id).up().up()
-
-                }
-
-                res.set('Content-Type', 'application/xml')
-                res.send(`<?xml version="1.0" encoding="UTF-8"?><result><has_error>0</has_error><version>1</version><request_name>specified_posts</request_name><topic><community_id>${community_id}</community_id></topic>${xml}</result>`)
-            } else {
-                res.set('Content-Type', 'application/json')
-                res.send(result)
-            }
-        })
+    let xml = xmlbuilder.create('result')
+        .e('has_error', "0").up()
+        .e('version', "1").up()
+        .e('request_name', 'posts').up()
+        .e('topic').e('community_id', community_id).up().up()
+        .e('posts');
+    for (let i = 0; i < posts.length; i++) {
+        xml = xml.e("post")
+            .e("app_data", posts[i].app_data).up()
+            .e("body", posts[i].body).up()
+            .e("community_id", posts[i].community_id).up()
+            .e('mii', posts[i].mii).up()
+            .e('mii_face_url', posts[i].mii_face_url).up()
+            .e("country_id", posts[i].country_id).up()
+            .e("created_at", posts[i].created_at).up()
+            .e("feeling_id", posts[i].feeling_id).up()
+            .e("id", posts[i].id).up()
+            .e("is_autopost", posts[i].is_autopost).up()
+            .e("is_community_private_autopost", "0").up()
+            .e("is_spoiler", posts[i].is_spoiler).up()
+            .e("is_app_jumpable", posts[i].is_app_jumpable).up()
+            .e("empathy_count", posts[i].empathy_count).up()
+            .e("language_id", posts[i].language_id).up()
+            .e("number", posts[i].number).up();
+        if (posts[i].painting) {
+            xml = xml.e("painting")
+                .e("format", "tga").up()
+                .e("content", posts[i].painting).up()
+                .e("size", posts[i].painting.length).up()
+                .e("url", "https://s3.amazonaws.com/olv-public/pap/WVW69koebmETvBVqm1").up()
+                .up();
+        }
+        if (posts[i].topic_tag) {
+            xml = xml.e('topic_tag')
+                .e('name', posts[i].topic_tag).up()
+                .e('title_id', posts[i].title_id).up().up()
+        }
+        xml = xml.e("pid", posts[i].pid).up()
+            .e("platform_id", posts[i].platform_id).up()
+            .e("region_id", posts[i].region_id).up()
+            .e("reply_count", posts[i].reply_count).up()
+            .e("screen_name", posts[i].screen_name).up()
+            .e("title_id", posts[i].title_id).up().up()
     }
+
+    xml = xml.end({ pretty: true, allowEmpty: true })
+
+    res.set('Content-Type', 'application/xml')
+    res.send(`${xml}`)
 })
 
 router.post('/:community_id/favorite', async (req, res) => {
-    var service_token = (req.get('x-nintendo-servicetoken')) ? req.get('x-nintendo-servicetoken') : ''
     var community_id = req.params.community_id
 
     console.log(logger.Info(req.originalUrl))
@@ -302,23 +200,16 @@ router.post('/:community_id/favorite', async (req, res) => {
         if (!favorited_communities.includes(Number(community_id))) {
             favorited_communities.push(Number(community_id))
 
-            con.query(`UPDATE account SET favorited_communities="${JSON.stringify(favorited_communities)}" WHERE id=${account[0].id}`, (err, result, fields) => {
-                if (err) { console.log(logger.Error(err)); res.sendStatus(500); return} else {
-                    res.sendStatus(201)
-                }
-            })
+            await query(`UPDATE account SET favorited_communities="${JSON.stringify(favorited_communities)}" WHERE id=${account[0].id}`)
+            res.sendStatus(201)
         } else {
             favorited_communities.splice(favorited_communities.indexOf(Number(community_id)), 1)
 
-            con.query(`UPDATE account SET favorited_communities="${JSON.stringify(favorited_communities)}" WHERE id=${account[0].id}`, (err, result, fields) => {
-                if (err) { console.log(logger.Error(err)); res.sendStatus(500); return} else {
-                    res.sendStatus(200)
-                }
-            })
+            await query(`UPDATE account SET favorited_communities="${JSON.stringify(favorited_communities)}" WHERE id=${account[0].id}`)
+            res.sendStatus(200)
         }
     } else {
-        console.log('h')
-        res.sendStatus(403)
+        res.sendStatus(401)
     }
 })
 
@@ -328,26 +219,23 @@ router.get('/:community_id/loadmoreposts', async (req, res) => {
 
     var sql = `SELECT * FROM post WHERE community_id=${community_id} ORDER BY id DESC LIMIT ${offset}, 99999`
 
-    con.query(sql, async (err,result, fields) => {
+    const posts_db = await query(sql)
 
-        if (err) throw err;
+    var posts = ""
 
-        var posts = ""
+    for (let i = 0; i < posts_db.length; i++) {
+        const element = posts_db[i];
 
-        for (let i = 0; i < result.length; i++) {
-            const element = result[i];
-            
-            var t = await ejs.renderFile('views/portal/partials/post.ejs', {
-                post : element,
-                moment : moment,
-                href_needed : true
-            }, {rmWhitespace : true})
+        var post_html = await ejs.renderFile('views/portal/partials/post.ejs', {
+            post: element,
+            moment: moment,
+            href_needed: true
+        }, { rmWhitespace: true })
 
-            posts += ('<li>' + t + '</li>')
-        }
+        posts += ('<li>' + post_html + '</li>')
+    }
 
-        res.send(posts)
-    })
+    res.send(posts)
 })
 
 module.exports = router
