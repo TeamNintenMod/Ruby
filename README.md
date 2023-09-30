@@ -31,7 +31,7 @@ This is an attempt to create a semi-miiversey social media platform, written in 
 
 ## Admin
 - [ ] Proper admin view panel
-- [ ] Ban system
+- [x] Ban system (Semi-Working)
 - [ ] Timed ban system
 - [ ] Deleting posts
 - [ ] Altering communities
