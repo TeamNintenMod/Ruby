@@ -8,7 +8,7 @@
     border-radius: 10px;
 
     background: -webkit-linear-gradient(30deg, #58a7db, #46799b);
-    background-image:-webkit-linear-gradient(30deg, rgba(98, 161, 202, 0.8), rgba(123, 187, 230, 0.4)),  url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAAA8CAAAAAAfl4auAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QA/4ePzL8AAAAHdElNRQfnCRoSLzWuLN9AAAAA4ElEQVRIx+2Vyw7DIAwEvcD//25PeHvoIdiAUYQqpRUcsx4ck8fgJc0ia6XMFnIG2gtJNtaBfxZGVIwFvNOZjIp9mly6gG1caEJlNDUViglMKgkA0veHkKTU1H5XpdoYSBj3JlUo2m59wZ8dkCesgKjuyMzMAiRMHx40qYVdKRCcVxd2sEhEh/C95d+wuDp8w/Y6H/jAB/4fGHH1N/9hG5aMNdmFxY7hPWhZ79CSr8MYeNCxzqEXPPSg2K2dQ9vbHnjQ7eAcambuPehY59Dk4oXobPwYS8aa5ALe6nzgx8JvdaBrc8TMYTAAAAAldEVYdGRhdGU6Y3JlYXRlADIwMjMtMDktMjZUMTg6NDc6MzUrMDA6MDAltN3oAAAAJXRFWHRkYXRlOm1vZGlmeQAyMDIzLTA5LTI2VDE4OjQ3OjM1KzAwOjAwVOllVAAAAABJRU5ErkJggg==');
+    background-image: -webkit-linear-gradient(30deg, rgba(98, 161, 202, 0.8), rgba(123, 187, 230, 0.4)), url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAAA8CAAAAAAfl4auAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QA/4ePzL8AAAAHdElNRQfnCRoSLzWuLN9AAAAA4ElEQVRIx+2Vyw7DIAwEvcD//25PeHvoIdiAUYQqpRUcsx4ck8fgJc0ia6XMFnIG2gtJNtaBfxZGVIwFvNOZjIp9mly6gG1caEJlNDUViglMKgkA0veHkKTU1H5XpdoYSBj3JlUo2m59wZ8dkCesgKjuyMzMAiRMHx40qYVdKRCcVxd2sEhEh/C95d+wuDp8w/Y6H/jAB/4fGHH1N/9hG5aMNdmFxY7hPWhZ79CSr8MYeNCxzqEXPPSg2K2dQ9vbHnjQ7eAcambuPehY59Dk4oXobPwYS8aa5ALe6nzgx8JvdaBrc8TMYTAAAAAldEVYdGRhdGU6Y3JlYXRlADIwMjMtMDktMjZUMTg6NDc6MzUrMDA6MDAltN3oAAAAJXRFWHRkYXRlOm1vZGlmeQAyMDIzLTA5LTI2VDE4OjQ3OjM1KzAwOjAwVOllVAAAAABJRU5ErkJggg==');
 
     color: white;
 
@@ -121,4 +121,19 @@
     position: absolute;
     top: 0;
     right: 0;
+}
+
+.community_user_count {
+    display: block;
+    border-radius: 50px;
+    width: 150px;
+    height: 25px;
+
+    background-color: #B3B0B3;
+    font-size: 19px;
+    color: white;
+    font-weight: 900;
+    font-family: MiiverseSymbols;
+
+    text-indent: 10px;
 }

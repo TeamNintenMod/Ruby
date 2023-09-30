@@ -34,7 +34,7 @@ router.get('/me', async (req, res) => {
     var language = req.language
 
     var user = JSON.parse(await UIQuery.getUserProfile(account[0].pid))[0]
-    var user_posts = JSON.parse(await UIQuery.getAllPostsFromUser(account[0].pid))
+    var user_posts = JSON.parse(await UIQuery.getAllPostsFromUser(account[0].pid, account[0].pid))
     var yeahs_recieved = JSON.parse(await UIQuery.getAllEmpathiesToUser(account[0].pid))
 
     res.render('portal/user.ejs', {
@@ -70,7 +70,7 @@ router.get('/show', async (req, res) => {
     var language = req.language
     
     var user = JSON.parse(await UIQuery.getUserProfile(user_id))[0]
-    var user_posts = JSON.parse(await UIQuery.getAllPostsFromUser(user_id))
+    var user_posts = JSON.parse(await UIQuery.getAllPostsFromUser(user_id, account[0].pid))
     var yeahs_recieved = JSON.parse(await UIQuery.getAllEmpathiesToUser(user.pid))
 
     res.render('portal/user.ejs', {

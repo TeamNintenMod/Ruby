@@ -47,10 +47,10 @@ router.get('/', async (req, res) => {
     for (let i = 0; i < communities.length; i++) {
         const community = communities[i];
 
-        var posts = await query(`SELECT * FROM post WHERE community_id=${community.community_id} GROUP BY pid ORDER BY created_at LIMIT 30`)
+        var posts = await query(`SELECT * FROM post WHERE community_id=${community.community_id} GROUP BY pid ORDER BY created_at DESC LIMIT 30`)
 
         xml = xml.e('topic')
-        .e('empathy_count', '213').up()
+        .e('empathy_count', (await query(`SELECT * FROM favorites WHERE community_id=${community.community_id}`)).length).up()
         .e('has_shop_page', '1').up()
         .e('icon', String(fs.readFileSync(__dirname + `/files/encoded/${community.community_id}.txt`))).up()
         .e('title_ids');

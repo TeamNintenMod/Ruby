@@ -30,28 +30,12 @@
                         <a style="display: block; text-decoration: none; margin-right: 65px; width: 900px; display: inline-block;">
                             <img style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0), 0 6px 20px 0 rgba(0, 0, 0, 0.4); display: inline-block; margin-left: 25px; vertical-align: middle; border-radius: 15px; border-bottom: #818181 2px solid;" src="../../../img/icons/<%=communities[i].community_id%>.jpg" width="100px"></img>
                             <div style="display: inline-block; position: relative; left: 10px; vertical-align: middle;">
-                                <span style="display: inline-block; width: 350px; text-decoration: none; font-size: 24px; color: black; font-weight: 900;  position: relative; text-overflow: clip;"><%= communities[i].name %></span>
-
-                                <% switch (communities[i].type) {
-                                    case 'wiiu':%>
-                                    <span style="display: block; color: grey;"><span style="display: inline-block; border-radius: 50px; width: 60px; height: 16px; padding: 5px; text-align: center; background-color: #0099C9; font-size: 14px; color: white; font-weight: 900;">WiiU</span> Wii U Games</span>
-                                        <%break;
-                                    case '3ds':%>
-                                    <span style="display: block; color: grey;"><span style="display: inline-block; border-radius: 50px; width: 60px; height: 16px; padding: 5px; text-align: center; background-color: #D3000F; font-size: 14px; color: white; font-weight: 900;">3DS</span> 3DS Games</span>
-                                        <%break;
-                                        case 'wii':%>
-                                    <span style="display: block; color: grey;"><span style="display: inline-block; border-radius: 50px; width: 60px; height: 16px; padding: 5px; text-align: center; background-color: #cacaca; font-size: 14px; color: rgb(255, 255, 255); font-weight: 900;">Wii</span> Wii Games</span>
-                                        <%break;
-                                        case 'vc':%>
-                                    <span style="display: block; color: grey;"><span style="display: inline-block; border-radius: 50px; width: 60px; height: 16px; padding: 5px; text-align: center; background-color: #525252; font-size: 14px; color: rgb(255, 255, 255); font-weight: 900;">VC</span> Virtual Console Games</span>
-                                        <%break;
-                                    default:%>
-                                    <span style="display: block; color: grey;"><span style="display: inline-block; border-radius: 50px; width: 60px; height: 16px; padding: 5px; text-align: center; background-color: #777777; font-size: 14px; color: white; font-weight: 900;">Topic</span> General Topic</span>
-                                    <%break;
-                                }%>
+                                <span style="display: inline-block; width: 700px; text-decoration: none; font-size: 24px; color: black; font-weight: 900;  position: relative; text-overflow: clip;"><%= communities[i].name %> Community</span>
+                                <span style="color: #B3B0B3; display: block; font-size: 18px;"><%= communities[i].name %></span>
+                                <span class="community_user_count">e <span style="font-family: 'Times New Roman', Times, serif; font-size: 18px;"><%= communities[i].users.length %></span></span>
                             </div>     
                         </a>
-                            <a id="favorite_button_<%=communities[i].community_id%>" class="arrow" onclick="wiiuSound.playSoundByName('SE_WAVE_MENU', 1);" href="<%= communities[i].community_id %>" >A</a>
+                            <a id="favorite_button_<%=communities[i].community_id%>" class="arrow" onclick="wiiuSound.playSoundByName('SE_WAVE_MENU', 1);" href="../communities/<%= communities[i].community_id %>" >A</a>
                     </td>
                     
                    <tr></tr>

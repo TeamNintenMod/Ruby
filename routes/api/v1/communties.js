@@ -132,7 +132,7 @@ router.get('/:community_id/posts', async (req, res) => {
         community_id = req.params.community_id
     }
 
-    var sql = `SELECT * FROM post WHERE community_id=${community_id} ${search_key}${with_mii}${distinct_pid} ORDER BY id DESC ${limit}`
+    var sql = `SELECT * FROM post WHERE community_id=${community_id} ${search_key}${with_mii}${distinct_pid} ORDER BY created_at DESC ${limit}`
 
     const posts = await query(sql)
 
@@ -188,24 +188,24 @@ router.get('/:community_id/posts', async (req, res) => {
 })
 
 router.post('/:community_id/favorite', async (req, res) => {
-    var community_id = req.params.community_id
+    const community_id = req.params.community_id
 
     console.log(logger.Info(req.originalUrl))
 
-    const account = req.account
+    const account = req.account[0]
 
-    if (account[0]) {
-        var favorited_communities = JSON.parse(account[0].favorited_communities)
+    if (account) {
+        if (!(await query(`SELECT * FROM favorites WHERE community_id=${community_id} AND pid=${account.pid}`))[0]) {
+            //user already favorited
 
-        if (!favorited_communities.includes(Number(community_id))) {
-            favorited_communities.push(Number(community_id))
+            await query(`INSERT INTO favorites (pid, community_id, created_at) VALUES(${account.pid}, ${community_id}, NOW())`)
 
-            await query(`UPDATE account SET favorited_communities="${JSON.stringify(favorited_communities)}" WHERE id=${account[0].id}`)
             res.sendStatus(201)
         } else {
-            favorited_communities.splice(favorited_communities.indexOf(Number(community_id)), 1)
+            //user has not favorited
 
-            await query(`UPDATE account SET favorited_communities="${JSON.stringify(favorited_communities)}" WHERE id=${account[0].id}`)
+            await query(`DELETE FROM favorites WHERE pid=${account.pid} AND community_id=${community_id}`)
+
             res.sendStatus(200)
         }
     } else {
@@ -219,12 +219,23 @@ router.get('/:community_id/loadmoreposts', async (req, res) => {
 
     var sql = `SELECT * FROM post WHERE community_id=${community_id} ORDER BY id DESC LIMIT ${offset}, 99999`
 
-    const posts_db = await query(sql)
+    var posts_db = await query(sql)
 
     var posts = ""
 
     for (let i = 0; i < posts_db.length; i++) {
-        const element = posts_db[i];
+        posts_db[i].empathy_count = await query(`SELECT * FROM empathies WHERE post_id=${posts_db[i].id}`)
+
+        if (JSON.stringify(posts_db[i].empathy_count).search(String(req.account[0].pid)) !== -1) {
+            posts_db[i].user_empathized = true
+        } else {
+            posts_db[i].user_empathized = false
+        }
+    }
+
+    for (let i = 0; i < posts_db.length; i++) {
+
+        const element = posts_db[i]
 
         var post_html = await ejs.renderFile('views/portal/partials/post.ejs', {
             post: element,

@@ -1,6 +1,6 @@
 <div class="post_author">
     <a href="/users/show?pid=<%= post.pid %>">
-        <img src="<%= post.mii_face_url %>" width="96px" height="96px" onload="init_post(<%= post.id %>)" >
+        <img src="<%= post.mii_face_url %>" width="96px" height="96px">
     </a>
     
     <span class="screen_name" id="screen_name_<%= post.id %>" <% if (post.is_spoiler) {%> style="bottom: 15px;
@@ -24,17 +24,17 @@
 
                         <% if (post.screenshot) {%>
                             <img class="screenshot" src="data:image/png;base64,<%= post.screenshot %>" width="750px"
-                                height="421px" onload="init_post(<%= post.id %>)">
+                                height="421px">
                             <%} %>
 
                                 <% if (post.body) { %>
                                     <span class="body" <% if (post.screenshot) {%> style="margin-top: 15px; position:
                                         relative; top: 15px" <%} %>><%= post.body %></span>
                                     <%} else { %>
-                                        <img onload="init_post(<%= post.id %>)" class="painting" src="data:image/png;base64,<%=post.painting_png%>" <%if
+                                        <img class="painting" src="data:image/png;base64,<%=post.painting_png%>" <%if
                                             (post.screenshot) {%> style="margin-top: 15px;" width='750px' <%} else {%>
                                             width='600px' <%}%>>
-                                                <%} %>
+                                    <%} %>
 
                     </div>
         </a>
@@ -42,13 +42,20 @@
                     <div class="bottom_row" id="<%= post.id %>_bottom_row">
                         <span class="empathy_count">
                             <span class="empathy_symbol">e</span>
-                            <span id="<%= post.id %>_empathy_count">_</span>
+                            <span id="<%= post.id %>_empathy_count"><%= post.empathy_count.length %></span>
                         </span>
 
-                        <a class="yeah" id="<%= post.id %>" href="javascript:void(0)" onclick="Yeah(<%= post.id %>)">
-                            <span id="<%= post.id %>_symbol" class="yeah_symbol">E</span>
-                            <span id="<%= post.id %>_text">Yeah!</span>
-                        </a>
+                        <% if (post.user_empathized) {%>
+                            <a class="yeah" id="<%= post.id %>" href="javascript:void(0)" onclick="Yeah(<%= post.id %>)" style="color: #58a7db;">
+                                <span id="<%= post.id %>_symbol" class="yeah_symbol">E</span>
+                                <span id="<%= post.id %>_text">Unyeah!</span>
+                            </a>
+                        <% } else {%>
+                            <a class="yeah" id="<%= post.id %>" href="javascript:void(0)" onclick="Yeah(<%= post.id %>)">
+                                <span id="<%= post.id %>_symbol" class="yeah_symbol">E</span>
+                                <span id="<%= post.id %>_text">Yeah!</span>
+                            </a>
+                        <%} %>
                     </div>
         
 </div>

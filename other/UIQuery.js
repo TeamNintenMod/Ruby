@@ -1,14 +1,29 @@
 const con = require('./mysqlConnection')
 const logger = require('./logger')
 
-function getPosts(community_id, limit) {
+const util = require('util')
+
+const query = util.promisify(con.query).bind(con)
+
+function getPosts(community_id, limit, pid) {
 
     var limit = (limit) ? `LIMIT ${limit}` : '';
     const sql = `SELECT * FROM post WHERE community_id=${community_id} ORDER BY id DESC ${limit} `
 
     return new Promise((resolve, reject) => {
-        con.query(sql, (err, result, fields) => {
+        con.query(sql, async (err, result, fields) => {
             if (err) { console.log(logger.Error(err)); reject(err) } else {
+
+                for (let i = 0; i < result.length; i++) {
+                    result[i].empathy_count = await query(`SELECT * FROM empathies WHERE post_id=${result[i].id}`)
+
+                    if (JSON.stringify(result[i].empathy_count).search(String(pid)) !== -1) {
+                        result[i].user_empathized = true
+                    } else {
+                        result[i].user_empathized = false
+                    }
+                }
+
                 resolve(JSON.stringify(result))
             }
         })
@@ -16,12 +31,23 @@ function getPosts(community_id, limit) {
     })
 }
 
-function getSinglePost(post_id) {
+function getSinglePost(post_id, pid) {
     const sql = `SELECT * FROM post WHERE id=${post_id}`
 
     return new Promise((resolve, reject) => {
-        con.query(sql, (err, result, fields) => {
+        con.query(sql, async (err, result, fields) => {
             if (err) { console.log(logger.Error(err)); reject(err) } else {
+
+                for (let i = 0; i < result.length; i++) {
+                    result[i].empathy_count = await query(`SELECT * FROM empathies WHERE post_id=${result[i].id}`)
+
+                    if (JSON.stringify(result[i].empathy_count).search(String(pid)) !== -1) {
+                        result[i].user_empathized = true
+                    } else {
+                        result[i].user_empathized = false
+                    }
+                }
+
                 resolve(JSON.stringify(result))
             }
         })
@@ -60,8 +86,13 @@ function getCommunities(key, limit) {
     }
 
     return new Promise((resolve, reject) => {
-        con.query(sql, (err, result, fields) => {
+        con.query(sql, async (err, result, fields) => {
             if (err) { console.log(logger.Error(err)); reject(err) } else {
+
+                for (let i = 0; i < result.length; i++) {
+                    result[i].users = await query(`SELECT * FROM favorites WHERE community_id=${result[i].community_id}`)
+                }
+
                 resolve(JSON.stringify(result))
             }
         })
@@ -93,6 +124,30 @@ function getUserProfile(pid) {
     })
 }
 
+function getAllEmpathiesForPost(id) {
+    const sql = `SELECT * FROM empathies WHERE post_id=${id}`
+
+    return new Promise((resolve, reject) => {
+        con.query(sql, (err, result, fields) => {
+            if (err) { console.log(logger.Error(err)); reject(err) } else {
+                resolve(JSON.stringify(result))
+            }
+        })
+    })
+}
+
+function getAllUserProfileFromPostEmpathies(id) {
+    const sql = `SELECT name, hash, pid, id, nnid, mii, bio FROM account WHERE pid IN (SELECT pid FROM empathies WHERE post_id=${id})`
+
+    return new Promise((resolve, reject) => {
+        con.query(sql, (err, result, fields) => {
+            if (err) { console.log(logger.Error(err)); reject(err) } else {
+                resolve(JSON.stringify(result))
+            }
+        })
+    })
+}
+
 function getAllEmpathiesToUser(pid) {
     const sql = `SELECT * FROM empathies WHERE post_id IN (SELECT id FROM post WHERE pid=${pid})`
 
@@ -105,13 +160,40 @@ function getAllEmpathiesToUser(pid) {
     })
 }
 
-function getAllPostsFromUser(pid) {
+function getAllPostsFromUser(pid, account_pid) {
     const sql = `SELECT * FROM post WHERE pid=${pid} ORDER BY created_at DESC`
 
     return new Promise((resolve, reject) => {
-        con.query(sql, (err, result, fields) => {
+        con.query(sql, async (err, result, fields) => {
             if (err) { console.log(logger.Error(err)); reject(err) } else {
+
+                for (let i = 0; i < result.length; i++) {
+                    result[i].empathy_count = await query(`SELECT * FROM empathies WHERE post_id=${result[i].id}`)
+
+                    if (JSON.stringify(result[i].empathy_count).search(String(account_pid)) !== -1) {
+                        result[i].user_empathized = true
+                    } else {
+                        result[i].user_empathized = false
+                    }
+                }
+
                 resolve(JSON.stringify(result))
+            }
+        })
+    })
+}
+
+function isCommunityFavorited(community_id, pid) {
+    const sql = `SELECT * FROM favorites WHERE community_id=${community_id} AND pid=${pid}`
+
+    return new Promise((resolve, reject) => {
+        con.query(sql, (err, result, fields) => {
+            if (err) {reject(err); return;}
+
+            if (result[0]) {
+                resolve(true)
+            } else {
+                resolve(false)
             }
         })
     })
@@ -124,6 +206,9 @@ module.exports =
     getCommunities,
     getCommunityData,
     getUserProfile,
+    getAllEmpathiesForPost,
+    getAllUserProfileFromPostEmpathies,
     getAllEmpathiesToUser,
-    getAllPostsFromUser
+    getAllPostsFromUser,
+    isCommunityFavorited
 }

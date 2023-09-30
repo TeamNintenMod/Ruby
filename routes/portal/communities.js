@@ -29,14 +29,17 @@ router.get('/:community_id', async (req, res) => {
         console.log(logger.Error('Did not find any Service Token or ParamPack. Setting both values to default.'))
     }
 
-    var posts = JSON.parse(await UIQuery.getPosts(community_id, 10))
-    var community = JSON.parse(await UIQuery.getCommunityData(community_id))[0]
     var account = req.account
     var language = req.language
+
+    var favorited = await UIQuery.isCommunityFavorited(community_id, account[0].pid)
+    var posts = JSON.parse(await UIQuery.getPosts(community_id, 10, account[0].pid))
+    var community = JSON.parse(await UIQuery.getCommunityData(community_id))[0]
 
     res.render('portal/community.ejs', {
         posts: posts,
         community: community,
+        favorited : favorited,
         account: account,
         language : language,
         moment: moment
