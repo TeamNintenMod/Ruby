@@ -105,10 +105,10 @@ router.post('/', multer().none(), async (req, res) => {
         } else {
             sql = `INSERT INTO post (app_data, ${(painting) ? "painting" : "body"}, ${(paintingPNG) ? "painting_png," : ""} ${(screenshot) ? "screenshot," : ""} community_id, feeling_id, is_autopost, is_spoiler, language_id, is_app_jumpable, created_at, empathy_count, number, platform_id, region_id, reply_count, title_id, country_id, topic_tag, search_key, mii, mii_face_url, screen_name, pid) VALUES (null, ?, ${(paintingPNG) ? "'" + paintingPNG + "'," : ""} ${(screenshot) ? `"${screenshot}",` : ""} ${req.body.community_id}, ${req.body.feeling_id}, ${req.body.is_autopost}, ${req.body.is_spoiler}, ${req.body.language_id}, ${req.body.is_app_jumpable}, "${moment().format('YYYY-MM-DD HH:mm:ss')}", 0, 0, ${paremPack.platform_id}, ${paremPack.region_id}, 0, ${paremPack.title_id}, ${paremPack.country_id}, "${topic_tag}", "${req.body.search_key}", "${account[0].mii}", "${mii_url}", "${account[0].name}", ${account[0].pid})`
 
-            await query(sql, [(painting) ? painting : req.body.body])
+            const post = await query(sql, [(painting) ? painting : req.body.body])
 
             console.log(logger.MySQL('Post Created!'))
-            res.sendStatus(200)
+            res.status(200).send(`{"post_id" : ${post.insertId}}`)
         }
     } else { console.log(logger.Error("User is trying to post from an account that either doesn't exist, or that is currently banned.")); res.sendStatus(403) }
 })

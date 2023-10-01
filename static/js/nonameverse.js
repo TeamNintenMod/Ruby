@@ -194,7 +194,7 @@ function submitPost(community_id) {
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4) {
                 console.log("Rec")
-                window.location.replace("/titles/" + community_id)
+                window.location.href = "/posts/" + JSON.parse(xhr.responseText).post_id
             }
         }
     }

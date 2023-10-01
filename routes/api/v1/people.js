@@ -10,6 +10,11 @@ const moment = require('moment')
 const { placeholderBio } = config
 
 const fetch = require('node-fetch')
+const xmlbuilder = require('xmlbuilder')
+
+const util = require('util')
+
+const query = util.promisify(con.query).bind(con)
 
 router.post('/', (req, res) => {
     const serviceToken = req.get('x-nintendo-servicetoken').slice(0, 42)
@@ -41,8 +46,64 @@ router.post('/', (req, res) => {
     })
 })
 
-router.get('/', (req, res) => {
-    res.sendStatus(404)
+router.get('/', async (req, res) => {
+
+    if (req.query['pid']) {
+        xml = xmlbuilder.create('result')
+        .e('has_error', '0').up()
+        .e('version', '1').up()
+        .e('request_name', 'people').up()
+        .e('people');
+        
+        for (let i = 0; i < req.query['pid'].length; i++) {
+
+            const pid = req.query['pid'][i]
+
+            const person = (await query(`SELECT * FROM post WHERE pid=? ORDER BY created_at DESC LIMIT 1`, [pid]))[0]
+            if (person) {
+                xml = xml.e('person')
+                .e('posts')
+                .e('post')
+                .e('app_data', person.app_data).up()
+                .e('body', person.body).up()
+                .e('community_id', person.community_id).up()
+                .e('country_id', person.country_id).up()
+                .e('created_at', person.created_at).up()
+                .e('feeling_id', person.feeling_id).up()
+                .e('id', person.id).up()
+                .e('is_autopost', person.is_autopost).up()
+                .e('is_community_private_autopost', '0').up()
+                .e('is_spoiler', person.is_spoiler).up()
+                .e('is_app_jumpable', person.is_app_jumpable).up()
+                .e('empathy_count', (await query(`SELECT * FROM empathies WHERE post_id=?`, [person.id])).length).up()
+                .e('language_id', person.language_id).up()
+                .e('mii', person.mii).up()
+                .e('mii_face_url', person.mii_face_url).up()
+                .e('number', '0').up();
+                if (person.painting) {
+                    xml = xml.e('painting')
+                    .e('format', 'tga').up()
+                    .e('content', person.painting).up()
+                    .e('size', person.painting.length).up()
+                    .e('url', 'https://s3.amazonaws.com/olv-public/pap/WVW69koebmETvBVqm1').up().up()
+                }
+                xml = xml.e('pid', person.pid).up()
+                .e('platform_id', person.platform_id).up()
+                .e('region_id', person.region_id).up()
+                //TODO: change reply count to grab from database, once replies are created.
+                .e('reply_count', '0').up()
+                .e('screen_name', person.screen_name).up()
+                .e('title_id', person.title_id).up().up().up().up()
+            }
+        }
+
+        xml = xml.end({pretty : true, allowEmpty : true})
+
+        res.set('Content-Type', 'application/xml')
+        res.send(xml)
+    } else {
+        res.sendStatus(404)
+    }
 })
 
 

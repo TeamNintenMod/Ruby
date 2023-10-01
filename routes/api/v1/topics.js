@@ -37,6 +37,8 @@ router.get('/', async (req, res) => {
     (SELECT COUNT(community_id) FROM post WHERE community_id=c.community_id)
     DESC`)
 
+    //ty pretendo for the topics generation code
+
     let xml = xmlbuilder.create('result')
     .e('has_error', '0').up()
     .e('version', '1').up()

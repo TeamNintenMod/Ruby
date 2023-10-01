@@ -4,6 +4,9 @@
     },
 
     "ui" : {
+        "yeah" : "Yeah!",
+        "unyeah" : "Unyeah!",
+
         "communities" : "Communities",
         "new_communities" : "New Communities",
         "popular_communities" : "Popular Communities",
@@ -16,7 +19,11 @@
         "country" : "Country",
         "game_experience" : "Game Experience",
         "yeahs" : "Yeahs",
-        "posts" : "Posts"
+        "posts" : "Posts",
+
+        "settings" : {
+            
+        }
     },
 
     "newUser" : {
