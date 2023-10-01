@@ -35,7 +35,8 @@ router.get('/:post_id', async (req, res) => {
     var account = req.account
     var language = req.language
     
-    var post = JSON.parse(await UIQuery.getSinglePost(post_id, account[0].pid))[0]
+    var post = JSON.parse(await UIQuery.getSinglePost(post_id, account[0].pid))
+
     var empathized_users = JSON.parse(await UIQuery.getAllUserProfileFromPostEmpathies(post_id))
 
     res.render('portal/post', {

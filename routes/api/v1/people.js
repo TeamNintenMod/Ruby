@@ -93,7 +93,13 @@ router.get('/', async (req, res) => {
                 //TODO: change reply count to grab from database, once replies are created.
                 .e('reply_count', '0').up()
                 .e('screen_name', person.screen_name).up()
-                .e('title_id', person.title_id).up().up().up().up()
+                const title_ids = JSON.parse((await query(`SELECT * FROM community WHERE community_id=${person.community_id}`))[0].title_ids)
+
+                for (let i = 0; i < title_ids.length; i++) {
+                    xml = xml.e('title_id', title_ids[i]).up()
+                }
+
+                xml = xml.up().up().up()
             }
         }
 

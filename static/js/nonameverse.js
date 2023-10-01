@@ -181,7 +181,7 @@ function submitPost(community_id) {
     form.append('language_id', '0')
     form.append('is_spoiler', '0')
     form.append('is_autopost', '0')
-    form.append('is_app_jumpable', '0')
+    form.append('is_app_jumpable', '1')
     form.append('community_id', community_id.toString())
     form.append('app_data', '')
 

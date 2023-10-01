@@ -38,17 +38,15 @@ function getSinglePost(post_id, pid) {
         con.query(sql, async (err, result, fields) => {
             if (err) { console.log(logger.Error(err)); reject(err) } else {
 
-                for (let i = 0; i < result.length; i++) {
-                    result[i].empathy_count = await query(`SELECT * FROM empathies WHERE post_id=${result[i].id}`)
+                result[0].empathy_count = await query(`SELECT * FROM empathies WHERE post_id=${result[0].id}`)
 
-                    if (JSON.stringify(result[i].empathy_count).search(String(pid)) !== -1) {
-                        result[i].user_empathized = true
-                    } else {
-                        result[i].user_empathized = false
-                    }
+                if (JSON.stringify(result[0].empathy_count).search(String(pid)) !== -1) {
+                    result[0].user_empathized = true
+                } else {
+                    result[0].user_empathized = false
                 }
 
-                resolve(JSON.stringify(result))
+                resolve(JSON.stringify(result[0]))
             }
         })
 

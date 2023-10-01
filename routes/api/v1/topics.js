@@ -96,7 +96,13 @@ router.get('/', async (req, res) => {
             .e('region_id', post.region_id).up()
             .e('reply_count', '0').up()
             .e('screen_name', post.screen_name).up()
-            .e('title_id', JSON.parse(community.title_ids)[0]).up().up().up().up()
+            for (let i = 0; i < JSON.parse(community.title_ids).length; i++) {
+                const title_id = JSON.parse(community.title_ids)[i];
+                
+                xml = xml.e('title_id', title_id).up()
+            }
+
+            xml = xml.up().up().up()
         }
         xml = xml.up().e('position', i + 1).up().up()
     }
