@@ -2,6 +2,8 @@ const express = require('express');
 
 const subdomain = require('express-subdomain')
 
+const con = require('./other/mysqlConnection')
+
 const colors = require('colors');
 const config = require("./config.json");
 const mysql = require('mysql')
@@ -39,6 +41,9 @@ const multer = require('multer')
 const https = require('https')
 
 const auth = require('./middleware/auth')
+
+const util = require('util')
+const query = util.promisify(con.query).bind(con)
 
 var app = express();
 
@@ -82,6 +87,9 @@ app.get('/p01/policylist/1/1/:var', (req, res) => {
     res.send(file)
 })
 
-app.listen(port, () => {
-    console.log(logger.Info('Server started on port 80.'))
+app.listen(port, async () => {
+    //setting sql mode to allow us to use GROUP BY
+    await query("set session sql_mode='STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';")
+
+    console.log(logger.Info(`Server started on port ${port}`))
 })
