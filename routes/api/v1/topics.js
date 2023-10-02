@@ -49,7 +49,7 @@ router.get('/', async (req, res) => {
     for (let i = 0; i < communities.length; i++) {
         const community = communities[i];
 
-        var posts = await query(`SELECT * FROM post WHERE community_id=${community.community_id} GROUP BY pid ORDER BY created_at DESC LIMIT 30`)
+        var posts = await query(`SELECT * FROM post WHERE community_id=${community.community_id} GROUP BY pid ORDER BY created_at DESC LIMIT 15`)
 
         xml = xml.e('topic')
         .e('empathy_count', (await query(`SELECT * FROM favorites WHERE community_id=${community.community_id}`)).length).up()

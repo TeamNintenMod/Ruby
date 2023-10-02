@@ -31,6 +31,8 @@ const UIpostsRoute = require('./routes/portal/posts')
 const usersRoute = require('./routes/portal/users')
 const communitiesRoute = require('./routes/portal/communities')
 
+const adminRoute = require('./routes/admin/admin')
+
 const xmljs= require('xml-js');
 const xml = require('xml')
 
@@ -48,7 +50,7 @@ const query = util.promisify(con.query).bind(con)
 var app = express();
 
 app.use(function (req, res, next) {
-    res.setHeader('Access-Control-Allow-Origin', 'https://davidsosa2022.github.io');
+    res.setHeader('Access-Control-Allow-Origin', 'https://davidsosa2022.github.io, http://localhost');
 
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
 
@@ -76,6 +78,9 @@ app.use('/titles', titlesRoute)
 app.use('/posts', UIpostsRoute)
 app.use('/users', usersRoute)
 app.use('/communities', communitiesRoute)
+
+//Admin
+app.use('/admin', adminRoute)
 
 app.use(express.static('static'))
 

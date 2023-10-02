@@ -1,0 +1,62 @@
+<header>
+    <title>Sapphire Admin Panel</title>
+</header>
+
+<style>
+
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    tr, td, th {
+        border: 2px solid black;
+    }
+</style>
+
+<script>
+    function submit(id) {
+        fetch('../../posts/' + id, {
+            method : "DELETE",
+            headers : {
+                "Content-Type" : "application/json"
+            }
+        }).then(res => {
+            if (res.status === 200) {
+                window.location.href = "../../"
+            } else {
+                console.log(`Status recieved ${res.status}`)
+            }
+        })
+    }
+</script>
+
+<body>
+    <img src="http://mii-images.account.nintendo.net/<%= account.hash %>_normal_face.png">
+
+    <br>
+
+    <table style="border: black 2px solid; width: 1280px;">
+        <tr><th>ID</th><th>Mii</th><th>Screen Name</th><th>Body</th><th>Is Spoiler?</th><th>Feeling Id</th><th>Created At</th><th>Delete</th></tr>
+        <% for (let i = 0; i < posts.length; i++) {
+            const post = posts[i];%>
+
+            <tr>
+                <td><%= post.id %></td>
+                <td><img src="<%= post.mii_face_url %>" width="55px"></td>
+                <td><%= post.screen_name %></td>
+                <% if (post.body && post.screenshot) {%>
+                    <td><%= post.body %><br><img src="data:image/png;base64,<%= post.screenshot %>" width="200px"></td>
+                <%} else if (post.painting) {%>
+                    <td><img src="data:image/png;base64,<%= post.painting_png %>"></td>
+                <%} else {%>
+                    <td><%= post.body %></td>
+                <%} %>
+                
+                <td><%= post.is_spoiler %></td>
+                <td><%= post.feeling_id %></td>
+                <td><%= post.created_at %></td>
+                <td><button onclick="submit(<%= post.id %>)">Delete</button></td>
+            </tr>
+        <%} %>
+    </table>
+</body>

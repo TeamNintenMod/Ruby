@@ -54,6 +54,14 @@ function Error(input) {
     return `(${moment().format("HH:mm:ss")}) [ERROR] ${input}`.red
 }
 
+function Put(input) {
+    return `(${moment().format("HH:mm:ss")}) [PUT] ${input}`.magenta
+}
+
+function Delete(input) {
+    return `(${moment().format("HH:mm:ss")}) [DELETE] ${input}`.white
+}
+
 function Post(input) {
     return `(${moment().format("HH:mm:ss")}) [POST] ${input}`.yellow
 }
@@ -64,5 +72,7 @@ module.exports = {
     Info,
     MySQL,
     Error,
+    Put,
+    Delete,
     PostWebhook
 }

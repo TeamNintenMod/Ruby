@@ -1,0 +1,151 @@
+<header>
+    <title>Sapphire Admin Panel</title>
+</header>
+
+<style>
+
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    tr, td, th {
+        border: 2px solid black;
+    }
+
+    input{
+        display: block;
+
+        width: 800px;
+        height: 25px;
+
+        border-radius: 5px;
+        border: 1px black solid;
+
+        margin-bottom: 15px;
+    }
+</style>
+
+<body>
+    <img src="http://mii-images.account.nintendo.net/<%= account.hash %>_normal_face.png">
+
+    <br>
+    <h1>Creating new community</h1>
+
+    <input type="text" id="name" name="name" placeholder="Community Name..">
+    <input type="text" id="desc" name="description" placeholder="Community Description..">
+    <input type="text" id="title_id_1" name="title_id_1" placeholder="US Title ID..">
+    <input type="text" id="title_id_2" name="title_id_2" placeholder="EU Title ID..">
+    <input type="text" id="title_id_3" name="title_id_3" placeholder="JP Title ID..">
+
+    <input type="text" id="community_id" name="community_id" placeholder="Community ID.. (Increase last communitys id by +1)">
+
+    <span>Icon (.jpg only)</span>
+    <input type="file" accept=".jpg" id="icon" name="community_id">
+
+    <br>
+
+    <span>Banner (.jpg only)</span>
+    <input type="file" accept="image/jpeg" id="banner" name="community_id">
+
+    <input type="text" id="app_data" name="app_data" placeholder="App Data">
+    <input type="text" id="type" name="type" placeholder='Type ("wiiu", "3ds", "topic", "vc")'>
+    <input type="text" id="recommended" name="recommended" placeholder="Recommended (Inside Wara Wara Plaza, 0 = no, 1 = yes)">
+
+    <input type="submit" onclick="submit()">
+
+    <img id="icon_preview">
+</body>
+
+<script>
+    const reader = new FileReader()
+
+    const name = document.getElementById('name')
+    const desc = document.getElementById('desc')
+    var title_id_1 = document.getElementById('title_id_1')
+    var title_id_2 = document.getElementById('title_id_2')
+    var title_id_3 = document.getElementById('title_id_3')
+
+    const id = document.getElementById('community_id')
+    const icon = document.getElementById('icon')
+    const app_data = document.getElementById('app_data')
+    const type = document.getElementById('type')
+    const recommended = document.getElementById('recommended')
+
+    var final_icon;
+    var final_banner;
+
+    icon.addEventListener('change', (event) => {
+        const file = icon.files
+        const reader = new FileReader()
+
+        reader.onload = (e) => {
+            document.getElementById('icon_preview').src = e.target.result
+
+            final_icon = (e.target.result).slice(23, Infinity)
+        }
+
+        reader.readAsDataURL(file[0])
+    })
+
+    banner.addEventListener('change', (event) => {
+        const file = banner.files
+        const reader = new FileReader()
+
+        reader.onload = (e) => {
+            document.getElementById('icon_preview').src = e.target.result
+
+            final_banner = (e.target.result).slice(23, Infinity)
+        }
+
+        reader.readAsDataURL(file[0])
+    })
+
+    function submit() {
+
+        title_id_1 = title_id_1.value.replace('-', '')
+        title_id_2 = title_id_2.value.replace('-', '')
+        title_id_3 = title_id_3.value.replace('-', '')
+
+        var final_name = name.value
+        var final_desc = desc.value
+        var final_title_ids = `[${parseInt( title_id_1, 16)},${parseInt( title_id_2, 16)},${parseInt(title_id_3, 16)}]`
+        var final_id = id.value
+        var final_app_data = app_data.value
+        var final_type = type.value
+        var final_recc = recommended.value
+
+        console.log({"name" : final_name,
+                "description" : final_desc,
+                "title_ids" : final_title_ids,
+                "id" : final_id,
+                "app_data" : final_app_data,
+                "type" : final_type,
+                "recomended" : final_recc,
+                "icon" : final_icon,
+                "banner" : final_banner})
+
+        fetch('../../../../admin/communities/new', {
+            method : "POST",
+            headers : {
+                "Content-Type" : "application/json"
+            },
+            body : JSON.stringify({
+                "name" : final_name,
+                "description" : final_desc,
+                "title_ids" : final_title_ids,
+                "id" : final_id,
+                "app_data" : final_app_data,
+                "type" : final_type,
+                "recomended" : final_recc,
+                "icon" : final_icon,
+                "banner" : final_banner
+            })
+        }).then(response => {
+            if (response.status === 201) {
+                window.location.href = '../../../../admin/'
+            } else {
+                console.log("Error! " + response.status)
+            }
+        })
+    }
+</script>

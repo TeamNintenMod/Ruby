@@ -98,9 +98,11 @@ function Yeah(postId) {
     xhr.open("POST", "https://olvportal.nonamegiven.xyz/v1/posts/" + postId + "/empathies")
 
     xhr.send()
+    wiiuBrowser.lockUserOperation(true);
 
     xhr.onload = function () {
         if (xhr.status == 201) {
+            wiiuBrowser.lockUserOperation(false);
             document.getElementById(postId + "_text").innerText = "Unyeah!"
             document.getElementById(postId).style.color = "#58a7db"
             document.getElementById(postId + "_symbol").innerText = "E"
@@ -108,10 +110,13 @@ function Yeah(postId) {
 
             wiiuSound.playSoundByName('SE_WAVE_MII_ADD', 1);
         } else if (xhr.status == 200) {
+            wiiuBrowser.lockUserOperation(false);
             document.getElementById(postId + "_text").innerText = "Yeah!"
             document.getElementById(postId).style.color = "grey"
             document.getElementById(postId + "_symbol").innerText = "E"
             document.getElementById(postId + "_empathy_count").innerText = Number(document.getElementById(postId + "_empathy_count").innerText) - 1
+        } else {
+            wiiuBrowser.lockUserOperation(false);
         }
     }
 }

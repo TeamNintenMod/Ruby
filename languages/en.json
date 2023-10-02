@@ -7,6 +7,9 @@
         "yeah" : "Yeah!",
         "unyeah" : "Unyeah!",
 
+        "favorite" : "Favorite",
+        "unfavorite" : "Unfavorite",
+
         "communities" : "Communities",
         "new_communities" : "New Communities",
         "popular_communities" : "Popular Communities",

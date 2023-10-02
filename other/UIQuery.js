@@ -1,7 +1,9 @@
 const con = require('./mysqlConnection')
 const logger = require('./logger')
+const fs = require('fs')
 
 const util = require('util')
+const path = require('path')
 
 const query = util.promisify(con.query).bind(con)
 
@@ -53,29 +55,30 @@ function getSinglePost(post_id, pid) {
     })
 }
 
-function getCommunities(key, limit) {
+function getCommunities(key, limit, hidden) {
 
     var sql;
     var limit = (limit) ? `LIMIT ${limit}` : '';
+    var hidden = (hidden) ? `` : `WHERE hidden=0`
 
     switch (key) {
         case 'newest':
-            sql = `SELECT * FROM community WHERE hidden=0 ORDER BY created_at DESC ${limit}`
+            sql = `SELECT * FROM community ${hidden} ORDER BY created_at DESC ${limit}`
             break;
 
         case 'oldest':
-            sql = `SELECT * FROM community WHERE hidden=0 ORDER BY created_at ASC ${limit}`
+            sql = `SELECT * FROM community ${hidden} ORDER BY created_at ASC ${limit}`
             break;
 
         case 'popular':
-            sql = `SELECT * FROM community AS c WHERE hidden=0 
+            sql = `SELECT * FROM community AS c ${hidden} 
                 ORDER BY 
                 (SELECT COUNT(community_id) FROM post WHERE community_id=c.community_id)
                 DESC ${limit}`
             break;
 
         case 'unpopular':
-            sql = `SELECT * FROM community AS c WHERE hidden=0 ORDER BY (SELECT COUNT(community_id) FROM post WHERE community_id=c.community_id) ASC ${limit}`
+            sql = `SELECT * FROM community AS c ${hidden} ORDER BY (SELECT COUNT(community_id) FROM post WHERE community_id=c.community_id) ASC ${limit}`
             break;
 
         default:
@@ -104,6 +107,14 @@ function getCommunityData(community_id) {
     return new Promise((resolve, reject) => {
         con.query(sql, (err, result, fields) => {
             if (err) { console.log(logger.Error(err)); reject(err) } else {
+
+                try {
+                    result[0].icon = fs.readFileSync(path.join(__dirname, `../routes/api/v1/files/encoded/${result[0].community_id}.txt`)).toString()
+                } catch(err) {
+                    console.log(logger.Error(`No icon found for ${result[0].name}`))
+                }
+                
+
                 resolve(JSON.stringify(result))
             }
         })
@@ -197,6 +208,20 @@ function isCommunityFavorited(community_id, pid) {
     })
 }
 
+function getAllAdminActions(limit) {
+    var limit = (limit) ? `LIMIT ${limit}` : '';
+
+    const sql = `SELECT * FROM admin_actions ${limit}`
+
+    return new Promise((resolve, reject) => {
+        con.query(sql, (err, result, fields) => {
+            if (err) {reject(err); return;}
+
+            resolve(JSON.stringify(result))
+        })
+    })
+}
+
 module.exports =
 {
     getPosts,
@@ -208,5 +233,6 @@ module.exports =
     getAllUserProfileFromPostEmpathies,
     getAllEmpathiesToUser,
     getAllPostsFromUser,
-    isCommunityFavorited
+    isCommunityFavorited,
+    getAllAdminActions
 }

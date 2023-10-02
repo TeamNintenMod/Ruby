@@ -55,8 +55,12 @@
                     class="community_post_button" src="../../../../../img/post.png" width="225px"></a>
 
             <content>
+
+                <div class="announcement_banner">
+                    <span class="announcement_text"><%= community.name %></span>
+                </div>
+
                 <%- include('./partials/titleHeader.ejs', { title : community.name, community : community, favorited : favorited }) %>
-                    <img class="titleBanner" src='../../../../img/banners/<%= community.community_id %>.jpg' width="1280px">
 
                     <div class="postsWrapper">
                         <ul id="posts_container" style="position: relative;">

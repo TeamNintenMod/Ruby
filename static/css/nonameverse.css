@@ -299,10 +299,7 @@ content>*>*>* {
     width: 1280px;
     margin: 0px;
 
-    height: 180px;
-
-    position: absolute;
-    top: 0;
+    height: 395px;
 
     color: black;
 
@@ -311,11 +308,7 @@ content>*>*>* {
 
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
 
-    border-bottom: 2px rgb(177, 177, 177) solid;
-
     z-index: 1;
-
-    display: inline;
 }
 
 .titleHeaderbg {
@@ -336,17 +329,24 @@ content>*>*>* {
 .titleMeta {
     position: relative;
 
-    top: 15px;
+    display: block;
 
-    width: 700px;
+    bottom: 7px;
+
+    width: 1280px;
+
+    height: 148px;
 
     font-size: 30px;
 
-    vertical-align: middle;
-    display: inline-block;
-
     margin: 0px;
-    margin-left: 10px;
+    margin-left: 0px;
+
+    background: -webkit-linear-gradient(90deg, #EEEEEE, #F9FDF6);
+    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0), 0 3px 1px 0 rgba(0, 0, 0, 0.2);
+    
+    border-bottom: #a0a0a0 1px solid;
+    border-top: #a0a0a0 1px solid;
 }
 
 br {
@@ -358,13 +358,13 @@ br {
     position: relative;
 
     width: 600px;
-    height: 115px;
+    height: 85px;
 
     vertical-align: middle;
 
     color: rgb(77, 77, 77);
 
-    font-size: 18px;
+    font-size: 17px;
 
     margin: 0;
     font-weight: 300;
@@ -376,40 +376,43 @@ br {
 
 .titleBanner {
     margin-bottom: 0px;
-
+    margin-top: 65px;
     margin-left: 0;
 
     border-bottom: 2px rgb(177, 177, 177) solid;
 }
 
 .titleData {
-    position: relative;
-    display: block;
-    bottom: 4px;
-    background: rgb(255, 255, 255);
-    background: -moz-linear-gradient(180deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 0%, rgba(224, 224, 224, 1) 100%);
-    background: -webkit-linear-gradient(-90deg, rgba(255, 255, 255, 1) 0%, rgb(221, 221, 221) 100%);
-    background: linear-gradient(180deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 0%, rgba(224, 224, 224, 1) 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ffffff", endColorstr="#e0e0e0", GradientType=1);
+    vertical-align: middle;
 
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0), 0 6px 20px 0 rgba(0, 0, 0, 0.3);
+    margin: 0;
 
-    margin-left: 13%;
+    width: 700px;
+    height: 120px;
 
-    padding-bottom: -20px;
+    display: inline-block;
 
-    border-top: 2px rgb(177, 177, 177) solid;
-
-    height: 50px;
-
-    border-bottom: 2px rgb(177, 177, 177) solid;
+    margin-top: 7px;
 }
 
 .titleIcon {
-    border-radius: 10px;
+    border-radius: 15px;
 
     display: inline-block;
     vertical-align: middle;
+
+    border: 4px white solid;
+
+    position: relative;
+    bottom: 55px;
+
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0), 0 6px 20px 0 rgba(0, 0, 0, 0.3);
+}
+
+.titleName {
+    width: 500px;
+
+    font-size: 25px;
 }
 
 .postsWrapper ul,

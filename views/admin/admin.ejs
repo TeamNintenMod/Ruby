@@ -1,0 +1,40 @@
+<header>
+    <title>Sapphire Admin Panel</title>
+</header>
+
+<style>
+
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    tr, td, th {
+        border: 2px solid black;
+    }
+</style>
+
+<body>
+    <img src="http://mii-images.account.nintendo.net/<%= account.hash %>_normal_face.png">
+
+    <br>
+
+    <a href="../../admin/communities/new">Create New Community</a> <br>
+    <a href="../../admin/audit">Admin Audit Log</a>
+
+    <table style="border: black 2px solid; width: 1280px;">
+        <tr><th>ID</th><th>Hidden?</th><th>Community Name</th><th>Description</th><th>Posts</th><th>Edit</th><th>Icon</th></tr>
+        <% for (let i = 0; i < communities.length; i++) {
+            const community = communities[i];%>
+
+            <tr>
+                <td><%= community.community_id %></td>
+                <td><%= community.hidden %></td>
+                <td><%= community.name %></td>
+                <td><%= community.description %></td>
+                <td><a href="../../admin/communities/<%= community.community_id %>/posts">Posts</a></td>
+                <td><a href="../../admin/communities/<%= community.community_id %>">Edit</a></td>
+                <td><img src="../../img/icons/<%= community.community_id %>.jpg" width="50px"></td>
+            </tr>
+        <%} %>
+    </table>
+</body>
