@@ -157,7 +157,7 @@ router.get('/:community_id/posts', async (req, res) => {
             .e("is_community_private_autopost", "0").up()
             .e("is_spoiler", posts[i].is_spoiler).up()
             .e("is_app_jumpable", posts[i].is_app_jumpable).up()
-            .e("empathy_count", posts[i].empathy_count).up()
+            .e("empathy_count", String((await query(`SELECT * FROM empathies WHERE post_id=?`, [posts[i].id])).length)).up()
             .e("language_id", posts[i].language_id).up()
             .e("number", posts[i].number).up();
         if (posts[i].painting) {

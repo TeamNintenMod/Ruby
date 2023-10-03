@@ -98,27 +98,29 @@ function Yeah(postId) {
     xhr.open("POST", "https://olvportal.nonamegiven.xyz/v1/posts/" + postId + "/empathies")
 
     xhr.send()
-    wiiuBrowser.lockUserOperation(true);
 
     xhr.onload = function () {
-        if (xhr.status == 201) {
-            wiiuBrowser.lockUserOperation(false);
+        if (JSON.parse(xhr.responseText).result == 1) {
             document.getElementById(postId + "_text").innerText = "Unyeah!"
             document.getElementById(postId).style.color = "#58a7db"
             document.getElementById(postId + "_symbol").innerText = "E"
             document.getElementById(postId + "_empathy_count").innerText = Number(document.getElementById(postId + "_empathy_count").innerText) + 1
 
-            wiiuSound.playSoundByName('SE_WAVE_MII_ADD', 1);
-        } else if (xhr.status == 200) {
             wiiuBrowser.lockUserOperation(false);
+            wiiuSound.playSoundByName('SE_WAVE_MII_ADD', 1);
+        } else if (JSON.parse(xhr.responseText).result == 0) {
             document.getElementById(postId + "_text").innerText = "Yeah!"
             document.getElementById(postId).style.color = "grey"
             document.getElementById(postId + "_symbol").innerText = "E"
             document.getElementById(postId + "_empathy_count").innerText = Number(document.getElementById(postId + "_empathy_count").innerText) - 1
+
+            wiiuBrowser.lockUserOperation(false);
         } else {
             wiiuBrowser.lockUserOperation(false);
         }
     }
+
+    wiiuBrowser.lockUserOperation(true);
 }
 
 function postUIToggle() {
@@ -225,13 +227,19 @@ function favorite_community(id) {
             if (xhr.status === 201) {
                 document.getElementById("favorite_button_"+id).style.color = "#F7A642"
                 wiiuSound.playSoundByName('SE_WAVE_MII_ADD', 1);
+                
+                wiiuBrowser.lockUserOperation(false);
             } else if (xhr.status === 200) {
                 document.getElementById("favorite_button_"+id).style.color = "grey"
                 wiiuSound.playSoundByName('SE_WAVE_MII_CANCEL', 1);
+
+                wiiuBrowser.lockUserOperation(false);
             }
             
         }
     }
+
+    wiiuBrowser.lockUserOperation(true);
 }
 
 function show_spoiler(id) {

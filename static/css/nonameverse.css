@@ -26,7 +26,7 @@
     left: 0px;
 
     height: 720px;
-    width: 175px;
+    width: 160px;
 
     margin: 0px;
     margin-top: 0px;
@@ -128,6 +128,9 @@
 
 .mii {
     border-top: none;
+
+    border-top-right-radius: 65px;
+    border-bottom-right-radius: 65px;
 }
 
 
@@ -335,7 +338,7 @@ content>*>*>* {
 
     width: 1280px;
 
-    height: 148px;
+    height: max-content;
 
     font-size: 30px;
 
@@ -388,7 +391,8 @@ br {
     margin: 0;
 
     width: 700px;
-    height: 120px;
+    height: max-content;
+    padding-bottom: 25px;
 
     display: inline-block;
 

@@ -4,13 +4,17 @@
 
         <body onload="endLoading();">
             <content>
-                <div class="postsWrapper">
+
+                <div class="announcement_banner">
+                    <span class="announcement_text"><%= post.screen_name %>'s <%= language.ui.post %></span>
+                </div>
+
+                <div class="postsWrapper" style="margin-top: 50px;">
                     <ul id="posts_container">
                         <li>
                             <%- include('./partials/post.ejs', { post : post, href_needed: false, moment : moment }) %>
                         </li>
                     </ul>
                 </div>
-                
             </content>
         </body>

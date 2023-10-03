@@ -22,6 +22,7 @@ const util = require('util')
 const query = util.promisify(con.query).bind(con)
 
 const fs = require('fs')
+const path = require('path')
 
 router.use(body_parser.urlencoded({extended : false, limit : '150mb'}))
 router.use(body_parser.json({limit : '150mb'}))
@@ -59,7 +60,7 @@ router.post('/communities/new', async (req, res) => {
     fs.writeFileSync(`static/img/icons/${req.body.id}.jpg`, req.body.icon, 'base64')
     fs.writeFileSync(`static/img/banners/${req.body.id}.jpg`, req.body.banner, 'base64')
 
-    await query(`INSERT INTO community (community_id, olive_community_id, name, description, app_data, title_ids, recommended, created_at, type, hidden) VALUES (?, ?, ?, ?, ?, ?, ?, NOW(), ?, ?)`, [req.body.id, req.body.id, req.body.name, req.body.description, req.body.app_data, req.body.title_ids, req.body.recommended, req.body.type, 0])
+    await query(`INSERT INTO community (community_id, olive_community_id, name, description, app_data, title_ids, recommended, created_at, type, hidden, app_jumpable) VALUES (?, ?, ?, ?, ?, ?, ?, NOW(), ?, ?, 1)`, [req.body.id, req.body.id, req.body.name, req.body.description, req.body.app_data, req.body.title_ids, req.body.recommended, req.body.type, 0])
     await query(`INSERT INTO admin_actions (create_time, admin, action) VALUES(NOW(), ?, ?)`, [req.account[0].nnid, `Created community : ${req.body.name}`])
 
     res.sendStatus(201)
@@ -92,8 +93,10 @@ router.get('/communities/:id/posts', async (req, res) => {
 })
 
 router.put('/communities/:id', async (req, res) => {
-    await query(`UPDATE community SET name=?, description=?, title_ids=? WHERE community_id=?`, [req.body.name, req.body.description, req.body.title_ids, req.params.id])
+    await query(`UPDATE community SET name=?, description=?, title_ids=?, type=?, recommended=?, app_jumpable=1 WHERE community_id=?`, [req.body.name, req.body.description, req.body.title_ids, req.body.type, req.body.recommended, req.params.id])
     await query(`INSERT INTO admin_actions (create_time, admin, action) VALUES(NOW(), ?, ?)`, [req.account[0].nnid, `Altered community : ${req.body.name}`])
+
+    fs.writeFileSync(path.join(__dirname, `../../routes/api/v1/files/encoded/${req.params.id}.txt`), req.body.icon)
 
     res.sendStatus(200)
 })

@@ -30,6 +30,9 @@
         const name = document.getElementById('name').value
         const description = document.getElementById('desc').value
         const title_ids = document.getElementById('title_ids').value
+        const type = document.getElementById('type').value
+        const icon = document.getElementById('icon').value
+        const rec = document.getElementById('rec').value
 
         console.log(name, description)
 
@@ -38,7 +41,7 @@
             headers : {
                 "Content-Type" : "application/json"
             },
-            body : JSON.stringify({"name" : name, "description" : description, "title_ids" : title_ids, "community_id" : id})
+            body : JSON.stringify({"name" : name, "description" : description, "title_ids" : title_ids, "community_id" : id, "type" : type, "icon" : icon, "recommended" : rec})
         }).then(res => {
             if (res.status === 200) {
                 window.location.href = "../"
@@ -57,7 +60,16 @@
 
     <input type="text" id="name" name="name" value="<%= community.name %>">
     <input type="text" id="desc" name="description" value="<%= community.description %>">
+    <input type="text" id="type" name="type" value="<%= community.type %>" placeholder='Type ("wiiu", "3ds", "topic", "vc")'>
     <input type="text" id="title_ids" name="title_ids" value="<%= community.title_ids %>">
+
+    <br>
+
+    <span>Base64 TGA (Wara Wara Plaza)</span>
+    <input type="text" id="icon" name="icon" value="<%= community.icon %>">
+
+    <span>Recommended (Wara Wara Plaza)</span>
+    <input type="text" id="rec" name="rec" value="<%= community.recommended %>">
 
     <input type="submit" onclick="submit(<%= community.community_id %>)">
 </body>

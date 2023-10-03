@@ -127,12 +127,12 @@ router.post('/:id/empathies', async (req, res) => {
         sql = `INSERT INTO empathies (post_id, pid, created_at) VALUES(?, ?, NOW())`
 
         await query(sql, [post_id, account.pid])
-        res.sendStatus(201)
+        res.status(200).send('{"result" : 1}')
     } else {
         sql = `DELETE FROM empathies WHERE post_id=? AND pid=?`
 
         await query(sql, [post_id, account.pid])
-        res.sendStatus(200)
+        res.status(200).send('{"result" : 0}')
     }
 })
 

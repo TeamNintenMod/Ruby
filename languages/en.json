@@ -4,6 +4,9 @@
     },
 
     "ui" : {
+
+        "post" : "Post",
+
         "yeah" : "Yeah!",
         "unyeah" : "Unyeah!",
 
