@@ -113,8 +113,47 @@ router.post('/', multer().none(), async (req, res) => {
     } else { console.log(logger.Error("User is trying to post from an account that either doesn't exist, or that is currently banned.")); res.sendStatus(403) }
 })
 
-router.post('/:id/empathies', async (req, res) => {
+router.post('/:id', multer().none(), async (req, res) => {
+    const account = req.account
 
+    if (account[0].pid !== 1000000000) {
+
+        var mii_url, sql;
+
+        var painting, paintingPNG
+
+        if (req.body.painting) {
+            painting = req.body.painting.replace(/\0/g, "").replace(/\r?\n|\r/g, "").trim()
+            paintingPNG = headerDecoder.paintingProccess(painting)
+        }
+
+        if (req.body.feeling_id == 0) {
+            mii_url = `http://mii-images.account.nintendo.net/${account[0].hash}_normal_face.png`
+        } else if (req.body.feeling_id == 1) {
+            mii_url = `http://mii-images.account.nintendo.net/${account[0].hash}_happy_face.png`
+        } else if (req.body.feeling_id == 2) {
+            mii_url = `http://mii-images.account.nintendo.net/${account[0].hash}_like_face.png`
+        } else if (req.body.feeling_id == 3) {
+            mii_url = `http://mii-images.account.nintendo.net/${account[0].hash}_surprised_face.png`
+        } else if (req.body.feeling_id == 4) {
+            mii_url = `http://mii-images.account.nintendo.net/${account[0].hash}_puzzled_face.png`
+        } else if (req.body.feeling_id == 5) {
+            mii_url = `http://mii-images.account.nintendo.net/${account[0].hash}_frustrated_face.png`
+        } else {
+            mii_url = `http://mii-images.account.nintendo.net/${account[0].hash}_normal_face.png`
+        }
+
+        sql = `INSERT INTO replies (create_time, ${(painting) ? "painting" : "body"}, ${(paintingPNG) ? "painting_png," : ""} pid, post_id, feeling_id, mii_face_url, mii) 
+        VALUES (NOW(), "${(painting) ? painting : req.body.body}", ${(paintingPNG) ? '"' + paintingPNG + '",' : ""} ${account[0].pid}, ${req.params.id}, ${req.body.feeling_id}, "${mii_url}", "${account[0].mii}")`, 
+
+        await query(sql)
+
+        res.sendStatus(200)
+    }    
+})
+
+router.post('/:id/empathies', async (req, res) => {
+    
     const post_id = req.params.id
     const account = req.account[0]
 

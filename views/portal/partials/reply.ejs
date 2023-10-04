@@ -1,0 +1,16 @@
+<div class="post" id="reply<%= reply.id %>" style="position: relative; left: 110px;">
+    <% if (reply.painting_png) {%>
+        <img src="data:image/png;base64,<%= reply.painting_png %>" width="750px">
+    <%} else {%>
+        <span class="body" style="text-align: right;"><%= reply.body %></span>
+    <%} %>
+</div>
+
+<div class="post_author">
+    <a href="/users/show?pid=<%= reply.pid %>" style="position: relative; right: 15px;">
+        <img src="<%= reply.mii_face_url %>" width="96px" height="96px" style="float: right;">
+    </a>
+    
+    <span class="screen_name" id="screen_name_<%= reply.id %>" style="position: relative; left: 50px;"><%= reply.screen_name %></span>
+
+</div>

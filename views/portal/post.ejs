@@ -3,6 +3,48 @@
         `http://mii-images.account.nintendo.net/${account[0].hash}_normal_face.png`, page : 'post' }) %>
 
         <body onload="endLoading();">
+
+            <div class="postUI" style="display: none;" id="postUI">
+                <div class="postUI_bg"></div>
+                <div class="postUI_container">
+                    <div>
+                        <img src="<%= `http://mii-images.account.nintendo.net/${account[0].hash}_normal_face.png` %>"
+                            class="postUI_mii" width="100px">
+                        <div class="postUI_name_wrapper">
+                            <span class="postUI_name">
+                                <%= account[0].name %>
+                            </span>
+                            <div>
+                                
+                            </div>
+                        </div>
+                        <div class="postUI_actions" style="bottom: 30px;">
+                            <div class="postUI_textdraw">
+                                <a class="postUI_text" id="text" href="javascript:void(0)" onclick="postUI_text()">
+                                    T
+                                </a>
+                                <a class="postUI_draw" id="draw" href="javascript:void(0)" onclick="postUI_img()">
+                                    J
+                                </a>
+                            </div>
+                            <textarea id="postUI_input" class="postUI_input" placeholder="Please input post text."
+                                maxlength="350"></textarea>
+                            <img id="postUI_drawing" style=" display:none; vertical-align: middle; position: relative; right: 5px; border-top-right-radius: 15px; border-bottom-right-radius: 15px;" width="450px" height="185px">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="postUI_button_wrapper">
+                    <button class="postUI_button" onclick="postUIToggle()">Cancel</button>
+                    <button class="postUI_button" onclick="submitReply(<%= post.id %>)"
+                        style="left: 70%;">Post</button>
+                </div>
+
+            </div>
+
+                <a class="community_post_button" href="javascript:void(0)" onclick="postUIToggle()"><img class="community_post_button" src="../../../../../img/post.png" width="225px"></a>
+
+
             <content>
 
                 <div class="announcement_banner">
@@ -14,6 +56,14 @@
                         <li>
                             <%- include('./partials/post.ejs', { post : post, href_needed: false, moment : moment }) %>
                         </li>
+
+                        <% for (let i = 0; i < replies.length; i++) {
+                            const reply = replies[i];%>
+                            
+                            <li>
+                                <%- include('./partials/reply.ejs', {reply : reply, moment : moment}) %>
+                            </li>
+                        <%} %>
                     </ul>
                 </div>
             </content>

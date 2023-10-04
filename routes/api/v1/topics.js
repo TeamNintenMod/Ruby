@@ -95,7 +95,7 @@ router.get('/', async (req, res) => {
             xml = xml.e('pid', post.pid).up()
             .e('platform_id', post.platform_id).up()
             .e('region_id', post.region_id).up()
-            .e('reply_count', '0').up()
+            .e('reply_count', (await query(`SELECT * FROM replies WHERE post_id=${post.id}`)).length).up()
             .e('screen_name', post.screen_name).up()
             for (let i = 0; i < JSON.parse(community.title_ids).length; i++) {
                 const title_id = JSON.parse(community.title_ids)[i];

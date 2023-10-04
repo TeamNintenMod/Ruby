@@ -23,22 +23,20 @@
                         </div>
                         <div class="postUI_actions">
                             <div class="postUI_textdraw">
-                                <a class="postUI_text" href="javascript:void(0)" onclick="postUI_text()">
+                                <a class="postUI_text" id="text" href="javascript:void(0)" onclick="postUI_text()">
                                     T
                                 </a>
-                                <a class="postUI_draw" href="javascript:void(0)" onclick="postUI_img()">
+                                <a class="postUI_draw" id="draw" href="javascript:void(0)" onclick="postUI_img()">
                                     J
                                 </a>
                             </div>
                             <textarea id="postUI_input" class="postUI_input" placeholder="Please input post text."
-                                maxlength="100"></textarea>
-                            <img id="postUI_drawing"
-                                style=" display:none; vertical-align: middle; position: relative; right: 5px;"
-                                width="374px" height="174px">
-
-                            <img id="postUI_screenshot" width="250px" height="150"
-                                style="display: inline; vertical-align: middle;">
-                            <button onclick="getScreenshot()">Upload TV Screenshot</button>
+                                maxlength="350"></textarea>
+                            <img id="postUI_drawing" style=" display:none; vertical-align: middle; position: relative; right: 5px; border-top-right-radius: 15px; border-bottom-right-radius: 15px;" width="450px" height="185px">
+                                <div style=" vertical-align: middle; display: inline-block; width: 250px;">
+                                    <img id="postUI_screenshot" width="250px" height="140" style="display: inline; vertical-align: middle;">
+                                    <button style="display: inline-block; width: 250px; height: 50px; border-bottom-left-radius: 15px; border-bottom-right-radius: 15px; border: none; font-size: 20px; border-bottom: rgb(212, 212, 212) 2px solid;" onclick="getScreenshot()">Select Image</button>
+                                </div>  
                         </div>
                     </div>
                 </div>

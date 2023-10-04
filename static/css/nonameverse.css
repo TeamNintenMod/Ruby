@@ -430,7 +430,7 @@ br {
 }
 
 .postsWrapper ul {
-    width: 100%;
+    width: 1020px;
 }
 
 .postsWrapper ul li {
@@ -465,7 +465,7 @@ br {
     background: linear-gradient(180deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 0%, rgba(224, 224, 224, 1) 100%);
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ffffff", endColorstr="#e0e0e0", GradientType=1);
 
-    border-radius: 15px;
+    border-radius: 20px;
 
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
 
@@ -480,8 +480,12 @@ br {
     display: block;
 }
 
-.post span {
+.post .body {
     position: relative;
+
+    display: block;
+
+    width: 750px;
 }
 
 .post img {
@@ -754,13 +758,15 @@ br {
 
     width: 300px;
     height: 80px;
-    border-radius: 25px;
+    border-radius: 20px;
 
     font-size: 35px;
 
     z-index: 10;
 
     margin-right: 40px;
+
+    border: none;
 }
 
 .postUI_button_wrapper {
@@ -781,7 +787,7 @@ br {
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
 
-    width: 500px;
+    width: 450px;
 
     height: 172px;
 
@@ -796,6 +802,8 @@ br {
 
     display: inline;
     vertical-align: middle;
+
+    margin-right: 25px;
 }
 
 .postUI_actions {
@@ -842,9 +850,9 @@ br {
 }
 
 .postUI_draw {
-    background-color: red;
+    background: -webkit-linear-gradient(55deg, #f5f6f7, #DCE1E3);
     display: inline-block;
-    vertical-align: bottom;
+    vertical-align: middle;
 
     font-family: MiiverseSymbols;
     font-size: 55px;
@@ -860,14 +868,20 @@ br {
     text-decoration: none;
 
     border-bottom-left-radius: 10px;
+    border-top: rgb(238, 238, 238) 2px solid;
+    border-left: rgb(238, 238, 238) 2px solid;
+    border-bottom: rgb(238, 238, 238) 2px solid;
 
     text-shadow: rgba(88, 88, 88, 0.5) -1px 0, rgba(156, 156, 156, 0.3) 0 -1px, rgba(255, 255, 255, 0.5) 0 1px, rgba(0, 0, 0, 0.3) -1px -2px;
 }
 
 .postUI_text {
+
+    background:-webkit-radial-gradient(#8dc9e0, #55B3DD);
+
     background-color: red;
     display: inline-block;
-    vertical-align: bottom;
+    vertical-align: middle;
 
     font-family: MiiverseSymbols;
     font-size: 55px;
@@ -878,7 +892,7 @@ br {
     padding-bottom: 11px;
     width: 79px;
 
-    color: gray;
+    color: white;
 
     text-decoration: none;
 

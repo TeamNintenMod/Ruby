@@ -28,7 +28,7 @@
                             <%} %>
 
                                 <% if (post.body) { %>
-                                    <span class="body" <% if (post.screenshot) {%> style="margin-top: 15px; position:
+                                    <span <% if (post.screenshot) {%> style="margin-top: 15px; position:
                                         relative; top: 15px" <%} %>><%= post.body %></span>
                                     <%} else { %>
                                         <img class="painting" src="data:image/png;base64,<%=post.painting_png%>" <%if

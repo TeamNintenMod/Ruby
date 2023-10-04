@@ -10,7 +10,7 @@ const query = util.promisify(con.query).bind(con)
 
 function auth(req, res, next) {
     if (req.path.includes('css') || req.path.includes('js') || req.path.includes('img') 
-    || req.path.includes('endpoint') || req.path.includes('01') || req.path.includes('02') 
+    || req.path.includes('endpoint') || req.path.includes('setup/01') || req.path.includes('setup/02') 
     || req.path.includes('people') || req.path.includes('communities/0/posts')) {
         console.log(logger.Get(req.originalUrl))
         return next()

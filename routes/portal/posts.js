@@ -36,6 +36,7 @@ router.get('/:post_id', async (req, res) => {
     var language = req.language
     
     var post = JSON.parse(await UIQuery.getSinglePost(post_id, account[0].pid))
+    var replies = JSON.parse(await UIQuery.getRepliesForPost(post_id))
 
     var empathized_users = JSON.parse(await UIQuery.getAllUserProfileFromPostEmpathies(post_id))
 
@@ -44,6 +45,7 @@ router.get('/:post_id', async (req, res) => {
         language : language,
         empathized_users : empathized_users,
         post : post,
+        replies : replies,
         moment : moment
     })
 })

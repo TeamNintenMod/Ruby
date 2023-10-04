@@ -222,6 +222,24 @@ function getAllAdminActions(limit) {
     })
 }
 
+function getRepliesForPost(id, limit) {
+    var limit = (limit) ? `LIMIT ${limit}` : '';
+
+    const sql = `SELECT * FROM replies WHERE post_id=${id} ${limit}`
+
+    return new Promise((resolve, reject) => {
+        con.query(sql, async (err, result, fields) => {
+            if (err) {reject(err); return;}
+
+            for (let i = 0; i < result.length; i++) {
+                result[i].screen_name = (await query(`SELECT * FROM account WHERE pid=${result[i].pid}`))[0].name
+            }
+
+            resolve(JSON.stringify(result))
+        })
+    })
+}
+
 module.exports =
 {
     getPosts,
@@ -234,5 +252,6 @@ module.exports =
     getAllEmpathiesToUser,
     getAllPostsFromUser,
     isCommunityFavorited,
-    getAllAdminActions
+    getAllAdminActions,
+    getRepliesForPost
 }

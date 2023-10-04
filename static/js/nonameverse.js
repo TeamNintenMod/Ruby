@@ -139,9 +139,17 @@ var isPosting = 0;
 function postUI_text() {
     var input = document.getElementById('postUI_input')
     var drawing = document.getElementById('postUI_drawing')
+    var text = document.getElementById('text')
+    var draw = document.getElementById('draw')
 
     drawing.style.display = 'none'
     input.style.display = 'inline-block'
+
+    text.style.background = '-webkit-radial-gradient(#8dc9e0, #55B3DD)'
+    text.style.color = 'white'
+
+    draw.style.background = '-webkit-linear-gradient(55deg, #f5f6f7, #DCE1E3)'
+    draw.style.color = 'gray'
 
     postMode = 0
 }
@@ -149,9 +157,17 @@ function postUI_text() {
 function postUI_img() {
     var input = document.getElementById('postUI_input')
     var drawing = document.getElementById('postUI_drawing')
+    var text = document.getElementById('text')
+    var draw = document.getElementById('draw')
 
     drawing.style.display = 'inline-block'
     input.style.display = 'none'
+
+    text.style.background = '-webkit-linear-gradient(55deg, #f5f6f7, #DCE1E3)'
+    text.style.color = 'gray'
+
+    draw.style.background = '-webkit-radial-gradient(#8dc9e0, #55B3DD)'
+    draw.style.color = 'white'
 
     wiiuMemo.open(false)
     drawing.src = 'data:image/png;base64,' + wiiuMemo.getImage(false)
@@ -202,6 +218,46 @@ function submitPost(community_id) {
             if (xhr.readyState === 4) {
                 console.log("Rec")
                 window.location.href = "/posts/" + JSON.parse(xhr.responseText).post_id
+            }
+        }
+    }
+
+
+}
+
+function submitReply(post_id) {
+    var xhr = new XMLHttpRequest();
+
+    var content = document.getElementById("postUI_input").value
+    var memo = wiiuMemo.getImage(true)
+
+    var form = new FormData()
+
+    switch (postMode) {
+        case 0:
+            form.append('body', content)
+            break
+        case 1:
+            form.append('painting', memo)
+            break
+        default:
+            console.log('Broken!!!!')
+            break
+    }
+
+    form.append('feeling_id', '0')
+    form.append('is_spoiler', '0')
+
+    xhr.open("POST", "https://olvportal.nonamegiven.xyz/v1/posts/"+String(post_id))
+
+    if (isPosting == 0) {
+        xhr.send(form)
+        isPosting = 1
+
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4) {
+                console.log("Rec")
+                window.location.href = "../posts/" + post_id
             }
         }
     }
