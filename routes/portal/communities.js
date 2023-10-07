@@ -38,12 +38,8 @@ router.get('/:community_id', async (req, res) => {
 
     if (community[0]) {
          community = community[0]
-    } else {
-        res.sendStatus(404);
-        return;
-    }
 
-    res.render('portal/community.ejs', {
+        res.render('portal/community.ejs', {
         posts: posts,
         community: community,
         favorited : favorited,
@@ -51,6 +47,9 @@ router.get('/:community_id', async (req, res) => {
         language : language,
         moment: moment
     })
+    } else {
+        res.sendStatus(404);
+    }
 })
 
 module.exports = router
