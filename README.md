@@ -2,6 +2,10 @@
 
 This is an attempt to create a semi-miiversey social media platform, written in Node.JS, Powered by a MySQL server.
 
+## Notice
+
+Please do not rehost this service. I do not intend for it to be rehosted.
+
 [Discord Server Link](https://discord.gg/MaGtyJg6rH)
 
 # So Far..
