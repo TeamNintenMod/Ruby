@@ -3,7 +3,7 @@
   <has_error>0</has_error>
   <version>1</version>
   <request_name>topics</request_name>
-  <expire>2023-10-05 13:10:40</expire>
+  <expire>2099-10-05 13:10:40</expire>
   <topics>
     <topic>
       <empathy_count>21</empathy_count>
@@ -16,7 +16,6 @@
       </title_ids>
       <title_id>1407375153323008</title_id>
       <community_id>13</community_id>
-      <is_recommended>1</is_recommended>
       <name>SUPER MARIO 3D WORLD</name>
       <people>
         <person>
